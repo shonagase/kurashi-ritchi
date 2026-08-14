@@ -1,0 +1,4 @@
+/* base reset kept minimal; App.css owns the design */
+body {
+  margin: 0;
+}
