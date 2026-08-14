@@ -123,8 +123,30 @@ export function ComparisonTable({
                     購入額{c.purchaseManYen}万円の{impact}%
                   </div>
                 </td>
-                <td>{c.stationWalkMin != null ? `${c.stationWalkMin}分` : '—'}</td>
-                <td>{c.busWalkMin != null ? `${c.busWalkMin}分` : '—'}</td>
+                <td>
+                  {c.stationWalkMin != null ? (
+                    <>
+                      {c.stationWalkMin}分
+                      <div className="muted small">圏内{c.stations.length}駅</div>
+                    </>
+                  ) : c.transitFetchFailed ? (
+                    '取得失敗'
+                  ) : (
+                    '圏外'
+                  )}
+                </td>
+                <td>
+                  {c.busWalkMin != null ? (
+                    <>
+                      {c.busWalkMin}分
+                      <div className="muted small">圏内{c.buses.length}停留所</div>
+                    </>
+                  ) : c.transitFetchFailed ? (
+                    '取得失敗'
+                  ) : (
+                    '圏外'
+                  )}
+                </td>
                 <td>
                   <div className="small">{c.municipality.name}・{c.municipality.industryType}</div>
                   <div className="muted small">高齢{c.municipality.agingRate}%</div>

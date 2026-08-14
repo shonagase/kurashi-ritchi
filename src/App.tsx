@@ -64,10 +64,13 @@ export default function App() {
       elevationM,
       hazardLevel,
       municipality,
-      stationName: transit.station?.name ?? null,
-      stationWalkMin: transit.station?.walkMin ?? null,
-      busName: transit.busStop?.name ?? null,
-      busWalkMin: transit.busStop?.walkMin ?? null,
+      stations: transit.stations,
+      buses: transit.buses,
+      transitFetchFailed: transit.fetchFailed,
+      stationName: transit.stations[0]?.name ?? null,
+      stationWalkMin: transit.stations[0]?.walkMin ?? null,
+      busName: transit.buses[0]?.name ?? null,
+      busWalkMin: transit.buses[0]?.walkMin ?? null,
       createdAt: Date.now(),
     }
   }

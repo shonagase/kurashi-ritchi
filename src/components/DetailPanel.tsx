@@ -66,17 +66,41 @@ export function DetailPanel({ candidate }: Props) {
         同時全損ではなく、代表的な単一シナリオの目安です。
       </p>
 
-      <h3>通勤・移動</h3>
-      <ul className="plain-list">
-        <li>
-          最寄り駅: {candidate.stationName ?? '取得できず'}
-          {candidate.stationWalkMin != null ? `（徒歩約${candidate.stationWalkMin}分）` : ''}
-        </li>
-        <li>
-          最寄りバス停: {candidate.busName ?? '取得できず'}
-          {candidate.busWalkMin != null ? `（徒歩約${candidate.busWalkMin}分）` : ''}
-        </li>
-      </ul>
+      <h3>通勤・移動（徒歩30分圏）</h3>
+      {candidate.transitFetchFailed ? (
+        <p className="error">交通データの取得に失敗しました。時間をおいて候補を入れ直してください。</p>
+      ) : (
+        <>
+          <h4 className="subhead">駅・電停（{candidate.stations.length}件）</h4>
+          {candidate.stations.length ? (
+            <ul className="plain-list transit-list">
+              {candidate.stations.map((s) => (
+                <li key={`st-${s.name}-${s.meters}`}>
+                  {s.name}
+                  <span className="muted"> 徒歩約{s.walkMin}分（{s.meters}m）</span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="muted">徒歩30分圏内に駅が見つかりませんでした。</p>
+          )}
+
+          <h4 className="subhead">バス停（{candidate.buses.length}件）</h4>
+          {candidate.buses.length ? (
+            <ul className="plain-list transit-list">
+              {candidate.buses.map((s) => (
+                <li key={`bus-${s.name}-${s.meters}`}>
+                  {s.name}
+                  <span className="muted"> 徒歩約{s.walkMin}分（{s.meters}m）</span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="muted">徒歩30分圏内にバス停が見つかりませんでした。</p>
+          )}
+        </>
+      )}
+      <p className="note">※徒歩分数は直線距離÷分速80mの概算です。実際の道路距離とは差があります。</p>
       <p className="source-line">
         出典:{' '}
         <a href={DATA_SOURCES.osm.url} target="_blank" rel="noreferrer">

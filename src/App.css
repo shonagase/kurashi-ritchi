@@ -460,6 +460,19 @@ input:focus {
   margin: 0 0 0.75rem;
 }
 
+.subhead {
+  margin: 0.85rem 0 0.35rem;
+  font-size: 0.95rem;
+  font-family: 'IBM Plex Sans JP', sans-serif;
+  font-weight: 600;
+}
+
+.transit-list {
+  max-height: 220px;
+  overflow: auto;
+  padding-right: 0.25rem;
+}
+
 @keyframes rise {
   from {
     opacity: 0;
