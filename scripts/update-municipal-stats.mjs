@@ -55,11 +55,19 @@ async function findStatsTables() {
 }
 
 function pickTable(tables, predicates) {
+  // 市区町村表を優先し、都道府県表を除外
+  const municipal = tables.filter(
+    (t) =>
+      (`${t.title} ${t.statsName}`.includes('市区町村') ||
+        t.id.startsWith('000002')) &&
+      !`${t.title} ${t.statsName}`.includes('都道府県'),
+  )
+  const pool = municipal.length ? municipal : tables
   for (const p of predicates) {
-    const hit = tables.find((t) => p(`${t.title} ${t.statsName}`))
+    const hit = pool.find((t) => p(`${t.title} ${t.statsName}`))
     if (hit) return hit
   }
-  return null
+  return pool[0] || null
 }
 
 async function getMetaCat01(statsDataId) {
@@ -327,9 +335,9 @@ async function main() {
     field: 'agingRate',
     tables,
     tablePredicates: [
-      (t) => t.includes('社会生活統計指標') && t.includes('人口'),
-      (t) => t.includes('市区町村') && t.includes('人口・世帯') && t.includes('指標'),
-      (t) => t.includes('Ａ　人口・世帯') || t.includes('A　人口・世帯') || t.includes('人口・世帯'),
+      (t) => t.includes('社会生活統計指標') && t.includes('人口') && t.includes('市区町村'),
+      (t) => t.includes('市区町村') && t.includes('人口・世帯'),
+      (t) => t.includes('人口・世帯') && !t.includes('都道府県'),
     ],
     catOpts: {
       must: ['65歳以上'],
@@ -347,13 +355,13 @@ async function main() {
     field: 'singleHouseholdRate',
     tables,
     tablePredicates: [
-      (t) => t.includes('社会生活統計指標') && (t.includes('人口') || t.includes('世帯')),
-      (t) => t.includes('人口・世帯'),
+      (t) => t.includes('社会生活統計指標') && t.includes('市区町村') && (t.includes('人口') || t.includes('世帯')),
+      (t) => t.includes('市区町村') && t.includes('人口・世帯'),
+      (t) => t.includes('人口・世帯') && !t.includes('都道府県'),
     ],
     catOpts: {
       must: ['単独世帯'],
-      prefer: ['一般世帯', '割合'],
-      // ここがバグの主因だった: 65歳以上世帯員の単独世帯
+      prefer: ['一般世帯', '割合', '単独世帯割合'],
       exclude: ['65歳以上', '高齢', '親族', '核家族'],
       forbid: ['65歳以上世帯員'],
     },
@@ -367,13 +375,13 @@ async function main() {
     field: 'welfareRatePercent',
     tables,
     tablePredicates: [
-      (t) => t.includes('社会生活統計指標') && (t.includes('福祉') || t.includes('社会保障')),
-      (t) => t.includes('福祉・社会保障'),
+      (t) => t.includes('社会生活統計指標') && t.includes('市区町村') && (t.includes('福祉') || t.includes('社会保障')),
       (t) => t.includes('市区町村') && t.includes('福祉'),
+      (t) => (t.includes('福祉・社会保障') || t.includes('福祉')) && !t.includes('都道府県'),
     ],
     catOpts: {
       must: ['生活保護'],
-      prefer: ['人口千', '被保護', '千対', '保護率'],
+      prefer: ['人口千', '被保護', '千対', '保護率', '実人員'],
       exclude: ['開始', '廃止', '停止', '世帯類型', '保護費'],
     },
     convert: (v, c) => toPercentFromPerThousand(v, c.unit, c.name),
@@ -386,9 +394,9 @@ async function main() {
     field: 'crimePer100People',
     tables,
     tablePredicates: [
-      (t) => t.includes('社会生活統計指標') && (t.includes('安全') || t.includes('治安')),
+      (t) => t.includes('社会生活統計指標') && t.includes('市区町村') && (t.includes('安全') || t.includes('治安')),
       (t) => t.includes('市区町村') && t.includes('安全'),
-      (t) => t.includes('Ｋ　安全') || t.includes('K　安全'),
+      (t) => (t.includes('Ｋ　安全') || t.includes('K　安全') || t.includes('安全')) && !t.includes('都道府県'),
     ],
     catOpts: {
       must: ['刑法犯'],
