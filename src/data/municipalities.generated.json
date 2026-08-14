@@ -2,144 +2,6 @@
   "meta": {
     "retrievedAt": "2026-08-14T06:17:18.948Z",
     "notes": "e-Statは固定コードのみ使用。overrides の locked 値は人手検証優先。retrievedAtは取得日であり各指標の対象時点ではない。",
-    "coding": {
-      "population": {
-        "field": "population",
-        "statsDataId": "0000020301",
-        "cdCat01": "#A1101",
-        "fallbackCat01": [
-          "#A110101"
-        ],
-        "unit": "人",
-        "label": "総人口",
-        "convert": "identity"
-      },
-      "agingRate": {
-        "field": "agingRate",
-        "statsDataId": "0000020301",
-        "cdCat01": "#A03503",
-        "fallbackCat01": [
-          "#A03506",
-          "#A4101"
-        ],
-        "unit": "%",
-        "label": "65歳以上人口割合（高齢化率）",
-        "convert": "percent"
-      },
-      "singleHouseholdRate": {
-        "field": "singleHouseholdRate",
-        "statsDataId": "0000020301",
-        "cdCat01": "#A06205",
-        "fallbackCat01": [
-          "#A06301"
-        ],
-        "unit": "%",
-        "label": "単独世帯割合",
-        "convert": "percent",
-        "forbiddenNameSubstrings": [
-          "65歳以上世帯員"
-        ]
-      },
-      "welfareRatePercent": {
-        "field": "welfareRatePercent",
-        "statsDataId": "0000020310",
-        "cdCat01": "#J01107",
-        "fallbackCat01": [
-          "#J2301",
-          "#J01101"
-        ],
-        "fallbackStatsDataIds": [
-          "0000020210",
-          "0000020301"
-        ],
-        "unit": "%",
-        "label": "生活保護被保護実人員（人口千人当たり）→%",
-        "convert": "perThousandToPercent"
-      },
-      "crimePer100People": {
-        "field": "crimePer100People",
-        "statsDataId": "0000020311",
-        "cdCat01": "#K06101",
-        "fallbackCat01": [
-          "#K4101"
-        ],
-        "unit": "件/100人・年",
-        "label": "刑法犯認知件数（人口千人当たり）→100人あたり",
-        "convert": "perThousandToPer100"
-      },
-      "theftPer100People": {
-        "field": "theftPer100People",
-        "statsDataId": "0000020311",
-        "cdCat01": "#K06104",
-        "fallbackCat01": [
-          "K06104",
-          "#K420103",
-          "K420103"
-        ],
-        "fallbackStatsDataIds": [
-          "0000020211"
-        ],
-        "unit": "件/100人・年",
-        "label": "窃盗犯認知件数（人口千人当たり）→100人あたり",
-        "convert": "perThousandToPer100"
-      },
-      "heinousSharePercent": {
-        "field": "heinousSharePercent",
-        "statsDataId": "0000020311",
-        "cdCat01": "#K06401",
-        "fallbackCat01": [
-          "K06401"
-        ],
-        "fallbackStatsDataIds": [
-          "0000020211"
-        ],
-        "unit": "%",
-        "label": "刑法犯認知件数に占める凶悪犯の割合",
-        "convert": "percent"
-      },
-      "violentSharePercent": {
-        "field": "violentSharePercent",
-        "statsDataId": "0000020311",
-        "cdCat01": "#K06402",
-        "fallbackCat01": [
-          "K06402"
-        ],
-        "fallbackStatsDataIds": [
-          "0000020211"
-        ],
-        "unit": "%",
-        "label": "刑法犯認知件数に占める粗暴犯の割合",
-        "convert": "percent"
-      },
-      "theftSharePercent": {
-        "field": "theftSharePercent",
-        "statsDataId": "0000020311",
-        "cdCat01": "#K06403",
-        "fallbackCat01": [
-          "K06403"
-        ],
-        "fallbackStatsDataIds": [
-          "0000020211"
-        ],
-        "unit": "%",
-        "label": "刑法犯認知件数に占める窃盗犯の割合",
-        "convert": "percent"
-      },
-      "moralsSharePercent": {
-        "field": "moralsSharePercent",
-        "statsDataId": "0000020311",
-        "cdCat01": "#K06405",
-        "fallbackCat01": [
-          "K06405"
-        ],
-        "fallbackStatsDataIds": [
-          "0000020211"
-        ],
-        "unit": "%",
-        "label": "刑法犯認知件数に占める風俗犯の割合",
-        "convert": "percent"
-      }
-    },
     "fields": {
       "population": "総人口",
       "agingRate": "65歳以上人口割合（高齢化率）",
@@ -2287,7 +2149,7 @@
       "industryType": "郊外住宅・商業",
       "industryNote": "千葉県東部の郊外都市。住宅団地と幹線沿い商業が中心。",
       "agingRate": 33.2,
-      "singleHouseholdRate": 36.1,
+      "singleHouseholdRate": 36,
       "welfareRatePercent": 1.48,
       "crimePer100People": 0.89,
       "population": 55860,
@@ -2304,18 +2166,18 @@
           "source": "東金市 住民基本台帳（人手検証）",
           "referenceDate": "2026-04-01",
           "catName": "高齢化率 = 65歳以上 / 総人口",
-          "locked": true,
-          "retrievedAt": "2026-08-14T06:17:18.948Z"
+          "formula": "18540 / 55860 ≈ 33.19% → 33.2%",
+          "locked": true
         },
         "singleHouseholdRate": {
-          "value": 36.1,
+          "value": 36,
           "unit": "%",
           "valueType": "official",
-          "source": "国勢調査2020 / 東金市資料（人手検証）",
+          "source": "国勢調査2020（人手検証）",
           "referenceDate": "2020-10-01",
           "catName": "単独世帯 / 一般世帯",
-          "locked": true,
-          "retrievedAt": "2026-08-14T06:17:18.948Z"
+          "formula": "9129 / 25355 = 36.00%",
+          "locked": true
         },
         "welfareRatePercent": {
           "value": 1.48,
@@ -2323,20 +2185,20 @@
           "valueType": "official",
           "source": "東金市公表 生活保護率 14.80‰（人手検証）",
           "referenceDate": "2020",
-          "catName": "生活保護率",
-          "locked": true,
-          "retrievedAt": "2026-08-14T06:17:18.948Z"
+          "catName": "生活保護率（年間平均）",
+          "formula": "14.80‰ = 1.48%",
+          "locked": true
         },
         "crimePer100People": {
           "value": 0.89,
           "unit": "件/100人・年",
           "valueType": "computed",
-          "source": "千葉県警2025年確定 501件 ÷ 人口約5.6万人（人手検証）",
+          "source": "千葉県警2025年確定 501件 ÷ 2025-04-01人口56,224（人手検証・参考計算）",
           "referenceDate": "2025",
-          "catName": "刑法犯認知件数 / 人口",
-          "formula": "501 / 56000 * 100 ≈ 0.89",
-          "locked": true,
-          "retrievedAt": "2026-08-14T06:17:18.948Z"
+          "catName": "人口100人当たり刑法犯認知件数（参考計算）",
+          "formula": "501 / 56224 × 100 ≈ 0.891",
+          "warning": "警察が公表する『犯罪率』そのものではない",
+          "locked": true
         },
         "population": {
           "value": 55860,
@@ -2345,8 +2207,7 @@
           "source": "東金市 住民基本台帳（人手検証）",
           "referenceDate": "2026-04-01",
           "catName": "総人口",
-          "locked": true,
-          "retrievedAt": "2026-08-14T06:17:18.948Z"
+          "locked": true
         },
         "theftPer100People": {
           "value": 2.02,

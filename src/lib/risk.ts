@@ -8,22 +8,22 @@ export type RepairScenario = {
   note: string
 }
 
-/** 損害側テーブル（発生側の区域該当結果から選ぶ） */
+/** 損害側テーブル（発生側の区域該当結果から選ぶ独自シナリオ） */
 export const REPAIR_SCENARIOS: Record<HazardLevel, RepairScenario[]> = {
   low: [
-    { id: 'flood', label: '浸水（軽微）', minManYen: 0, maxManYen: 50, note: '区域外〜軽微想定の内装・清掃目安' },
-    { id: 'quake', label: '地震（壁・屋根）', minManYen: 30, maxManYen: 120, note: '部分補修の目安（区域判定とは独立）' },
-    { id: 'foundation', label: '土台・沈下', minManYen: 0, maxManYen: 80, note: '軽微な不同沈下の目安' },
+    { id: 'flood', label: '浸水（軽微）', minManYen: 0, maxManYen: 50, note: '独自ヒューリスティック。区域判定とは独立した低ティア想定' },
+    { id: 'quake', label: '地震（壁・屋根）', minManYen: 30, maxManYen: 120, note: '独自ヒューリスティック。部分補修の目安' },
+    { id: 'foundation', label: '土台・沈下', minManYen: 0, maxManYen: 80, note: '独自ヒューリスティック。軽微な不同沈下の目安' },
   ],
   mid: [
-    { id: 'flood', label: '浸水（床上）', minManYen: 100, maxManYen: 350, note: '公式浸水/土砂区域該当時の代表レンジ' },
-    { id: 'quake', label: '地震（壁・屋根）', minManYen: 80, maxManYen: 250, note: '屋根・外壁のまとまった補修' },
-    { id: 'foundation', label: '土台・沈下', minManYen: 100, maxManYen: 350, note: '沈下修正工事の目安' },
+    { id: 'flood', label: '浸水（床上）', minManYen: 100, maxManYen: 350, note: '独自ヒューリスティック。公式浸水/土砂区域該当時の代表レンジ' },
+    { id: 'quake', label: '地震（壁・屋根）', minManYen: 80, maxManYen: 250, note: '独自ヒューリスティック。屋根・外壁のまとまった補修' },
+    { id: 'foundation', label: '土台・沈下', minManYen: 100, maxManYen: 350, note: '独自ヒューリスティック。沈下修正工事の目安' },
   ],
   high: [
-    { id: 'flood', label: '浸水（大規模）', minManYen: 250, maxManYen: 600, note: '深い浸水や複合該当時の重いレンジ' },
-    { id: 'quake', label: '地震（大破寄り）', minManYen: 200, maxManYen: 500, note: '構造補修が必要な水準の目安' },
-    { id: 'foundation', label: '土台崩壊・不同沈下', minManYen: 200, maxManYen: 500, note: '基礎・地盤対策の重いケース' },
+    { id: 'flood', label: '浸水（大規模）', minManYen: 250, maxManYen: 600, note: '独自ヒューリスティック。深い浸水や複合該当時' },
+    { id: 'quake', label: '地震（大破寄り）', minManYen: 200, maxManYen: 500, note: '独自ヒューリスティック。構造補修が必要な水準の目安' },
+    { id: 'foundation', label: '土台崩壊・不同沈下', minManYen: 200, maxManYen: 500, note: '独自ヒューリスティック。基礎・地盤対策の重いケース' },
   ],
 }
 
@@ -38,11 +38,11 @@ export function estimateHazardFromElevation(elevationM: number | null): HazardLe
 export function hazardLabel(level: HazardLevel): string {
   switch (level) {
     case 'low':
-      return '損害ティア: 低'
+      return '修理費シナリオ: 低'
     case 'mid':
-      return '損害ティア: 中'
+      return '修理費シナリオ: 中'
     case 'high':
-      return '損害ティア: 高'
+      return '修理費シナリオ: 高'
   }
 }
 

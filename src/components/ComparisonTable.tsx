@@ -1,3 +1,4 @@
+import { hazardStatusLabel } from '../lib/hazardZones'
 import { hazardLabel, lossImpactPercent, totalRepairRange } from '../lib/risk'
 import type { Candidate, SortKey } from '../types'
 
@@ -61,7 +62,7 @@ export function ComparisonTable({
         {(
           [
             ['lossImpact', '損害額比率'],
-            ['hazard', '損害ティア'],
+            ['hazard', '修理費シナリオ'],
             ['stationWalk', '駅(直線)'],
             ['aging', '高齢化率'],
             ['purchase', '購入額'],
@@ -82,9 +83,9 @@ export function ComparisonTable({
           <tr>
             <th>候補</th>
             <th>購入額</th>
-            <th>発生側（公式区域）</th>
-            <th>損害側（修理費）</th>
-            <th>損害額比率</th>
+            <th>発生側（機械判定）</th>
+            <th>損害側（シナリオ）</th>
+            <th>シナリオ上限比</th>
             <th>駅(直線)</th>
             <th>バス停(直線)</th>
             <th>地域性</th>
@@ -107,9 +108,7 @@ export function ComparisonTable({
                 </td>
                 <td>{c.purchaseManYen}万円</td>
                 <td>
-                  {c.zones.fetchFailed ? (
-                    <span className="muted">判定失敗</span>
-                  ) : c.zones.anyOfficialZone ? (
+                  {c.zones.status === 'in_zone' ? (
                     <>
                       <span className="badge badge-high">区域該当あり</span>
                       <div className="muted small">
@@ -125,22 +124,32 @@ export function ComparisonTable({
                           .join('・')}
                       </div>
                     </>
+                  ) : c.zones.status === 'all_outside' ? (
+                    <>
+                      <span className="badge badge-mid">区域外推定</span>
+                      <div className="muted small">全層判定済み（≠安全）</div>
+                    </>
+                  ) : c.zones.status === 'partially_evaluated' ? (
+                    <>
+                      <span className="badge badge-mid">一部判定済み</span>
+                      <div className="muted small">
+                        判定{c.zones.evaluatedCount}/4・未判定{c.zones.unknownCount}
+                      </div>
+                    </>
                   ) : (
-                    <span className="badge badge-low">区域外</span>
+                    <span className="muted">{hazardStatusLabel(c.zones.status)}</span>
                   )}
                 </td>
                 <td>
                   <span className={`badge badge-${c.hazardLevel}`}>{hazardLabel(c.hazardLevel)}</span>
                   <div className="muted small">
-                    {range.min}〜{range.max}万円
+                    シナリオ {range.min}〜{range.max}万円
                   </div>
                 </td>
                 <td>
-                  <strong className={impact >= 60 ? 'warn-text' : ''}>
-                    最大{range.max}万円
-                  </strong>
+                  <strong className={impact >= 60 ? 'warn-text' : ''}>{impact}%</strong>
                   <div className="muted small">
-                    購入額{c.purchaseManYen}万円の{impact}%
+                    上限{range.max}万円 / {c.purchaseManYen}万円
                   </div>
                 </td>
                 <td>

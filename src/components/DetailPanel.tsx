@@ -7,6 +7,7 @@ import {
 } from '../data/municipalities'
 import { FORMULAS, VALUE_TYPE_LABEL, type ValueType } from '../lib/formulas'
 import { officialHazardMapUrl } from '../lib/geo'
+import { hazardStatusLabel } from '../lib/hazardZones'
 import { REPAIR_SCENARIOS, hazardLabel, lossImpactPercent, totalRepairRange } from '../lib/risk'
 import type { Candidate } from '../types'
 
@@ -79,31 +80,32 @@ export function DetailPanel({ candidate }: Props) {
         </div>
         <div>
           <span className="stat-label">
-            <TypeBadge type="official" /> 発生側
+            <TypeBadge type="computed" /> 発生側（機械判定）
           </span>
-          <strong>
-            {candidate.zones.fetchFailed
-              ? '判定失敗'
-              : candidate.zones.anyOfficialZone
-                ? '公式区域に該当'
-                : '公式区域外'}
-          </strong>
+          <strong>{hazardStatusLabel(candidate.zones.status)}</strong>
+          <div className="muted small">
+            判定済み {candidate.zones.evaluatedCount}/4 ／ 未判定 {candidate.zones.unknownCount}
+          </div>
           <div className="muted small">{FORMULAS.officialZone.note}</div>
         </div>
         <div>
           <span className="stat-label">
-            <TypeBadge type="computed" /> 損害額比率
+            <TypeBadge type="computed" /> シナリオ上限の価格比
           </span>
           <strong className={impact >= 60 ? 'warn-text' : ''}>
-            最大{range.max}万円（{impact}%）
+            設定シナリオ上限 {range.max}万円（{impact}%）
           </strong>
           <div className="muted small">{FORMULAS.lossImpact.note}</div>
         </div>
       </div>
 
       <h3>
-        <TypeBadge type="official" /> 発生側：公式ハザード区域
+        <TypeBadge type="computed" /> 発生側：公式ハザードの機械判定
       </h3>
+      <p className="muted small">
+        判定方式: 公式ハザードマップのラスタタイル地点サンプリング（z={candidate.zones.sampledAtZoom}）。
+        区域外推定は安全宣言ではありません。警戒区域外でも災害が起きうる場合があります。
+      </p>
       <ul className="plain-list">
         {[
           candidate.zones.flood,
@@ -111,20 +113,24 @@ export function DetailPanel({ candidate }: Props) {
           candidate.zones.sedimentDebris,
           candidate.zones.sedimentSlide,
         ].map((z) => (
-          <li key={z.id}>
-            <strong>{z.label}</strong>: {z.detail}
-            <div className="muted small">方法: ラスタタイル地点サンプリング（z={candidate.zones.sampledAtZoom}）</div>
+          <li key={z.id} className="metric-line">
+            <div className="metric-main">
+              <TypeBadge type={z.valueType} />
+              <strong>{z.label}</strong>: {z.detail}
+            </div>
           </li>
         ))}
       </ul>
       {candidate.elevationM != null && (
         <p className="muted small">
-          標高補助: {candidate.elevationM.toFixed(1)}m（{FORMULAS.hazardFromElevation.note}）
+          <TypeBadge type="computed" /> 標高補助: {candidate.elevationM.toFixed(1)}m
+          {candidate.elevationHsrc ? `（hsrc: ${candidate.elevationHsrc}）` : ''}
+          ／ {FORMULAS.hazardFromElevation.note}
         </p>
       )}
 
       <h3>
-        <TypeBadge type="estimate" /> 損害側：想定修理費（{hazardLabel(level)}）
+        <TypeBadge type="judgment" /> 損害側：独自修理費シナリオ（{hazardLabel(level)}）
       </h3>
       <ul className="scenario-list">
         {scenarios.map((s) => (
@@ -140,7 +146,8 @@ export function DetailPanel({ candidate }: Props) {
         ))}
       </ul>
       <p className="note">
-        ※発生側（区域該当）と損害側（修理費）は分離しています。期待損失（発生確率×損害額）は未計算です。
+        ※これは物理的な最大損害額ではなく、モデルが置いた修理費シナリオです（{FORMULAS.repairRange.note}）。
+        発生側（区域の機械判定）と損害側は分離しています。期待損失（発生確率×損害額）は未計算です。
         最終確認は公式地図で行ってください。
       </p>
 

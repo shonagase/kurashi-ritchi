@@ -117,9 +117,14 @@ export function findNearestMunicipality(lat: number, lon: number): MunicipalityP
 }
 
 export function formatWelfare(m: MunicipalityProfile): string {
-  return `保護 ${m.welfareRatePercent.toFixed(2)}%（100人中約${m.welfareRatePercent.toFixed(2)}人）`
+  const meta = m.metrics?.welfareRatePercent
+  const perMille =
+    meta?.formula?.includes('‰') || meta?.source?.includes('‰')
+      ? `（${(m.welfareRatePercent * 10).toFixed(2)}‰換算）`
+      : ''
+  return `保護率 ${m.welfareRatePercent.toFixed(2)}%${perMille}`
 }
 
 export function formatCrime(m: MunicipalityProfile): string {
-  return `犯罪 年${m.crimePer100People.toFixed(2)}件/100人（認知件数ベース）`
+  return `人口100人当たり刑法犯認知 ${m.crimePer100People.toFixed(2)}件/年（参考計算・被害者数ではない）`
 }

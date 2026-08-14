@@ -7,15 +7,17 @@
       "source": "東金市 住民基本台帳（人手検証）",
       "referenceDate": "2026-04-01",
       "catName": "高齢化率 = 65歳以上 / 総人口",
+      "formula": "18540 / 55860 ≈ 33.19% → 33.2%",
       "locked": true
     },
     "singleHouseholdRate": {
-      "value": 36.1,
+      "value": 36.0,
       "unit": "%",
       "valueType": "official",
-      "source": "国勢調査2020 / 東金市資料（人手検証）",
+      "source": "国勢調査2020（人手検証）",
       "referenceDate": "2020-10-01",
       "catName": "単独世帯 / 一般世帯",
+      "formula": "9129 / 25355 = 36.00%",
       "locked": true
     },
     "welfareRatePercent": {
@@ -24,17 +26,19 @@
       "valueType": "official",
       "source": "東金市公表 生活保護率 14.80‰（人手検証）",
       "referenceDate": "2020",
-      "catName": "生活保護率",
+      "catName": "生活保護率（年間平均）",
+      "formula": "14.80‰ = 1.48%",
       "locked": true
     },
     "crimePer100People": {
       "value": 0.89,
       "unit": "件/100人・年",
       "valueType": "computed",
-      "source": "千葉県警2025年確定 501件 ÷ 人口約5.6万人（人手検証）",
+      "source": "千葉県警2025年確定 501件 ÷ 2025-04-01人口56,224（人手検証・参考計算）",
       "referenceDate": "2025",
-      "catName": "刑法犯認知件数 / 人口",
-      "formula": "501 / 56000 * 100 ≈ 0.89",
+      "catName": "人口100人当たり刑法犯認知件数（参考計算）",
+      "formula": "501 / 56224 × 100 ≈ 0.891",
+      "warning": "警察が公表する『犯罪率』そのものではない",
       "locked": true
     },
     "population": {

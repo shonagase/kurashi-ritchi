@@ -11,9 +11,11 @@ export type Candidate = {
   lat: number
   lon: number
   elevationM: number | null
-  /** 損害側ティア（区域該当から選定） */
+  /** 国土地理院標高APIの hsrc（DEM種別） */
+  elevationHsrc: string | null
+  /** 損害側ティア（区域該当から選定したシナリオ。物理最大損害ではない） */
   hazardLevel: HazardLevel
-  /** 発生側: 公式ハザード区域判定 */
+  /** 発生側: 公式ハザード区域の機械判定 */
   zones: ZoneAssessment
   municipality: MunicipalityProfile
   stations: TransitStop[]

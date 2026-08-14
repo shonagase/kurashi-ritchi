@@ -10,28 +10,28 @@ export const VALUE_TYPE_LABEL: Record<ValueType, string> = {
 
 export const FORMULAS = {
   lossImpact: {
-    label: '購入額に対する最大想定修理費比率',
+    label: '購入額に対するシナリオ上限修理費の比率',
     valueType: 'computed' as ValueType,
-    formula: '想定修理費の上限（万円） ÷ 購入額（万円） × 100',
-    note: '危険度そのものではない。損害額の価格比（損害側）。',
+    formula: 'シナリオ上限修理費（万円） ÷ 購入額（万円） × 100',
+    note: '危険度でも物理的最大損害でもない。設定シナリオ上限の価格比。',
   },
   officialZone: {
-    label: '公式ハザード区域該当',
-    valueType: 'official' as ValueType,
-    formula: 'ハザードマップポータルのラスタタイルを地点サンプリング',
-    note: '発生側。ポリゴン厳密判定ではない。最終確認は公式地図で。',
+    label: '公式ハザード区域の機械判定',
+    valueType: 'computed' as ValueType,
+    formula: 'ハザードマップポータルのラスタタイルを地点サンプリング（z=15）',
+    note: '公的データに基づく計算値。未判定を区域外に丸めない。区域外推定≠安全。最終確認は公式地図で。',
   },
   damageTier: {
-    label: '損害ティア',
-    valueType: 'estimate' as ValueType,
-    formula: '公式区域該当（洪水・土砂）→ 修理費テーブルを選択',
-    note: '発生側と損害側を分けたうえでの損害額レンジ選定。',
+    label: '独自修理費シナリオ（損害ティア）',
+    valueType: 'judgment' as ValueType,
+    formula: '区域該当結果 → 修理費ヒューリスティックテーブルを選択',
+    note: '公式の被害額算定式ではない。モデル仮定のレンジ。',
   },
   hazardFromElevation: {
     label: '標高補助',
-    valueType: 'judgment' as ValueType,
-    formula: '標高は補助情報。公式区域判定を優先。',
-    note: '区域外でも極低標高なら損害ティアを一段上げる場合あり。',
+    valueType: 'computed' as ValueType,
+    formula: '国土地理院標高API（elevation + hsrc）',
+    note: '標高は補助情報。発生側ステータスの代替には使わない。',
   },
   straightWalkMin: {
     label: '直線距離換算時間',
@@ -40,9 +40,9 @@ export const FORMULAS = {
     note: '道路距離・実歩行時間ではない。',
   },
   repairRange: {
-    label: '想定修理費レンジ',
-    valueType: 'estimate' as ValueType,
-    formula: '損害ティアに応じた固定テーブル',
-    note: '発生確率を掛けた期待損失ではない。',
+    label: '独自修理費シナリオレンジ',
+    valueType: 'judgment' as ValueType,
+    formula: '損害ティアに応じた固定ヒューリスティック',
+    note: '発生確率を掛けた期待損失ではない。物理最大損害でもない。',
   },
 } as const

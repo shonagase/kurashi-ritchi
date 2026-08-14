@@ -66,16 +66,23 @@ export async function searchAddress(query: string): Promise<GeoPoint | null> {
   return null
 }
 
-export async function fetchElevation(lat: number, lon: number): Promise<number | null> {
+export async function fetchElevation(
+  lat: number,
+  lon: number,
+): Promise<{ elevationM: number; hsrc: string | null } | null> {
   try {
     const url =
       `https://cyberjapandata2.gsi.go.jp/general/dem/scripts/getelevation.php` +
       `?lon=${lon}&lat=${lat}&outtype=JSON`
     const res = await fetch(url)
     if (!res.ok) return null
-    const data = (await res.json()) as { elevation?: number | string }
+    const data = (await res.json()) as { elevation?: number | string; hsrc?: string }
     const elev = Number(data.elevation)
-    return Number.isFinite(elev) ? elev : null
+    if (!Number.isFinite(elev)) return null
+    return {
+      elevationM: elev,
+      hsrc: data.hsrc ? String(data.hsrc) : null,
+    }
   } catch {
     return null
   }

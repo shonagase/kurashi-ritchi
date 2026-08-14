@@ -1,20 +1,37 @@
 /**
  * ハザードマップポータル（国土地理院）の公式ラスタタイルを地点サンプリングし、
- * 洪水・土砂区域への該当を判定する。
+ * 洪水・土砂区域への該当を機械判定する。
  *
- * 注意: ラスタ色からの判定であり、属性付きポリゴンの厳密な空間結合ではない。
- * 最終確認は公式「重ねるハザードマップ」で行うこと。
+ * 注意:
+ * - 行政による「区域外証明」ではない。公式データのラスタ1点からの推定。
+ * - 属性付きポリゴンの厳密な空間結合ではない。
+ * - 未判定（タイル取得失敗等）を「区域外」に丸めないこと。
+ * - 最終確認は公式「重ねるハザードマップ」で行うこと。
  */
+
+import type { ValueType } from './formulas'
+
+export type ZoneHitStatus = 'in_zone' | 'likely_outside' | 'unknown'
+
+/** 4層を踏まえた総合ステータス。unknown を安全側に丸めない */
+export type HazardEvalStatus =
+  | 'in_zone'
+  | 'all_outside'
+  | 'partially_evaluated'
+  | 'unevaluated'
 
 export type ZoneHit = {
   id: string
   label: string
+  /** true=区域内推定, false=区域外推定, null=未判定 */
   inZone: boolean | null
+  status: ZoneHitStatus
   detail: string
   sourceUrl: string
   legendUrl?: string
   method: 'gsi-raster-sample'
-  valueType: 'official'
+  /** 公的ラスタに基づく機械判定 → 計算値 */
+  valueType: ValueType
 }
 
 export type ZoneAssessment = {
@@ -22,10 +39,14 @@ export type ZoneAssessment = {
   sedimentSteep: ZoneHit
   sedimentDebris: ZoneHit
   sedimentSlide: ZoneHit
-  /** いずれかの公式区域に該当 */
+  /** @deprecated status を優先。後方互換のため残す */
   anyOfficialZone: boolean
-  /** タイル取得失敗など */
+  /** 全層が未判定 */
   fetchFailed: boolean
+  /** Unknown を区域外に丸めない総合結果 */
+  status: HazardEvalStatus
+  evaluatedCount: number
+  unknownCount: number
   sampledAtZoom: number
 }
 
@@ -92,7 +113,6 @@ function samplePixel(
   canvas.height = 1
   const ctx = canvas.getContext('2d', { willReadFrequently: true })
   if (!ctx) return null
-  // タイル内の1pxを切り出し
   ctx.drawImage(img, px, py, 1, 1, 0, 0, 1, 1)
   const [r, g, b, a] = ctx.getImageData(0, 0, 1, 1).data
   return { r, g, b, a }
@@ -120,6 +140,24 @@ function classifyFloodDepth(r: number, g: number, b: number): string {
   return best.label
 }
 
+function unknownHit(
+  layer: (typeof LAYERS)[keyof typeof LAYERS],
+  detail: string,
+  url: string,
+): ZoneHit {
+  return {
+    id: layer.id,
+    label: layer.label,
+    inZone: null,
+    status: 'unknown',
+    detail,
+    sourceUrl: url,
+    legendUrl: 'legendUrl' in layer ? layer.legendUrl : undefined,
+    method: 'gsi-raster-sample',
+    valueType: 'computed',
+  }
+}
+
 async function sampleLayer(
   layer: (typeof LAYERS)[keyof typeof LAYERS],
   lat: number,
@@ -130,43 +168,91 @@ async function sampleLayer(
   const url = layer.url.replace('{z}', String(z)).replace('{x}', String(x)).replace('{y}', String(y))
   const img = await loadImage(url)
   if (!img) {
-    return {
-      id: layer.id,
-      label: layer.label,
-      inZone: null,
-      detail: 'タイル取得失敗（未判定）',
-      sourceUrl: url,
-      legendUrl: 'legendUrl' in layer ? layer.legendUrl : undefined,
-      method: 'gsi-raster-sample',
-      valueType: 'official',
-    }
+    return unknownHit(layer, '未判定（タイル取得失敗）', url)
   }
   const pix = samplePixel(img, px, py)
   if (!pix) {
-    return {
-      id: layer.id,
-      label: layer.label,
-      inZone: null,
-      detail: '画素読み取り失敗',
-      sourceUrl: url,
-      method: 'gsi-raster-sample',
-      valueType: 'official',
-    }
+    return unknownHit(layer, '未判定（画素読み取り失敗）', url)
   }
   const inZone = pix.a > 30
-  let detail = inZone ? '区域内' : '区域外（このタイル上）'
+  let detail = inZone
+    ? '機械判定：区域内推定'
+    : '機械判定：区域外推定'
   if (inZone && layer.kind === 'flood') {
-    detail = `区域内（推定: ${classifyFloodDepth(pix.r, pix.g, pix.b)}）`
+    detail = `機械判定：区域内推定（${classifyFloodDepth(pix.r, pix.g, pix.b)}）`
   }
   return {
     id: layer.id,
     label: layer.label,
     inZone,
+    status: inZone ? 'in_zone' : 'likely_outside',
     detail,
     sourceUrl: url,
     legendUrl: 'legendUrl' in layer ? layer.legendUrl : undefined,
     method: 'gsi-raster-sample',
-    valueType: 'official',
+    valueType: 'computed',
+  }
+}
+
+export function summarizeHazardStatus(hits: ZoneHit[]): {
+  status: HazardEvalStatus
+  anyOfficialZone: boolean
+  fetchFailed: boolean
+  evaluatedCount: number
+  unknownCount: number
+} {
+  const evaluated = hits.filter((h) => h.inZone !== null)
+  const unknown = hits.filter((h) => h.inZone === null)
+  const inZone = hits.some((h) => h.inZone === true)
+  const evaluatedCount = evaluated.length
+  const unknownCount = unknown.length
+
+  if (inZone) {
+    return {
+      status: 'in_zone',
+      anyOfficialZone: true,
+      fetchFailed: false,
+      evaluatedCount,
+      unknownCount,
+    }
+  }
+  if (evaluatedCount === 0) {
+    return {
+      status: 'unevaluated',
+      anyOfficialZone: false,
+      fetchFailed: true,
+      evaluatedCount,
+      unknownCount,
+    }
+  }
+  if (unknownCount > 0) {
+    return {
+      status: 'partially_evaluated',
+      anyOfficialZone: false,
+      fetchFailed: false,
+      evaluatedCount,
+      unknownCount,
+    }
+  }
+  return {
+    status: 'all_outside',
+    anyOfficialZone: false,
+    fetchFailed: false,
+    evaluatedCount,
+    unknownCount,
+  }
+}
+
+export function hazardStatusLabel(status: HazardEvalStatus): string {
+  switch (status) {
+    case 'in_zone':
+      return '公式区域に該当（機械判定）'
+    case 'all_outside':
+      return '判定済み層は区域外推定'
+    case 'partially_evaluated':
+      return '一部判定済み（未判定あり）'
+    case 'unevaluated':
+      return '未判定'
   }
 }
 
@@ -178,25 +264,27 @@ export async function assessOfficialHazardZones(lat: number, lon: number): Promi
     sampleLayer(LAYERS.sedimentSlide, lat, lon, Z),
   ])
   const [flood, sedimentSteep, sedimentDebris, sedimentSlide] = results
-  const known = results.filter((r) => r.inZone !== null)
-  const fetchFailed = known.length === 0
-  const anyOfficialZone = results.some((r) => r.inZone === true)
+  const summary = summarizeHazardStatus(results)
 
   return {
     flood,
     sedimentSteep,
     sedimentDebris,
     sedimentSlide,
-    anyOfficialZone,
-    fetchFailed,
+    anyOfficialZone: summary.anyOfficialZone,
+    fetchFailed: summary.fetchFailed,
+    status: summary.status,
+    evaluatedCount: summary.evaluatedCount,
+    unknownCount: summary.unknownCount,
     sampledAtZoom: Z,
   }
 }
 
 /**
  * 発生側（区域該当）に応じた損害側テーブルキー。
- * 公式区域に入っていれば mid/high、入っていなければ low。
- * 標高は補助情報として残す。
+ * 区域内該当があれば mid/high。
+ * 未判定を「安全＝low」と断定しないが、シナリオ選定の既定は低ティアを使う
+ *（表示上は発生側ステータスを別表示すること）。
  */
 export function damageTierFromZones(
   zones: ZoneAssessment,
@@ -210,15 +298,18 @@ export function damageTierFromZones(
 
   if (flood && sediment) return 'high'
   if (flood) {
-    // 深い浸水色は高ダメージ寄り（detail文字列で粗い判定）
-    if (zones.flood.detail.includes('10') || zones.flood.detail.includes('20') || zones.flood.detail.includes('5〜')) {
+    if (
+      zones.flood.detail.includes('10') ||
+      zones.flood.detail.includes('20') ||
+      zones.flood.detail.includes('5〜')
+    ) {
       return 'high'
     }
     return 'mid'
   }
   if (sediment) return 'mid'
 
-  // 区域外でも極低標高は注意寄り（補助）
+  // 区域該当が確認できない場合のシナリオ既定（≠安全宣言）
   if (elevationM != null && elevationM < 5) return 'mid'
   return 'low'
 }

@@ -56,11 +56,12 @@ export default function App() {
     lat: number
     lon: number
   }): Promise<Candidate> {
-    const [elevationM, transit, zones] = await Promise.all([
+    const [elevation, transit, zones] = await Promise.all([
       fetchElevation(input.lat, input.lon),
       fetchNearbyTransit(input.lat, input.lon),
       assessOfficialHazardZones(input.lat, input.lon),
     ])
+    const elevationM = elevation?.elevationM ?? null
     const hazardLevel = damageTierFromZones(zones, elevationM)
     const municipality = findNearestMunicipality(input.lat, input.lon)
 
@@ -72,6 +73,7 @@ export default function App() {
       lat: input.lat,
       lon: input.lon,
       elevationM,
+      elevationHsrc: elevation?.hsrc ?? null,
       hazardLevel,
       zones,
       municipality,
