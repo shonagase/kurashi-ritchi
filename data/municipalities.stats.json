@@ -1,0 +1,231 @@
+{
+  "meta": {
+    "updatedAt": "2026-08-14",
+    "source": "seed (manual baseline; replace via e-Stat updater)",
+    "notes": "犯罪は人口100人あたり年間刑法犯認知件数。保護は人口比率%。"
+  },
+  "byId": {
+    "11100": {
+      "agingRate": 23.8,
+      "singleHouseholdRate": 40,
+      "welfareRatePercent": 1.4,
+      "crimePer100People": 0.65
+    },
+    "11203": {
+      "agingRate": 23,
+      "singleHouseholdRate": 45,
+      "welfareRatePercent": 1.8,
+      "crimePer100People": 0.75
+    },
+    "12100": {
+      "agingRate": 25.5,
+      "singleHouseholdRate": 41,
+      "welfareRatePercent": 1.6,
+      "crimePer100People": 0.7
+    },
+    "12204": {
+      "agingRate": 24.2,
+      "singleHouseholdRate": 39,
+      "welfareRatePercent": 1.5,
+      "crimePer100People": 0.65
+    },
+    "12207": {
+      "agingRate": 26,
+      "singleHouseholdRate": 38,
+      "welfareRatePercent": 1.7,
+      "crimePer100People": 0.7
+    },
+    "12217": {
+      "agingRate": 25,
+      "singleHouseholdRate": 37,
+      "welfareRatePercent": 1.2,
+      "crimePer100People": 0.55
+    },
+    "12227": {
+      "agingRate": 31.2,
+      "singleHouseholdRate": 33,
+      "welfareRatePercent": 1.8,
+      "crimePer100People": 0.6
+    },
+    "13101": {
+      "agingRate": 18.5,
+      "singleHouseholdRate": 58,
+      "welfareRatePercent": 0.7,
+      "crimePer100People": 1.45
+    },
+    "13103": {
+      "agingRate": 17.8,
+      "singleHouseholdRate": 55,
+      "welfareRatePercent": 0.8,
+      "crimePer100People": 1.1
+    },
+    "13104": {
+      "agingRate": 19.2,
+      "singleHouseholdRate": 62,
+      "welfareRatePercent": 1.6,
+      "crimePer100People": 1.6
+    },
+    "13112": {
+      "agingRate": 20.5,
+      "singleHouseholdRate": 48,
+      "welfareRatePercent": 0.9,
+      "crimePer100People": 0.55
+    },
+    "13113": {
+      "agingRate": 17.1,
+      "singleHouseholdRate": 60,
+      "welfareRatePercent": 1,
+      "crimePer100People": 1.2
+    },
+    "13120": {
+      "agingRate": 22.8,
+      "singleHouseholdRate": 42,
+      "welfareRatePercent": 1.3,
+      "crimePer100People": 0.5
+    },
+    "13121": {
+      "agingRate": 24.5,
+      "singleHouseholdRate": 45,
+      "welfareRatePercent": 3.2,
+      "crimePer100People": 0.85
+    },
+    "13122": {
+      "agingRate": 25.1,
+      "singleHouseholdRate": 43,
+      "welfareRatePercent": 2.8,
+      "crimePer100People": 0.8
+    },
+    "13123": {
+      "agingRate": 22,
+      "singleHouseholdRate": 40,
+      "welfareRatePercent": 1.9,
+      "crimePer100People": 0.7
+    },
+    "14100": {
+      "agingRate": 24,
+      "singleHouseholdRate": 44,
+      "welfareRatePercent": 1.7,
+      "crimePer100People": 0.7
+    },
+    "14130": {
+      "agingRate": 21.5,
+      "singleHouseholdRate": 48,
+      "welfareRatePercent": 1.8,
+      "crimePer100People": 0.75
+    },
+    "14131": {
+      "agingRate": 25.8,
+      "singleHouseholdRate": 36,
+      "welfareRatePercent": 1.1,
+      "crimePer100People": 0.5
+    },
+    "14150": {
+      "agingRate": 25.2,
+      "singleHouseholdRate": 38,
+      "welfareRatePercent": 1.5,
+      "crimePer100People": 0.55
+    },
+    "15100": {
+      "agingRate": 29,
+      "singleHouseholdRate": 36,
+      "welfareRatePercent": 1.5,
+      "crimePer100People": 0.5
+    },
+    "20201": {
+      "agingRate": 29.5,
+      "singleHouseholdRate": 35,
+      "welfareRatePercent": 1.4,
+      "crimePer100People": 0.45
+    },
+    "22100": {
+      "agingRate": 29.5,
+      "singleHouseholdRate": 35,
+      "welfareRatePercent": 1.5,
+      "crimePer100People": 0.5
+    },
+    "22130": {
+      "agingRate": 28,
+      "singleHouseholdRate": 34,
+      "welfareRatePercent": 1.4,
+      "crimePer100People": 0.48
+    },
+    "23100": {
+      "agingRate": 25,
+      "singleHouseholdRate": 46,
+      "welfareRatePercent": 1.9,
+      "crimePer100People": 0.8
+    },
+    "23200": {
+      "agingRate": 24,
+      "singleHouseholdRate": 32,
+      "welfareRatePercent": 0.9,
+      "crimePer100People": 0.45
+    },
+    "26100": {
+      "agingRate": 28.5,
+      "singleHouseholdRate": 48,
+      "welfareRatePercent": 1.8,
+      "crimePer100People": 0.7
+    },
+    "27100": {
+      "agingRate": 25.5,
+      "singleHouseholdRate": 52,
+      "welfareRatePercent": 3.8,
+      "crimePer100People": 1.35
+    },
+    "27140": {
+      "agingRate": 28.5,
+      "singleHouseholdRate": 38,
+      "welfareRatePercent": 2.2,
+      "crimePer100People": 0.85
+    },
+    "28100": {
+      "agingRate": 28,
+      "singleHouseholdRate": 45,
+      "welfareRatePercent": 2,
+      "crimePer100People": 0.75
+    },
+    "34100": {
+      "agingRate": 25.5,
+      "singleHouseholdRate": 42,
+      "welfareRatePercent": 1.7,
+      "crimePer100People": 0.7
+    },
+    "40100": {
+      "agingRate": 32,
+      "singleHouseholdRate": 40,
+      "welfareRatePercent": 3.5,
+      "crimePer100People": 0.9
+    },
+    "40130": {
+      "agingRate": 22,
+      "singleHouseholdRate": 50,
+      "welfareRatePercent": 1.8,
+      "crimePer100People": 0.95
+    },
+    "43100": {
+      "agingRate": 26,
+      "singleHouseholdRate": 40,
+      "welfareRatePercent": 1.7,
+      "crimePer100People": 0.7
+    },
+    "47201": {
+      "agingRate": 22.5,
+      "singleHouseholdRate": 42,
+      "welfareRatePercent": 2.9,
+      "crimePer100People": 0.9
+    },
+    "01100": {
+      "agingRate": 26.5,
+      "singleHouseholdRate": 48,
+      "welfareRatePercent": 2.1,
+      "crimePer100People": 0.8
+    },
+    "04100": {
+      "agingRate": 24.5,
+      "singleHouseholdRate": 45,
+      "welfareRatePercent": 1.6,
+      "crimePer100People": 0.7
+    }
+  }
+}

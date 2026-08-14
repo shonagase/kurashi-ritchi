@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "npm run merge:stats && tsc -b && vite build",
+    "merge:stats": "node scripts/merge-municipalities.mjs",
+    "update:stats": "node scripts/update-municipal-stats.mjs",
     "lint": "oxlint",
     "preview": "vite preview"
   },

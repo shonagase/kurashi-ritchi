@@ -21,10 +21,31 @@ GitHub Pages で公開します。
 3. 比較リストで並べ替え・詳細を確認
 4. 必要なら公式「重ねるハザードマップ」で最終確認
 
+## 地域統計の自動更新
+
+保護・犯罪・高齢化などの市区町村統計は、**e-Stat API（社会・人口統計体系）** から週次で更新できます。
+
+### セットアップ（必須）
+
+1. [e-Stat API](https://www.e-stat.go.jp/api/) でアプリケーションIDを無料発行
+2. GitHub リポジトリの **Settings → Secrets and variables → Actions** に  
+   `ESTAT_APP_ID` を追加
+3. Actions タブで **Update municipal stats** を手動実行（または毎週月曜に自動実行）
+
+更新されると `data/municipalities.stats.json` と `src/data/municipalities.generated.json` がコミットされ、Pages も再デプロイされます。
+
+ローカル手動更新:
+
+```bash
+export ESTAT_APP_ID=あなたのID
+npm run update:stats
+```
+
 ## ローカル起動
 
 ```bash
 npm install
+npm run merge:stats
 npm run dev
 ```
 

@@ -1,4 +1,4 @@
-import { DATA_SOURCES, formatCrime, formatWelfare } from '../data/municipalities'
+import { DATA_SOURCES, formatCrime, formatWelfare, statsMeta } from '../data/municipalities'
 import { officialHazardMapUrl } from '../lib/geo'
 import { REPAIR_SCENARIOS, hazardLabel, lossImpactPercent, totalRepairRange } from '../lib/risk'
 import type { Candidate } from '../types'
@@ -85,6 +85,7 @@ export function DetailPanel({ candidate }: Props) {
       </p>
 
       <h3>地域性（{m.pref} {m.name}）</h3>
+      <p className="muted small">統計更新日: {statsMeta.updatedAt}</p>
       <p>{m.industryNote}</p>
       <ul className="plain-list">
         <li>産業タイプ: {m.industryType}</li>
@@ -98,6 +99,10 @@ export function DetailPanel({ candidate }: Props) {
       </ul>
       <p className="source-line">
         出典:{' '}
+        <a href={DATA_SOURCES.estatApi.url} target="_blank" rel="noreferrer">
+          {DATA_SOURCES.estatApi.label}
+        </a>
+        {' / '}
         <a href={DATA_SOURCES.census.url} target="_blank" rel="noreferrer">
           {DATA_SOURCES.census.label}
         </a>

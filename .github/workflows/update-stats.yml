@@ -1,0 +1,50 @@
+name: Update municipal stats
+
+on:
+  schedule:
+    # 毎週月曜 12:00 JST (03:00 UTC)
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-stats
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Require ESTAT_APP_ID
+        env:
+          ESTAT_APP_ID: ${{ secrets.ESTAT_APP_ID }}
+        run: |
+          if [ -z "$ESTAT_APP_ID" ]; then
+            echo "::error::Secret ESTAT_APP_ID が未設定です。https://www.e-stat.go.jp/api/ で発行し、リポジトリ Secrets に追加してください。"
+            exit 1
+          fi
+
+      - name: Fetch latest stats from e-Stat
+        env:
+          ESTAT_APP_ID: ${{ secrets.ESTAT_APP_ID }}
+        run: node scripts/update-municipal-stats.mjs
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- data/municipalities.stats.json src/data/municipalities.generated.json; then
+            echo "No stats changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/municipalities.stats.json src/data/municipalities.generated.json
+          git commit -m "chore: update municipal stats from e-Stat"
+          git push

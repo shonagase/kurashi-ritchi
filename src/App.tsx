@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { ComparisonTable } from './components/ComparisonTable'
 import { DetailPanel } from './components/DetailPanel'
 import { MapView } from './components/MapView'
-import { DATA_SOURCES, findNearestMunicipality } from './data/municipalities'
+import { DATA_SOURCES, findNearestMunicipality, statsMeta } from './data/municipalities'
 import { fetchElevation, fetchNearbyTransit, searchAddress } from './lib/geo'
 import { estimateHazardFromElevation } from './lib/risk'
 import type { Candidate, SortKey } from './types'
@@ -245,7 +245,18 @@ export default function App() {
 
       <footer className="footer">
         <h2>データと免責</h2>
+        <p className="stats-updated">
+          地域統計の最終更新: <strong>{statsMeta.updatedAt}</strong>
+          <span className="muted">（{statsMeta.source}）</span>
+        </p>
         <ul className="source-list">
+          <li>
+            地域統計の自動更新:{' '}
+            <a href={DATA_SOURCES.estatApi.url} target="_blank" rel="noreferrer">
+              {DATA_SOURCES.estatApi.label}
+            </a>
+            （週次 GitHub Actions）
+          </li>
           <li>
             背景地図:{' '}
             <a href={DATA_SOURCES.gsiMap.url} target="_blank" rel="noreferrer">
@@ -302,7 +313,8 @@ export default function App() {
           </li>
         </ul>
         <p>
-          本サービスは住宅購入の参考比較ツールです。危険度は標高などから推定した相対指標であり、正式なハザード判定や損害保険・不動産鑑定の代替ではありません。地域統計は公開値を参考にした市区町村単位の概算です。犯罪は「被害者人数」ではなく「年間認知件数」ベースです。
+          本サービスは住宅購入の参考比較ツールです。危険度は標高などから推定した相対指標であり、正式なハザード判定や損害保険・不動産鑑定の代替ではありません。地域統計は e-Stat
+          等の公開値を週次で取り込みます（秘密鍵 ESTAT_APP_ID 設定時）。犯罪は「被害者人数」ではなく「年間認知件数」ベースです。
         </p>
       </footer>
     </div>
