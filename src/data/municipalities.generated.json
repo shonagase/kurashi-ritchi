@@ -1,12 +1,12 @@
 {
   "meta": {
-    "retrievedAt": "2026-08-14T05:16:52.890Z",
-    "notes": "指標ごとに referenceDate/source を保持。東金市はレビュー検証値。他自治体は再取得まで referenceDate=unknown。",
+    "retrievedAt": "2026-08-14T05:19:57.380Z",
+    "notes": "各指標は field ごとに referenceDate / source を持つ。retrievedAt は取得日時であり、統計の対象時点ではない。",
     "fields": {
-      "agingRate": "高齢化率",
-      "singleHouseholdRate": "単独世帯割合（一般世帯）",
-      "welfareRatePercent": "生活保護率%",
-      "crimePer100People": "刑法犯認知 件/100人・年"
+      "agingRate": "高齢化率（65歳以上人口割合）",
+      "singleHouseholdRate": "一般世帯に占める単独世帯割合（高齢単独世帯は除外）",
+      "welfareRatePercent": "生活保護（人口千対を%換算）",
+      "crimePer100People": "刑法犯認知（人口千対を100人あたり換算）"
     }
   },
   "municipalities": [
@@ -21,17 +21,16 @@
       "agingRate": 16.3,
       "singleHouseholdRate": 9.2,
       "welfareRatePercent": 0.7,
-      "crimePer100People": 1.45,
+      "crimePer100People": 13.03,
       "metrics": {
         "agingRate": {
           "value": 16.3,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 9.2,
@@ -54,14 +53,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 1.45,
+          "value": 13.03,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -76,17 +74,16 @@
       "agingRate": 16.3,
       "singleHouseholdRate": 9.6,
       "welfareRatePercent": 0.8,
-      "crimePer100People": 1.1,
+      "crimePer100People": 4.81,
       "metrics": {
         "agingRate": {
           "value": 16.3,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 9.6,
@@ -109,14 +106,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 1.1,
+          "value": 4.81,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -131,17 +127,16 @@
       "agingRate": 18.1,
       "singleHouseholdRate": 9.7,
       "welfareRatePercent": 1.6,
-      "crimePer100People": 1.6,
+      "crimePer100People": 3.72,
       "metrics": {
         "agingRate": {
           "value": 18.1,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 9.7,
@@ -164,14 +159,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 1.6,
+          "value": 3.72,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -186,17 +180,16 @@
       "agingRate": 20.1,
       "singleHouseholdRate": 11,
       "welfareRatePercent": 0.9,
-      "crimePer100People": 0.55,
+      "crimePer100People": 1.75,
       "metrics": {
         "agingRate": {
           "value": 20.1,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 11,
@@ -219,14 +212,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.55,
+          "value": 1.75,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -241,17 +233,16 @@
       "agingRate": 16.9,
       "singleHouseholdRate": 8.2,
       "welfareRatePercent": 1,
-      "crimePer100People": 1.2,
+      "crimePer100People": 4.99,
       "metrics": {
         "agingRate": {
           "value": 16.9,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 8.2,
@@ -274,14 +265,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 1.2,
+          "value": 4.99,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -296,17 +286,16 @@
       "agingRate": 21.2,
       "singleHouseholdRate": 10.4,
       "welfareRatePercent": 1.3,
-      "crimePer100People": 0.5,
+      "crimePer100People": 1.63,
       "metrics": {
         "agingRate": {
           "value": 21.2,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 10.4,
@@ -329,14 +318,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.5,
+          "value": 1.63,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -351,17 +339,16 @@
       "agingRate": 24.5,
       "singleHouseholdRate": 13.2,
       "welfareRatePercent": 3.2,
-      "crimePer100People": 0.85,
+      "crimePer100People": 2.19,
       "metrics": {
         "agingRate": {
           "value": 24.5,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 13.2,
@@ -384,14 +371,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.85,
+          "value": 2.19,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -406,17 +392,16 @@
       "agingRate": 24.7,
       "singleHouseholdRate": 13.5,
       "welfareRatePercent": 2.8,
-      "crimePer100People": 0.8,
+      "crimePer100People": 1.78,
       "metrics": {
         "agingRate": {
           "value": 24.7,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 13.5,
@@ -439,14 +424,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.8,
+          "value": 1.78,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -461,17 +445,16 @@
       "agingRate": 20.9,
       "singleHouseholdRate": 11,
       "welfareRatePercent": 1.9,
-      "crimePer100People": 0.7,
+      "crimePer100People": 2.07,
       "metrics": {
         "agingRate": {
           "value": 20.9,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 11,
@@ -494,14 +477,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.7,
+          "value": 2.07,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -516,17 +498,16 @@
       "agingRate": 24.4,
       "singleHouseholdRate": 11.2,
       "welfareRatePercent": 1.7,
-      "crimePer100People": 0.7,
+      "crimePer100People": 1.53,
       "metrics": {
         "agingRate": {
           "value": 24.4,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 11.2,
@@ -549,14 +530,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.7,
+          "value": 1.53,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -571,17 +551,16 @@
       "agingRate": 19.6,
       "singleHouseholdRate": 8.9,
       "welfareRatePercent": 1.8,
-      "crimePer100People": 0.75,
+      "crimePer100People": 1.67,
       "metrics": {
         "agingRate": {
           "value": 19.6,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 8.9,
@@ -604,14 +583,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.75,
+          "value": 1.67,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -626,17 +604,16 @@
       "agingRate": 25.5,
       "singleHouseholdRate": 10.1,
       "welfareRatePercent": 1.5,
-      "crimePer100People": 0.55,
+      "crimePer100People": 1.87,
       "metrics": {
         "agingRate": {
           "value": 25.5,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 10.1,
@@ -659,14 +636,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.55,
+          "value": 1.87,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -681,17 +657,16 @@
       "agingRate": 23,
       "singleHouseholdRate": 9.6,
       "welfareRatePercent": 1.4,
-      "crimePer100People": 0.65,
+      "crimePer100People": 2.51,
       "metrics": {
         "agingRate": {
           "value": 23,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 9.6,
@@ -714,14 +689,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.65,
+          "value": 2.51,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -736,17 +710,16 @@
       "agingRate": 23.2,
       "singleHouseholdRate": 10.3,
       "welfareRatePercent": 1.8,
-      "crimePer100People": 0.75,
+      "crimePer100People": 2.68,
       "metrics": {
         "agingRate": {
           "value": 23.2,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 10.3,
@@ -769,14 +742,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.75,
+          "value": 2.68,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -791,17 +763,16 @@
       "agingRate": 25.6,
       "singleHouseholdRate": 10.8,
       "welfareRatePercent": 1.6,
-      "crimePer100People": 0.7,
+      "crimePer100People": 2.59,
       "metrics": {
         "agingRate": {
           "value": 25.6,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 10.8,
@@ -824,14 +795,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.7,
+          "value": 2.59,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -846,17 +816,16 @@
       "agingRate": 23.8,
       "singleHouseholdRate": 10.2,
       "welfareRatePercent": 1.5,
-      "crimePer100People": 0.65,
+      "crimePer100People": 2.21,
       "metrics": {
         "agingRate": {
           "value": 23.8,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 10.2,
@@ -879,14 +848,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.65,
+          "value": 2.21,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -901,17 +869,16 @@
       "agingRate": 25.6,
       "singleHouseholdRate": 11.8,
       "welfareRatePercent": 1.7,
-      "crimePer100People": 0.7,
+      "crimePer100People": 2.26,
       "metrics": {
         "agingRate": {
           "value": 25.6,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 11.8,
@@ -934,14 +901,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.7,
+          "value": 2.26,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -956,17 +922,16 @@
       "agingRate": 25.8,
       "singleHouseholdRate": 9.9,
       "welfareRatePercent": 1.2,
-      "crimePer100People": 0.55,
+      "crimePer100People": 2.22,
       "metrics": {
         "agingRate": {
           "value": 25.8,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 9.9,
@@ -989,14 +954,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.55,
+          "value": 2.22,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -1008,19 +972,19 @@
       "lon": 140.366,
       "industryType": "郊外住宅・商業",
       "industryNote": "千葉県東部の郊外都市。住宅団地と幹線沿い商業が中心。",
-      "agingRate": 33.2,
+      "agingRate": 17.5,
       "singleHouseholdRate": 36.1,
       "welfareRatePercent": 1.48,
-      "crimePer100People": 0.89,
+      "crimePer100People": 2.68,
       "metrics": {
         "agingRate": {
-          "value": 33.2,
+          "value": 17.5,
           "unit": "%",
           "valueType": "official",
-          "source": "東金市 住民基本台帳（レビュー検証）",
-          "referenceDate": "2026-04-01",
-          "retrievedAt": "2026-08-14T05:16:52.886Z",
-          "catName": "高齢化率 = 65歳以上 / 総人口"
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 36.1,
@@ -1041,14 +1005,13 @@
           "catName": "生活保護率"
         },
         "crimePer100People": {
-          "value": 0.89,
+          "value": 2.68,
           "unit": "件/100人・年",
-          "valueType": "computed",
-          "source": "千葉県警2025年確定 刑法犯501件 ÷ 人口約5.6万人（レビュー検証）",
-          "referenceDate": "2025",
-          "retrievedAt": "2026-08-14T05:16:52.890Z",
-          "catName": "刑法犯認知件数 / 人口",
-          "formula": "501 / 56000 * 100 ≈ 0.89"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -1063,17 +1026,16 @@
       "agingRate": 21.3,
       "singleHouseholdRate": 10.9,
       "welfareRatePercent": 1.1,
-      "crimePer100People": 0.5,
+      "crimePer100People": 3.2,
       "metrics": {
         "agingRate": {
           "value": 21.3,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 10.9,
@@ -1096,14 +1058,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.5,
+          "value": 3.2,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -1118,17 +1079,16 @@
       "agingRate": 30.2,
       "singleHouseholdRate": 12.1,
       "welfareRatePercent": 1.5,
-      "crimePer100People": 0.5,
+      "crimePer100People": 1.59,
       "metrics": {
         "agingRate": {
           "value": 30.2,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 12.1,
@@ -1151,14 +1111,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.5,
+          "value": 1.59,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -1173,17 +1132,16 @@
       "agingRate": 27.9,
       "singleHouseholdRate": 10,
       "welfareRatePercent": 1.4,
-      "crimePer100People": 0.48,
+      "crimePer100People": 1.47,
       "metrics": {
         "agingRate": {
           "value": 27.9,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 10,
@@ -1206,14 +1164,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.48,
+          "value": 1.47,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -1228,17 +1185,16 @@
       "agingRate": 24.3,
       "singleHouseholdRate": 11.6,
       "welfareRatePercent": 1.9,
-      "crimePer100People": 0.8,
+      "crimePer100People": 3.6,
       "metrics": {
         "agingRate": {
           "value": 24.3,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 11.6,
@@ -1261,14 +1217,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.8,
+          "value": 3.6,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -1338,17 +1293,16 @@
       "agingRate": 24.6,
       "singleHouseholdRate": 14.6,
       "welfareRatePercent": 3.8,
-      "crimePer100People": 1.35,
+      "crimePer100People": 4.06,
       "metrics": {
         "agingRate": {
           "value": 24.6,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 14.6,
@@ -1371,14 +1325,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 1.35,
+          "value": 4.06,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -1393,17 +1346,16 @@
       "agingRate": 28.2,
       "singleHouseholdRate": 14.1,
       "welfareRatePercent": 2.2,
-      "crimePer100People": 0.85,
+      "crimePer100People": 2.73,
       "metrics": {
         "agingRate": {
           "value": 28.2,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 14.1,
@@ -1426,14 +1378,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.85,
+          "value": 2.73,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -1448,17 +1399,16 @@
       "agingRate": 27.5,
       "singleHouseholdRate": 13.9,
       "welfareRatePercent": 2,
-      "crimePer100People": 0.75,
+      "crimePer100People": 2.35,
       "metrics": {
         "agingRate": {
           "value": 27.5,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 13.9,
@@ -1481,14 +1431,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.75,
+          "value": 2.35,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -1503,17 +1452,16 @@
       "agingRate": 26.9,
       "singleHouseholdRate": 13.1,
       "welfareRatePercent": 1.8,
-      "crimePer100People": 0.7,
+      "crimePer100People": 2.57,
       "metrics": {
         "agingRate": {
           "value": 26.9,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 13.1,
@@ -1536,14 +1484,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.7,
+          "value": 2.57,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -1558,17 +1505,16 @@
       "agingRate": 25.1,
       "singleHouseholdRate": 11.5,
       "welfareRatePercent": 1.7,
-      "crimePer100People": 0.7,
+      "crimePer100People": 1.57,
       "metrics": {
         "agingRate": {
           "value": 25.1,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 11.5,
@@ -1591,14 +1537,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.7,
+          "value": 1.57,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -1613,17 +1558,16 @@
       "agingRate": 30.5,
       "singleHouseholdRate": 15,
       "welfareRatePercent": 3.5,
-      "crimePer100People": 0.9,
+      "crimePer100People": 2.21,
       "metrics": {
         "agingRate": {
           "value": 30.5,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 15,
@@ -1646,14 +1590,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.9,
+          "value": 2.21,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -1668,17 +1611,16 @@
       "agingRate": 21,
       "singleHouseholdRate": 9.8,
       "welfareRatePercent": 1.8,
-      "crimePer100People": 0.95,
+      "crimePer100People": 2.66,
       "metrics": {
         "agingRate": {
           "value": 21,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 9.8,
@@ -1701,14 +1643,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.95,
+          "value": 2.66,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -1723,17 +1664,16 @@
       "agingRate": 27.4,
       "singleHouseholdRate": 12.6,
       "welfareRatePercent": 2.1,
-      "crimePer100People": 0.8,
+      "crimePer100People": 1.7,
       "metrics": {
         "agingRate": {
           "value": 27.4,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 12.6,
@@ -1756,14 +1696,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.8,
+          "value": 1.7,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -1778,17 +1717,16 @@
       "agingRate": 23.5,
       "singleHouseholdRate": 9.1,
       "welfareRatePercent": 1.6,
-      "crimePer100People": 0.7,
+      "crimePer100People": 1.72,
       "metrics": {
         "agingRate": {
           "value": 23.5,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 9.1,
@@ -1811,14 +1749,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.7,
+          "value": 1.72,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -1833,17 +1770,16 @@
       "agingRate": 25.9,
       "singleHouseholdRate": 11.2,
       "welfareRatePercent": 1.7,
-      "crimePer100People": 0.7,
+      "crimePer100People": 1.65,
       "metrics": {
         "agingRate": {
           "value": 25.9,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 11.2,
@@ -1866,14 +1802,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.7,
+          "value": 1.65,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -1888,17 +1823,16 @@
       "agingRate": 22.8,
       "singleHouseholdRate": 12.4,
       "welfareRatePercent": 2.9,
-      "crimePer100People": 0.9,
+      "crimePer100People": 1.83,
       "metrics": {
         "agingRate": {
           "value": 22.8,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 12.4,
@@ -1921,14 +1855,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.9,
+          "value": 1.83,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -1943,17 +1876,16 @@
       "agingRate": 29.3,
       "singleHouseholdRate": 10.6,
       "welfareRatePercent": 1.5,
-      "crimePer100People": 0.5,
+      "crimePer100People": 1.54,
       "metrics": {
         "agingRate": {
           "value": 29.3,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 10.6,
@@ -1976,14 +1908,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.5,
+          "value": 1.54,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     },
@@ -1998,17 +1929,16 @@
       "agingRate": 29,
       "singleHouseholdRate": 10.5,
       "welfareRatePercent": 1.4,
-      "crimePer100People": 0.45,
+      "crimePer100People": 1.28,
       "metrics": {
         "agingRate": {
           "value": 29,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "2020年度",
+          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
           "value": 10.5,
@@ -2031,14 +1961,13 @@
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
         },
         "crimePer100People": {
-          "value": 0.45,
+          "value": 1.28,
           "unit": "件/100人・年",
-          "valueType": "estimate",
-          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "unknown (pending corrected e-Stat match)",
-          "retrievedAt": "2026-08-14T04:43:09.610Z",
-          "catName": "legacy-flat",
-          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+          "valueType": "official",
+          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "referenceDate": "2005年度",
+          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
     }
