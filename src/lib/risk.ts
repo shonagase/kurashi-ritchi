@@ -36,11 +36,11 @@ export function estimateHazardFromElevation(elevationM: number | null): HazardLe
 export function hazardLabel(level: HazardLevel): string {
   switch (level) {
     case 'low':
-      return '相対的に低め'
+      return '標高区分: 低め'
     case 'mid':
-      return '注意'
+      return '標高区分: 注意'
     case 'high':
-      return '高め'
+      return '標高区分: 高め'
   }
 }
 

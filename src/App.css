@@ -456,8 +456,60 @@ input:focus {
   margin-top: 0.75rem;
 }
 
-.stats-updated {
-  margin: 0 0 0.75rem;
+.type-badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  margin-right: 0.35rem;
+  vertical-align: middle;
+  font-family: 'IBM Plex Sans JP', sans-serif;
+}
+
+.type-input {
+  background: #e8eef5;
+  color: #345;
+}
+
+.type-official {
+  background: #e4f0e8;
+  color: #2f5d50;
+}
+
+.type-computed {
+  background: #eef0e4;
+  color: #5a5a2f;
+}
+
+.type-estimate {
+  background: #f5ebe4;
+  color: #8a4b2f;
+}
+
+.type-judgment {
+  background: #eee6f2;
+  color: #5a3d6b;
+}
+
+.metric-line {
+  margin-bottom: 0.75rem;
+}
+
+.metric-main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.metric-meta {
+  margin-top: 0.15rem;
+}
+
+.stat-label .type-badge {
+  margin-bottom: 0.2rem;
 }
 
 .subhead {

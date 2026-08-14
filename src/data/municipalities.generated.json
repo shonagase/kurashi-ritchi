@@ -1,9 +1,13 @@
 {
   "meta": {
-    "updatedAt": "2026-08-14",
-    "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
-    "notes": "犯罪は人口100人あたり年間刑法犯認知件数（千対を換算）。保護は人口比率%（千対を換算）。",
-    "fetchedAt": "2026-08-14T04:43:09.610Z"
+    "retrievedAt": "2026-08-14T05:16:52.890Z",
+    "notes": "指標ごとに referenceDate/source を保持。東金市はレビュー検証値。他自治体は再取得まで referenceDate=unknown。",
+    "fields": {
+      "agingRate": "高齢化率",
+      "singleHouseholdRate": "単独世帯割合（一般世帯）",
+      "welfareRatePercent": "生活保護率%",
+      "crimePer100People": "刑法犯認知 件/100人・年"
+    }
   },
   "municipalities": [
     {
@@ -17,7 +21,49 @@
       "agingRate": 16.3,
       "singleHouseholdRate": 9.2,
       "welfareRatePercent": 0.7,
-      "crimePer100People": 1.45
+      "crimePer100People": 1.45,
+      "metrics": {
+        "agingRate": {
+          "value": 16.3,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 9.2,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 0.7,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 1.45,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "13103",
@@ -30,7 +76,49 @@
       "agingRate": 16.3,
       "singleHouseholdRate": 9.6,
       "welfareRatePercent": 0.8,
-      "crimePer100People": 1.1
+      "crimePer100People": 1.1,
+      "metrics": {
+        "agingRate": {
+          "value": 16.3,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 9.6,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 0.8,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 1.1,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "13104",
@@ -43,7 +131,49 @@
       "agingRate": 18.1,
       "singleHouseholdRate": 9.7,
       "welfareRatePercent": 1.6,
-      "crimePer100People": 1.6
+      "crimePer100People": 1.6,
+      "metrics": {
+        "agingRate": {
+          "value": 18.1,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 9.7,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 1.6,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 1.6,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "13112",
@@ -56,7 +186,49 @@
       "agingRate": 20.1,
       "singleHouseholdRate": 11,
       "welfareRatePercent": 0.9,
-      "crimePer100People": 0.55
+      "crimePer100People": 0.55,
+      "metrics": {
+        "agingRate": {
+          "value": 20.1,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 11,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 0.9,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.55,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "13113",
@@ -69,7 +241,49 @@
       "agingRate": 16.9,
       "singleHouseholdRate": 8.2,
       "welfareRatePercent": 1,
-      "crimePer100People": 1.2
+      "crimePer100People": 1.2,
+      "metrics": {
+        "agingRate": {
+          "value": 16.9,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 8.2,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 1,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 1.2,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "13120",
@@ -82,7 +296,49 @@
       "agingRate": 21.2,
       "singleHouseholdRate": 10.4,
       "welfareRatePercent": 1.3,
-      "crimePer100People": 0.5
+      "crimePer100People": 0.5,
+      "metrics": {
+        "agingRate": {
+          "value": 21.2,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 10.4,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 1.3,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.5,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "13121",
@@ -95,7 +351,49 @@
       "agingRate": 24.5,
       "singleHouseholdRate": 13.2,
       "welfareRatePercent": 3.2,
-      "crimePer100People": 0.85
+      "crimePer100People": 0.85,
+      "metrics": {
+        "agingRate": {
+          "value": 24.5,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 13.2,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 3.2,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.85,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "13122",
@@ -108,7 +406,49 @@
       "agingRate": 24.7,
       "singleHouseholdRate": 13.5,
       "welfareRatePercent": 2.8,
-      "crimePer100People": 0.8
+      "crimePer100People": 0.8,
+      "metrics": {
+        "agingRate": {
+          "value": 24.7,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 13.5,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 2.8,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.8,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "13123",
@@ -121,7 +461,49 @@
       "agingRate": 20.9,
       "singleHouseholdRate": 11,
       "welfareRatePercent": 1.9,
-      "crimePer100People": 0.7
+      "crimePer100People": 0.7,
+      "metrics": {
+        "agingRate": {
+          "value": 20.9,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 11,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 1.9,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.7,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "14100",
@@ -134,7 +516,49 @@
       "agingRate": 24.4,
       "singleHouseholdRate": 11.2,
       "welfareRatePercent": 1.7,
-      "crimePer100People": 0.7
+      "crimePer100People": 0.7,
+      "metrics": {
+        "agingRate": {
+          "value": 24.4,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 11.2,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 1.7,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.7,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "14130",
@@ -147,7 +571,49 @@
       "agingRate": 19.6,
       "singleHouseholdRate": 8.9,
       "welfareRatePercent": 1.8,
-      "crimePer100People": 0.75
+      "crimePer100People": 0.75,
+      "metrics": {
+        "agingRate": {
+          "value": 19.6,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 8.9,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 1.8,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.75,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "14150",
@@ -160,7 +626,49 @@
       "agingRate": 25.5,
       "singleHouseholdRate": 10.1,
       "welfareRatePercent": 1.5,
-      "crimePer100People": 0.55
+      "crimePer100People": 0.55,
+      "metrics": {
+        "agingRate": {
+          "value": 25.5,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 10.1,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 1.5,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.55,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "11100",
@@ -173,7 +681,49 @@
       "agingRate": 23,
       "singleHouseholdRate": 9.6,
       "welfareRatePercent": 1.4,
-      "crimePer100People": 0.65
+      "crimePer100People": 0.65,
+      "metrics": {
+        "agingRate": {
+          "value": 23,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 9.6,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 1.4,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.65,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "11203",
@@ -186,7 +736,49 @@
       "agingRate": 23.2,
       "singleHouseholdRate": 10.3,
       "welfareRatePercent": 1.8,
-      "crimePer100People": 0.75
+      "crimePer100People": 0.75,
+      "metrics": {
+        "agingRate": {
+          "value": 23.2,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 10.3,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 1.8,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.75,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "12100",
@@ -199,7 +791,49 @@
       "agingRate": 25.6,
       "singleHouseholdRate": 10.8,
       "welfareRatePercent": 1.6,
-      "crimePer100People": 0.7
+      "crimePer100People": 0.7,
+      "metrics": {
+        "agingRate": {
+          "value": 25.6,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 10.8,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 1.6,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.7,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "12204",
@@ -212,7 +846,49 @@
       "agingRate": 23.8,
       "singleHouseholdRate": 10.2,
       "welfareRatePercent": 1.5,
-      "crimePer100People": 0.65
+      "crimePer100People": 0.65,
+      "metrics": {
+        "agingRate": {
+          "value": 23.8,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 10.2,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 1.5,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.65,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "12207",
@@ -225,7 +901,49 @@
       "agingRate": 25.6,
       "singleHouseholdRate": 11.8,
       "welfareRatePercent": 1.7,
-      "crimePer100People": 0.7
+      "crimePer100People": 0.7,
+      "metrics": {
+        "agingRate": {
+          "value": 25.6,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 11.8,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 1.7,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.7,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "12217",
@@ -238,7 +956,49 @@
       "agingRate": 25.8,
       "singleHouseholdRate": 9.9,
       "welfareRatePercent": 1.2,
-      "crimePer100People": 0.55
+      "crimePer100People": 0.55,
+      "metrics": {
+        "agingRate": {
+          "value": 25.8,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 9.9,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 1.2,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.55,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "12227",
@@ -248,10 +1008,49 @@
       "lon": 140.366,
       "industryType": "郊外住宅・商業",
       "industryNote": "千葉県東部の郊外都市。住宅団地と幹線沿い商業が中心。",
-      "agingRate": 17.5,
-      "singleHouseholdRate": 6.2,
-      "welfareRatePercent": 1.8,
-      "crimePer100People": 0.6
+      "agingRate": 33.2,
+      "singleHouseholdRate": 36.1,
+      "welfareRatePercent": 1.48,
+      "crimePer100People": 0.89,
+      "metrics": {
+        "agingRate": {
+          "value": 33.2,
+          "unit": "%",
+          "valueType": "official",
+          "source": "東金市 住民基本台帳（レビュー検証）",
+          "referenceDate": "2026-04-01",
+          "retrievedAt": "2026-08-14T05:16:52.886Z",
+          "catName": "高齢化率 = 65歳以上 / 総人口"
+        },
+        "singleHouseholdRate": {
+          "value": 36.1,
+          "unit": "%",
+          "valueType": "official",
+          "source": "国勢調査2020 / 東金市資料（レビュー検証）",
+          "referenceDate": "2020-10-01",
+          "retrievedAt": "2026-08-14T05:16:52.890Z",
+          "catName": "単独世帯 / 一般世帯"
+        },
+        "welfareRatePercent": {
+          "value": 1.48,
+          "unit": "%",
+          "valueType": "official",
+          "source": "東金市公表 生活保護率 14.80‰（レビュー検証）",
+          "referenceDate": "2020",
+          "retrievedAt": "2026-08-14T05:16:52.890Z",
+          "catName": "生活保護率"
+        },
+        "crimePer100People": {
+          "value": 0.89,
+          "unit": "件/100人・年",
+          "valueType": "computed",
+          "source": "千葉県警2025年確定 刑法犯501件 ÷ 人口約5.6万人（レビュー検証）",
+          "referenceDate": "2025",
+          "retrievedAt": "2026-08-14T05:16:52.890Z",
+          "catName": "刑法犯認知件数 / 人口",
+          "formula": "501 / 56000 * 100 ≈ 0.89"
+        }
+      }
     },
     {
       "id": "14131",
@@ -264,7 +1063,49 @@
       "agingRate": 21.3,
       "singleHouseholdRate": 10.9,
       "welfareRatePercent": 1.1,
-      "crimePer100People": 0.5
+      "crimePer100People": 0.5,
+      "metrics": {
+        "agingRate": {
+          "value": 21.3,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 10.9,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 1.1,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.5,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "22100",
@@ -277,7 +1118,49 @@
       "agingRate": 30.2,
       "singleHouseholdRate": 12.1,
       "welfareRatePercent": 1.5,
-      "crimePer100People": 0.5
+      "crimePer100People": 0.5,
+      "metrics": {
+        "agingRate": {
+          "value": 30.2,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 12.1,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 1.5,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.5,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "22130",
@@ -290,7 +1173,49 @@
       "agingRate": 27.9,
       "singleHouseholdRate": 10,
       "welfareRatePercent": 1.4,
-      "crimePer100People": 0.48
+      "crimePer100People": 0.48,
+      "metrics": {
+        "agingRate": {
+          "value": 27.9,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 10,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 1.4,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.48,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "23100",
@@ -303,7 +1228,49 @@
       "agingRate": 24.3,
       "singleHouseholdRate": 11.6,
       "welfareRatePercent": 1.9,
-      "crimePer100People": 0.8
+      "crimePer100People": 0.8,
+      "metrics": {
+        "agingRate": {
+          "value": 24.3,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 11.6,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 1.9,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.8,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "23200",
@@ -316,7 +1283,49 @@
       "agingRate": 24,
       "singleHouseholdRate": 32,
       "welfareRatePercent": 0.9,
-      "crimePer100People": 0.45
+      "crimePer100People": 0.45,
+      "metrics": {
+        "agingRate": {
+          "value": 24,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 32,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 0.9,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.45,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "27100",
@@ -329,7 +1338,49 @@
       "agingRate": 24.6,
       "singleHouseholdRate": 14.6,
       "welfareRatePercent": 3.8,
-      "crimePer100People": 1.35
+      "crimePer100People": 1.35,
+      "metrics": {
+        "agingRate": {
+          "value": 24.6,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 14.6,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 3.8,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 1.35,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "27140",
@@ -342,7 +1393,49 @@
       "agingRate": 28.2,
       "singleHouseholdRate": 14.1,
       "welfareRatePercent": 2.2,
-      "crimePer100People": 0.85
+      "crimePer100People": 0.85,
+      "metrics": {
+        "agingRate": {
+          "value": 28.2,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 14.1,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 2.2,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.85,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "28100",
@@ -355,7 +1448,49 @@
       "agingRate": 27.5,
       "singleHouseholdRate": 13.9,
       "welfareRatePercent": 2,
-      "crimePer100People": 0.75
+      "crimePer100People": 0.75,
+      "metrics": {
+        "agingRate": {
+          "value": 27.5,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 13.9,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 2,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.75,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "26100",
@@ -368,7 +1503,49 @@
       "agingRate": 26.9,
       "singleHouseholdRate": 13.1,
       "welfareRatePercent": 1.8,
-      "crimePer100People": 0.7
+      "crimePer100People": 0.7,
+      "metrics": {
+        "agingRate": {
+          "value": 26.9,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 13.1,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 1.8,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.7,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "34100",
@@ -381,7 +1558,49 @@
       "agingRate": 25.1,
       "singleHouseholdRate": 11.5,
       "welfareRatePercent": 1.7,
-      "crimePer100People": 0.7
+      "crimePer100People": 0.7,
+      "metrics": {
+        "agingRate": {
+          "value": 25.1,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 11.5,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 1.7,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.7,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "40100",
@@ -394,7 +1613,49 @@
       "agingRate": 30.5,
       "singleHouseholdRate": 15,
       "welfareRatePercent": 3.5,
-      "crimePer100People": 0.9
+      "crimePer100People": 0.9,
+      "metrics": {
+        "agingRate": {
+          "value": 30.5,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 15,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 3.5,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.9,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "40130",
@@ -407,7 +1668,49 @@
       "agingRate": 21,
       "singleHouseholdRate": 9.8,
       "welfareRatePercent": 1.8,
-      "crimePer100People": 0.95
+      "crimePer100People": 0.95,
+      "metrics": {
+        "agingRate": {
+          "value": 21,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 9.8,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 1.8,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.95,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "01100",
@@ -420,7 +1723,49 @@
       "agingRate": 27.4,
       "singleHouseholdRate": 12.6,
       "welfareRatePercent": 2.1,
-      "crimePer100People": 0.8
+      "crimePer100People": 0.8,
+      "metrics": {
+        "agingRate": {
+          "value": 27.4,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 12.6,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 2.1,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.8,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "04100",
@@ -433,7 +1778,49 @@
       "agingRate": 23.5,
       "singleHouseholdRate": 9.1,
       "welfareRatePercent": 1.6,
-      "crimePer100People": 0.7
+      "crimePer100People": 0.7,
+      "metrics": {
+        "agingRate": {
+          "value": 23.5,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 9.1,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 1.6,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.7,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "43100",
@@ -446,7 +1833,49 @@
       "agingRate": 25.9,
       "singleHouseholdRate": 11.2,
       "welfareRatePercent": 1.7,
-      "crimePer100People": 0.7
+      "crimePer100People": 0.7,
+      "metrics": {
+        "agingRate": {
+          "value": 25.9,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 11.2,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 1.7,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.7,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "47201",
@@ -459,7 +1888,49 @@
       "agingRate": 22.8,
       "singleHouseholdRate": 12.4,
       "welfareRatePercent": 2.9,
-      "crimePer100People": 0.9
+      "crimePer100People": 0.9,
+      "metrics": {
+        "agingRate": {
+          "value": 22.8,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 12.4,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 2.9,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.9,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "15100",
@@ -472,7 +1943,49 @@
       "agingRate": 29.3,
       "singleHouseholdRate": 10.6,
       "welfareRatePercent": 1.5,
-      "crimePer100People": 0.5
+      "crimePer100People": 0.5,
+      "metrics": {
+        "agingRate": {
+          "value": 29.3,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 10.6,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 1.5,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.5,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     },
     {
       "id": "20201",
@@ -485,7 +1998,49 @@
       "agingRate": 29,
       "singleHouseholdRate": 10.5,
       "welfareRatePercent": 1.4,
-      "crimePer100People": 0.45
+      "crimePer100People": 0.45,
+      "metrics": {
+        "agingRate": {
+          "value": 29,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "singleHouseholdRate": {
+          "value": 10.5,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "welfareRatePercent": {
+          "value": 1.4,
+          "unit": "%",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "crimePer100People": {
+          "value": 0.45,
+          "unit": "件/100人・年",
+          "valueType": "estimate",
+          "source": "e-Stat API / 0000020301 / Ａ　人口・世帯",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "retrievedAt": "2026-08-14T04:43:09.610Z",
+          "catName": "legacy-flat",
+          "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        }
+      }
     }
   ]
 }

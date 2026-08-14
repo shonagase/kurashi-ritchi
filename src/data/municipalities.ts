@@ -1,4 +1,17 @@
 import generated from './municipalities.generated.json'
+import type { ValueType } from '../lib/formulas'
+
+export type MetricMeta = {
+  value: number
+  unit?: string
+  valueType?: ValueType | string
+  source?: string
+  referenceDate?: string
+  retrievedAt?: string
+  catName?: string
+  formula?: string
+  warning?: string
+}
 
 export type MunicipalityProfile = {
   id: string
@@ -6,29 +19,26 @@ export type MunicipalityProfile = {
   pref: string
   lat: number
   lon: number
-  /** 65歳以上人口割合（%） */
   agingRate: number
-  /** 単身世帯割合（%） */
   singleHouseholdRate: number
-  /** 人口に占める被保護人員の割合（%） */
   welfareRatePercent: number
-  /**
-   * 人口100人あたりの年間刑法犯認知件数。
-   * 公式の「人口千人あたり」を /10 した値。被害者の実人数ではなく認知件数ベース。
-   */
   crimePer100People: number
   industryType: string
   industryNote: string
+  metrics?: {
+    agingRate?: MetricMeta | null
+    singleHouseholdRate?: MetricMeta | null
+    welfareRatePercent?: MetricMeta | null
+    crimePer100People?: MetricMeta | null
+  }
 }
 
 export type StatsMeta = {
-  updatedAt: string
-  source: string
+  retrievedAt?: string | null
   notes?: string
-  fetchedAt?: string
+  fields?: Record<string, string>
 }
 
-/** 出典リンク（確認用） */
 export const DATA_SOURCES = {
   gsiMap: {
     label: '国土地理院 地理院地図・タイル',
@@ -90,15 +100,10 @@ export function findNearestMunicipality(lat: number, lon: number): MunicipalityP
   return best
 }
 
-/** 人口100人あたり被保護者（おおよそ） */
 export function formatWelfare(m: MunicipalityProfile): string {
-  return `保護 ${m.welfareRatePercent.toFixed(1)}%（100人中約${m.welfareRatePercent.toFixed(1)}人）`
+  return `保護 ${m.welfareRatePercent.toFixed(2)}%（100人中約${m.welfareRatePercent.toFixed(2)}人）`
 }
 
-/**
- * 刑法犯認知を「100人あたり件数／おおよそ%」で表示。
- * ※被害者ユニーク人数ではなく、年間の認知件数ベース。
- */
 export function formatCrime(m: MunicipalityProfile): string {
-  return `犯罪 年${m.crimePer100People.toFixed(2)}件/100人（約${m.crimePer100People.toFixed(2)}%）`
+  return `犯罪 年${m.crimePer100People.toFixed(2)}件/100人（認知件数ベース）`
 }

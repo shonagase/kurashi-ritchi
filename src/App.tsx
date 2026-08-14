@@ -249,8 +249,8 @@ export default function App() {
       <footer className="footer">
         <h2>データと免責</h2>
         <p className="stats-updated">
-          地域統計の最終更新: <strong>{statsMeta.updatedAt}</strong>
-          <span className="muted">（{statsMeta.source}）</span>
+          地域統計の取得バッチ: <strong>{statsMeta.retrievedAt || '不明'}</strong>
+          <span className="muted">（各指標の対象時点は詳細の「対象時点」を参照）</span>
         </p>
         <ul className="source-list">
           <li>
@@ -316,8 +316,8 @@ export default function App() {
           </li>
         </ul>
         <p>
-          本サービスは住宅購入の参考比較ツールです。危険度は標高などから推定した相対指標であり、正式なハザード判定や損害保険・不動産鑑定の代替ではありません。地域統計は e-Stat
-          等の公開値を週次で取り込みます（秘密鍵 ESTAT_APP_ID 設定時）。犯罪は「被害者人数」ではなく「年間認知件数」ベースです。
+          本サービスは住宅購入の参考比較ツールです。画面上の値は「入力値 / 公的統計 / 計算値 / 推定 /
+          独自評価」を区別して表示します。損害額比率は危険度そのものではありません。標高区分は公式ハザード区域判定の代替ではありません。犯罪は被害確率ではなく認知件数ベースです。
         </p>
       </footer>
     </div>

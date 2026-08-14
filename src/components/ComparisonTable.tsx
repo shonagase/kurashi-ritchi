@@ -60,9 +60,9 @@ export function ComparisonTable({
         <span>並べ替え</span>
         {(
           [
-            ['lossImpact', '損失インパクト'],
-            ['hazard', '危険度'],
-            ['stationWalk', '駅徒歩'],
+            ['lossImpact', '損害額比率'],
+            ['hazard', '標高区分'],
+            ['stationWalk', '駅(直線)'],
             ['aging', '高齢化率'],
             ['purchase', '購入額'],
           ] as [SortKey, string][]
@@ -84,9 +84,9 @@ export function ComparisonTable({
             <th>購入額</th>
             <th>危険度</th>
             <th>想定修理費</th>
-            <th>損失インパクト</th>
-            <th>駅徒歩</th>
-            <th>バス停</th>
+            <th>損害額比率</th>
+            <th>駅(直線)</th>
+            <th>バス停(直線)</th>
             <th>地域性</th>
             <th></th>
           </tr>
@@ -126,8 +126,11 @@ export function ComparisonTable({
                 <td>
                   {c.stationWalkMin != null ? (
                     <>
-                      {c.stationWalkMin}分
-                      <div className="muted small">圏内{c.stations.length}駅</div>
+                      直線換算{c.stationWalkMin}分
+                      <div className="muted small">
+                        圏内{c.stations.length}駅
+                        {c.stations[0] ? ` / ${(c.stations[0].meters / 1000).toFixed(2)}km` : ''}
+                      </div>
                     </>
                   ) : c.transitFetchFailed ? (
                     '取得失敗'
@@ -138,7 +141,7 @@ export function ComparisonTable({
                 <td>
                   {c.busWalkMin != null ? (
                     <>
-                      {c.busWalkMin}分
+                      直線換算{c.busWalkMin}分
                       <div className="muted small">圏内{c.buses.length}停留所</div>
                     </>
                   ) : c.transitFetchFailed ? (

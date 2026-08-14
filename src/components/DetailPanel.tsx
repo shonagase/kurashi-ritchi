@@ -1,10 +1,48 @@
-import { DATA_SOURCES, formatCrime, formatWelfare, statsMeta } from '../data/municipalities'
+import {
+  DATA_SOURCES,
+  formatCrime,
+  formatWelfare,
+  statsMeta,
+  type MetricMeta,
+} from '../data/municipalities'
+import { FORMULAS, VALUE_TYPE_LABEL, type ValueType } from '../lib/formulas'
 import { officialHazardMapUrl } from '../lib/geo'
 import { REPAIR_SCENARIOS, hazardLabel, lossImpactPercent, totalRepairRange } from '../lib/risk'
 import type { Candidate } from '../types'
 
 type Props = {
   candidate: Candidate | null
+}
+
+function TypeBadge({ type }: { type: ValueType }) {
+  return <span className={`type-badge type-${type}`}>{VALUE_TYPE_LABEL[type]}</span>
+}
+
+function MetricLine({
+  label,
+  display,
+  meta,
+}: {
+  label: string
+  display: string
+  meta?: MetricMeta | null
+}) {
+  const type = (meta?.valueType as ValueType) || 'estimate'
+  return (
+    <li className="metric-line">
+      <div className="metric-main">
+        <TypeBadge type={type} />
+        <strong>{label}</strong>: {display}
+      </div>
+      {meta && (
+        <div className="muted small metric-meta">
+          対象時点: {meta.referenceDate || '不明'}
+          {meta.source ? ` / 出典: ${meta.source}` : ''}
+          {meta.warning ? ` / 注意: ${meta.warning}` : ''}
+        </div>
+      )}
+    </li>
+  )
 }
 
 export function DetailPanel({ candidate }: Props) {
@@ -28,26 +66,40 @@ export function DetailPanel({ candidate }: Props) {
       <p className="eyebrow">地点詳細</p>
       <h2>{candidate.name}</h2>
       <p className="muted">{candidate.address}</p>
+      <p className="muted small">
+        座標: {candidate.lat.toFixed(5)}, {candidate.lon.toFixed(5)}（この点を起点に距離計算）
+      </p>
 
       <div className="stat-row">
         <div>
-          <span className="stat-label">購入額（母数）</span>
+          <span className="stat-label">
+            <TypeBadge type="input" /> 購入額（母数）
+          </span>
           <strong>{candidate.purchaseManYen}万円</strong>
         </div>
         <div>
-          <span className="stat-label">損失インパクト</span>
-          <strong className={impact >= 60 ? 'warn-text' : ''}>最大{range.max}万円</strong>
-          <div className="muted small">
-            想定修理費上限 ÷ 購入額 = {impact}%
-          </div>
+          <span className="stat-label">
+            <TypeBadge type="computed" /> 損害額比率
+          </span>
+          <strong className={impact >= 60 ? 'warn-text' : ''}>
+            最大{range.max}万円（{impact}%）
+          </strong>
+          <div className="muted small">{FORMULAS.lossImpact.formula}</div>
+          <div className="muted small">{FORMULAS.lossImpact.note}</div>
         </div>
         <div>
-          <span className="stat-label">危険度</span>
+          <span className="stat-label">
+            <TypeBadge type="judgment" /> 標高ベース区分
+          </span>
           <strong>{hazardLabel(level)}</strong>
+          <div className="muted small">{FORMULAS.hazardFromElevation.formula}</div>
+          <div className="muted small">{FORMULAS.hazardFromElevation.note}</div>
         </div>
       </div>
 
-      <h3>被災時の想定修理費</h3>
+      <h3>
+        <TypeBadge type="estimate" /> 被災時の想定修理費
+      </h3>
       <ul className="scenario-list">
         {scenarios.map((s) => (
           <li key={s.id}>
@@ -62,11 +114,13 @@ export function DetailPanel({ candidate }: Props) {
         ))}
       </ul>
       <p className="note">
-        ※損失インパクトは「想定修理費の上限（{range.max}万円）÷ 購入額（{candidate.purchaseManYen}万円）」。
-        同時全損ではなく、代表的な単一シナリオの目安です。
+        ※これは発生確率を掛けた期待損失ではありません。修理費テーブルによる推定です。
+        公式ハザード区域への該当判定は別途「重ねるハザードマップ」で確認してください。
       </p>
 
-      <h3>通勤・移動（徒歩30分圏）</h3>
+      <h3>
+        <TypeBadge type="computed" /> 通勤・移動（直線30分換算圏）
+      </h3>
       {candidate.transitFetchFailed ? (
         <p className="error">交通データの取得に失敗しました。時間をおいて候補を入れ直してください。</p>
       ) : (
@@ -77,12 +131,14 @@ export function DetailPanel({ candidate }: Props) {
               {candidate.stations.map((s) => (
                 <li key={`st-${s.name}-${s.meters}`}>
                   {s.name}
-                  <span className="muted"> 徒歩約{s.walkMin}分（{s.meters}m）</span>
+                  <div className="muted small">
+                    直線距離 約{(s.meters / 1000).toFixed(2)}km ／ 直線換算 約{s.walkMin}分
+                  </div>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="muted">徒歩30分圏内に駅が見つかりませんでした。</p>
+            <p className="muted">直線30分換算圏内に駅が見つかりませんでした。</p>
           )}
 
           <h4 className="subhead">バス停（{candidate.buses.length}件）</h4>
@@ -91,38 +147,48 @@ export function DetailPanel({ candidate }: Props) {
               {candidate.buses.map((s) => (
                 <li key={`bus-${s.name}-${s.meters}`}>
                   {s.name}
-                  <span className="muted"> 徒歩約{s.walkMin}分（{s.meters}m）</span>
+                  <div className="muted small">
+                    直線距離 約{(s.meters / 1000).toFixed(2)}km ／ 直線換算 約{s.walkMin}分
+                  </div>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="muted">徒歩30分圏内にバス停が見つかりませんでした。</p>
+            <p className="muted">直線30分換算圏内にバス停が見つかりませんでした。</p>
           )}
         </>
       )}
-      <p className="note">※徒歩分数は直線距離÷分速80mの概算です。実際の道路距離とは差があります。</p>
+      <p className="note">※{FORMULAS.straightWalkMin.formula}。実歩行ルートではありません。</p>
       <p className="source-line">
-        出典:{' '}
+        地点データ出典:{' '}
         <a href={DATA_SOURCES.osm.url} target="_blank" rel="noreferrer">
           {DATA_SOURCES.osm.label}
         </a>
       </p>
 
       <h3>地域性（{m.pref} {m.name}）</h3>
-      <p className="muted small">統計更新日: {statsMeta.updatedAt}</p>
-      <p>{m.industryNote}</p>
+      <p className="muted small">
+        取得バッチ: {statsMeta.retrievedAt || '不明'}（これは取得日であり、各指標の対象時点ではありません）
+      </p>
+      <p>
+        <TypeBadge type="judgment" /> 産業メモ: {m.industryType} — {m.industryNote}
+      </p>
       <ul className="plain-list">
-        <li>産業タイプ: {m.industryType}</li>
-        <li>高齢化率: {m.agingRate}%</li>
-        <li>単身世帯比率: {m.singleHouseholdRate}%（概算）</li>
-        <li>{formatWelfare(m)}</li>
-        <li>
-          {formatCrime(m)}
-          <div className="muted small">※年間の刑法犯認知件数ベース（被害者人数そのものではない）</div>
-        </li>
+        <MetricLine
+          label="高齢化率"
+          display={`${m.agingRate}%`}
+          meta={m.metrics?.agingRate}
+        />
+        <MetricLine
+          label="単身世帯比率"
+          display={`${m.singleHouseholdRate}%`}
+          meta={m.metrics?.singleHouseholdRate}
+        />
+        <MetricLine label="生活保護" display={formatWelfare(m)} meta={m.metrics?.welfareRatePercent} />
+        <MetricLine label="犯罪認知" display={formatCrime(m)} meta={m.metrics?.crimePer100People} />
       </ul>
       <p className="source-line">
-        出典:{' '}
+        出典ポータル:{' '}
         <a href={DATA_SOURCES.estatApi.url} target="_blank" rel="noreferrer">
           {DATA_SOURCES.estatApi.label}
         </a>
@@ -138,10 +204,6 @@ export function DetailPanel({ candidate }: Props) {
         <a href={DATA_SOURCES.crime.url} target="_blank" rel="noreferrer">
           {DATA_SOURCES.crime.label}
         </a>
-        {' / '}
-        <a href={DATA_SOURCES.economicCensus.url} target="_blank" rel="noreferrer">
-          {DATA_SOURCES.economicCensus.label}
-        </a>
       </p>
 
       <div className="detail-actions">
@@ -151,7 +213,7 @@ export function DetailPanel({ candidate }: Props) {
           target="_blank"
           rel="noreferrer"
         >
-          公式「重ねるハザードマップ」で確認
+          公式「重ねるハザードマップ」で区域判定を確認
         </a>
         <a
           className="button ghost"
