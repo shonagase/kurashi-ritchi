@@ -430,6 +430,32 @@ input:focus {
   color: var(--ink);
 }
 
+.source-list {
+  padding-left: 1.1rem;
+}
+
+.source-list a,
+.source-line a {
+  word-break: break-all;
+}
+
+.source-line {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  margin: 0.35rem 0 1rem;
+}
+
+.detail-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.table-note {
+  margin-top: 0.75rem;
+}
+
 @keyframes rise {
   from {
     opacity: 0;

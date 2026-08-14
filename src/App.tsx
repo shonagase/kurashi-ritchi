@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { ComparisonTable } from './components/ComparisonTable'
 import { DetailPanel } from './components/DetailPanel'
 import { MapView } from './components/MapView'
-import { findNearestMunicipality } from './data/municipalities'
+import { DATA_SOURCES, findNearestMunicipality } from './data/municipalities'
 import { fetchElevation, fetchNearbyTransit, searchAddress } from './lib/geo'
 import { estimateHazardFromElevation } from './lib/risk'
 import type { Candidate, SortKey } from './types'
@@ -245,14 +245,64 @@ export default function App() {
 
       <footer className="footer">
         <h2>データと免責</h2>
-        <ul>
-          <li>背景地図・標高・住所検索: 国土地理院</li>
-          <li>公式ハザード確認: ハザードマップポータル（重ねるハザードマップ）</li>
-          <li>駅・バス停: OpenStreetMap / Overpass API</li>
-          <li>地域性: 国勢調査・経済センサス等を参考にした市区町村単位のMVP用相対指標</li>
+        <ul className="source-list">
+          <li>
+            背景地図:{' '}
+            <a href={DATA_SOURCES.gsiMap.url} target="_blank" rel="noreferrer">
+              {DATA_SOURCES.gsiMap.label}
+            </a>
+          </li>
+          <li>
+            標高:{' '}
+            <a href={DATA_SOURCES.gsiElevation.url} target="_blank" rel="noreferrer">
+              {DATA_SOURCES.gsiElevation.label}
+            </a>
+          </li>
+          <li>
+            住所検索:{' '}
+            <a href={DATA_SOURCES.gsiAddress.url} target="_blank" rel="noreferrer">
+              {DATA_SOURCES.gsiAddress.label}
+            </a>
+          </li>
+          <li>
+            公式ハザード:{' '}
+            <a href={DATA_SOURCES.hazardPortal.url} target="_blank" rel="noreferrer">
+              {DATA_SOURCES.hazardPortal.label}
+            </a>
+          </li>
+          <li>
+            駅・バス停:{' '}
+            <a href={DATA_SOURCES.osm.url} target="_blank" rel="noreferrer">
+              {DATA_SOURCES.osm.label}
+            </a>
+          </li>
+          <li>
+            高齢化・世帯:{' '}
+            <a href={DATA_SOURCES.census.url} target="_blank" rel="noreferrer">
+              {DATA_SOURCES.census.label}
+            </a>
+          </li>
+          <li>
+            生活保護率:{' '}
+            <a href={DATA_SOURCES.welfare.url} target="_blank" rel="noreferrer">
+              {DATA_SOURCES.welfare.label}
+            </a>
+          </li>
+          <li>
+            犯罪（刑法犯認知）:{' '}
+            <a href={DATA_SOURCES.crime.url} target="_blank" rel="noreferrer">
+              {DATA_SOURCES.crime.label}
+            </a>
+          </li>
+          <li>
+            産業:{' '}
+            <a href={DATA_SOURCES.economicCensus.url} target="_blank" rel="noreferrer">
+              {DATA_SOURCES.economicCensus.label}
+            </a>
+          </li>
         </ul>
         <p>
-          本サービスは住宅購入の参考比較ツールです。危険度は標高などから推定した相対指標であり、正式なハザード判定や損害保険・不動産鑑定の代替ではありません。生活保護・犯罪は自治体単位の相対表示です。
+          本サービスは住宅購入の参考比較ツールです。危険度は標高などから推定した相対指標であり、正式なハザード判定や損害保険・不動産鑑定の代替ではありません。地域統計は公開値を参考にした市区町村単位の概算です。犯罪は「被害者人数」ではなく「年間認知件数」ベースです。
         </p>
       </footer>
     </div>

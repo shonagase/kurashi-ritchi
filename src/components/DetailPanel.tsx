@@ -1,4 +1,4 @@
-import { relativeLabel } from '../data/municipalities'
+import { DATA_SOURCES, formatCrime, formatWelfare } from '../data/municipalities'
 import { officialHazardMapUrl } from '../lib/geo'
 import { REPAIR_SCENARIOS, hazardLabel, lossImpactPercent, totalRepairRange } from '../lib/risk'
 import type { Candidate } from '../types'
@@ -31,12 +31,15 @@ export function DetailPanel({ candidate }: Props) {
 
       <div className="stat-row">
         <div>
-          <span className="stat-label">購入額</span>
+          <span className="stat-label">購入額（母数）</span>
           <strong>{candidate.purchaseManYen}万円</strong>
         </div>
         <div>
           <span className="stat-label">損失インパクト</span>
-          <strong className={impact >= 60 ? 'warn-text' : ''}>最大{impact}%</strong>
+          <strong className={impact >= 60 ? 'warn-text' : ''}>最大{range.max}万円</strong>
+          <div className="muted small">
+            想定修理費上限 ÷ 購入額 = {impact}%
+          </div>
         </div>
         <div>
           <span className="stat-label">危険度</span>
@@ -59,7 +62,8 @@ export function DetailPanel({ candidate }: Props) {
         ))}
       </ul>
       <p className="note">
-        ※同時に全被害が起きる想定ではなく、代表的な単一シナリオの目安です。正式な見積や保険の代替ではありません。
+        ※損失インパクトは「想定修理費の上限（{range.max}万円）÷ 購入額（{candidate.purchaseManYen}万円）」。
+        同時全損ではなく、代表的な単一シナリオの目安です。
       </p>
 
       <h3>通勤・移動</h3>
@@ -73,6 +77,12 @@ export function DetailPanel({ candidate }: Props) {
           {candidate.busWalkMin != null ? `（徒歩約${candidate.busWalkMin}分）` : ''}
         </li>
       </ul>
+      <p className="source-line">
+        出典:{' '}
+        <a href={DATA_SOURCES.osm.url} target="_blank" rel="noreferrer">
+          {DATA_SOURCES.osm.label}
+        </a>
+      </p>
 
       <h3>地域性（{m.pref} {m.name}）</h3>
       <p>{m.industryNote}</p>
@@ -80,18 +90,49 @@ export function DetailPanel({ candidate }: Props) {
         <li>産業タイプ: {m.industryType}</li>
         <li>高齢化率: {m.agingRate}%</li>
         <li>単身世帯比率: {m.singleHouseholdRate}%（概算）</li>
-        <li>生活保護の相対水準: {relativeLabel(m.welfareRelative)}（自治体単位）</li>
-        <li>犯罪の相対水準: {relativeLabel(m.crimeRelative)}（自治体単位）</li>
+        <li>{formatWelfare(m)}</li>
+        <li>
+          {formatCrime(m)}
+          <div className="muted small">※年間の刑法犯認知件数ベース（被害者人数そのものではない）</div>
+        </li>
       </ul>
+      <p className="source-line">
+        出典:{' '}
+        <a href={DATA_SOURCES.census.url} target="_blank" rel="noreferrer">
+          {DATA_SOURCES.census.label}
+        </a>
+        {' / '}
+        <a href={DATA_SOURCES.welfare.url} target="_blank" rel="noreferrer">
+          {DATA_SOURCES.welfare.label}
+        </a>
+        {' / '}
+        <a href={DATA_SOURCES.crime.url} target="_blank" rel="noreferrer">
+          {DATA_SOURCES.crime.label}
+        </a>
+        {' / '}
+        <a href={DATA_SOURCES.economicCensus.url} target="_blank" rel="noreferrer">
+          {DATA_SOURCES.economicCensus.label}
+        </a>
+      </p>
 
-      <a
-        className="button secondary"
-        href={officialHazardMapUrl(candidate.lat, candidate.lon)}
-        target="_blank"
-        rel="noreferrer"
-      >
-        公式「重ねるハザードマップ」で確認
-      </a>
+      <div className="detail-actions">
+        <a
+          className="button secondary"
+          href={officialHazardMapUrl(candidate.lat, candidate.lon)}
+          target="_blank"
+          rel="noreferrer"
+        >
+          公式「重ねるハザードマップ」で確認
+        </a>
+        <a
+          className="button ghost"
+          href={DATA_SOURCES.gsiElevation.url}
+          target="_blank"
+          rel="noreferrer"
+        >
+          標高データの出典を開く
+        </a>
+      </div>
     </aside>
   )
 }

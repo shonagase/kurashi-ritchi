@@ -1,4 +1,3 @@
-import { relativeLabel } from '../data/municipalities'
 import { hazardLabel, lossImpactPercent, totalRepairRange } from '../lib/risk'
 import type { Candidate, SortKey } from '../types'
 
@@ -85,7 +84,7 @@ export function ComparisonTable({
             <th>購入額</th>
             <th>危険度</th>
             <th>想定修理費</th>
-            <th>購入額比</th>
+            <th>損失インパクト</th>
             <th>駅徒歩</th>
             <th>バス停</th>
             <th>地域性</th>
@@ -117,16 +116,21 @@ export function ComparisonTable({
                   {range.min}〜{range.max}万円
                 </td>
                 <td>
-                  <strong className={impact >= 60 ? 'warn-text' : ''}>最大{impact}%</strong>
+                  <strong className={impact >= 60 ? 'warn-text' : ''}>
+                    最大{range.max}万円
+                  </strong>
+                  <div className="muted small">
+                    購入額{c.purchaseManYen}万円の{impact}%
+                  </div>
                 </td>
                 <td>{c.stationWalkMin != null ? `${c.stationWalkMin}分` : '—'}</td>
                 <td>{c.busWalkMin != null ? `${c.busWalkMin}分` : '—'}</td>
                 <td>
-                  <div className="small">{c.municipality.industryType}</div>
+                  <div className="small">{c.municipality.name}・{c.municipality.industryType}</div>
+                  <div className="muted small">高齢{c.municipality.agingRate}%</div>
                   <div className="muted small">
-                    高齢{c.municipality.agingRate}% / 保護
-                    {relativeLabel(c.municipality.welfareRelative)} / 犯罪
-                    {relativeLabel(c.municipality.crimeRelative)}
+                    保護{c.municipality.welfareRatePercent.toFixed(1)}% / 犯罪
+                    {c.municipality.crimePer100People.toFixed(2)}件/100人・年
                   </div>
                 </td>
                 <td>
@@ -146,6 +150,9 @@ export function ComparisonTable({
           })}
         </tbody>
       </table>
+      <p className="note table-note">
+        犯罪は刑法犯の年間認知件数（人口100人あたり）。被害者人数そのものではありません。保護は人口に占める被保護人員の割合です。
+      </p>
     </div>
   )
 }
