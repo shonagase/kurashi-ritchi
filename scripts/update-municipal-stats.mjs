@@ -116,6 +116,82 @@ function convertValue(raw, convert, unit, name) {
   return round1(raw)
 }
 
+function lookupArea(map, id) {
+  return (
+    map.get(id) ||
+    map.get(normalizeAreaCode(id)) ||
+    map.get(id.replace(/^0/, '')) ||
+    null
+  )
+}
+
+/** 市区町村基礎データ（件数）から罪種構成比・窃盗率を補完 */
+async function fillCrimeBreakdownFromBase(base, byId) {
+  const statsDataId = '0000020211'
+  const codes = {
+    total: ['K4201', '#K4201'],
+    heinous: ['K420101', '#K420101'],
+    violent: ['K420102', '#K420102'],
+    theft: ['K420103', '#K420103'],
+    morals: ['K420105', '#K420105'],
+  }
+
+  const resolved = {}
+  for (const [key, candidates] of Object.entries(codes)) {
+    const cat = await resolveCat(statsDataId, candidates[0], candidates.slice(1))
+    if (!cat) continue
+    console.log(`fetch crime-base ${key}: [${statsDataId}] ${cat.code} ${cat.name}`)
+    resolved[key] = { cat, map: await fetchLatestByArea(statsDataId, cat.code) }
+  }
+  if (!resolved.total) {
+    console.warn('crime-base total not found; skip breakdown fill')
+    return 0
+  }
+
+  let hits = 0
+  for (const m of base) {
+    const totalRow = lookupArea(resolved.total.map, m.id)
+    if (!totalRow || !totalRow.value) continue
+    const total = totalRow.value
+    byId[m.id] = byId[m.id] || {}
+
+    const setShare = (field, pack) => {
+      if (!pack) return
+      const row = lookupArea(pack.map, m.id)
+      if (!row || !Number.isFinite(row.value)) return
+      byId[m.id][field] = metricRecord({
+        value: round2((row.value / total) * 100),
+        unit: '%',
+        source: `e-Stat ${statsDataId} / ${pack.cat.code} ÷ ${resolved.total.cat.code}`,
+        referenceDate: row.timeName,
+        catName: pack.cat.name,
+      })
+    }
+
+    if (!byId[m.id].heinousSharePercent) setShare('heinousSharePercent', resolved.heinous)
+    if (!byId[m.id].violentSharePercent) setShare('violentSharePercent', resolved.violent)
+    if (!byId[m.id].theftSharePercent) setShare('theftSharePercent', resolved.theft)
+    if (!byId[m.id].moralsSharePercent) setShare('moralsSharePercent', resolved.morals)
+
+    if (!byId[m.id].theftPer100People && resolved.theft) {
+      const theftRow = lookupArea(resolved.theft.map, m.id)
+      const pop = byId[m.id].population?.value
+      if (theftRow && pop > 0) {
+        byId[m.id].theftPer100People = metricRecord({
+          value: round2((theftRow.value / pop) * 100),
+          unit: '件/100人・年',
+          source: `e-Stat ${statsDataId} / ${resolved.theft.cat.code} ÷ population`,
+          referenceDate: theftRow.timeName,
+          catName: resolved.theft.cat.name,
+        })
+      }
+    }
+    hits++
+  }
+  console.log(`  crime-base filled municipalities: ${hits}`)
+  return hits
+}
+
 function metricRecord({ value, unit, source, referenceDate, catName }) {
   return {
     value,
@@ -236,6 +312,9 @@ async function main() {
     const ok = await updateFixedMetric(def, base, byId)
     if (ok) okCount++
   }
+
+  const baseHits = await fillCrimeBreakdownFromBase(base, byId)
+  if (baseHits > 0) okCount++
 
   // locked overrides win
   for (const [id, fields] of Object.entries(overrides)) {
