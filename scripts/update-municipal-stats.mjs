@@ -125,10 +125,48 @@ function lookupArea(map, id) {
   )
 }
 
-/** 市区町村基礎データ（件数）から罪種構成比・窃盗率を補完 */
+function prefAreaCandidates(muniId) {
+  const pref = String(muniId).padStart(5, '0').slice(0, 2)
+  return [`${pref}000`, pref, `0${pref}`, `${pref}00`, normalizeAreaCode(`${pref}000`)]
+}
+
+function lookupPref(map, muniId) {
+  for (const code of prefAreaCandidates(muniId)) {
+    const hit = lookupArea(map, code)
+    if (hit) return hit
+  }
+  // 一部テーブルは都道府県を「13000」以外の表記で持つ
+  for (const [area, row] of map.entries()) {
+    if (String(area).padStart(5, '0').startsWith(String(muniId).padStart(5, '0').slice(0, 2))) {
+      // 市区町村コード（5桁で末尾が000以外）は都道府県集計ではないのでスキップ
+      if (/^\d{5}$/.test(area) && !area.endsWith('000')) continue
+      return row
+    }
+  }
+  return null
+}
+
+function metricRecord({ value, unit, source, referenceDate, catName, valueType = 'official', warning }) {
+  const rec = {
+    value,
+    unit,
+    valueType,
+    source,
+    referenceDate,
+    retrievedAt: new Date().toISOString(),
+    catName,
+  }
+  if (warning) rec.warning = warning
+  return rec
+}
+
+/**
+ * 罪種内訳は市区町村表に無いことが多い。
+ * 1) 市区町村基礎 0000020211
+ * 2) 都道府県基礎 0000010111（市区町村へ都道府県構成比を適用）
+ */
 async function fillCrimeBreakdownFromBase(base, byId) {
-  const statsDataId = '0000020211'
-  const codes = {
+  const codeSets = {
     total: ['K4201', '#K4201'],
     heinous: ['K420101', '#K420101'],
     violent: ['K420102', '#K420102'],
@@ -136,72 +174,91 @@ async function fillCrimeBreakdownFromBase(base, byId) {
     morals: ['K420105', '#K420105'],
   }
 
-  const resolved = {}
-  for (const [key, candidates] of Object.entries(codes)) {
-    const cat = await resolveCat(statsDataId, candidates[0], candidates.slice(1))
-    if (!cat) continue
-    console.log(`fetch crime-base ${key}: [${statsDataId}] ${cat.code} ${cat.name}`)
-    resolved[key] = { cat, map: await fetchLatestByArea(statsDataId, cat.code) }
+  async function resolvePacks(statsDataId) {
+    const resolved = {}
+    for (const [key, candidates] of Object.entries(codeSets)) {
+      const cat = await resolveCat(statsDataId, candidates[0], candidates.slice(1))
+      if (!cat) continue
+      console.log(`fetch crime-base ${key}: [${statsDataId}] ${cat.code} ${cat.name}`)
+      resolved[key] = { cat, map: await fetchLatestByArea(statsDataId, cat.code) }
+    }
+    return resolved
   }
+
+  // まず市区町村
+  let statsDataId = '0000020211'
+  let resolved = await resolvePacks(statsDataId)
+  let scope = 'municipality'
+  if (!resolved.heinous && !resolved.violent && !resolved.theft && !resolved.morals) {
+    console.warn('municipal crime-type counts missing; trying prefecture table 0000010111')
+    statsDataId = '0000010111'
+    resolved = await resolvePacks(statsDataId)
+    scope = 'prefecture'
+  }
+
   if (!resolved.total) {
     console.warn('crime-base total not found; skip breakdown fill')
     return 0
   }
 
+  const warning =
+    scope === 'prefecture'
+      ? '市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用'
+      : undefined
+
   let hits = 0
   for (const m of base) {
-    const totalRow = lookupArea(resolved.total.map, m.id)
+    const totalRow =
+      scope === 'prefecture'
+        ? lookupPref(resolved.total.map, m.id)
+        : lookupArea(resolved.total.map, m.id)
     if (!totalRow || !totalRow.value) continue
     const total = totalRow.value
     byId[m.id] = byId[m.id] || {}
 
     const setShare = (field, pack) => {
-      if (!pack) return
-      const row = lookupArea(pack.map, m.id)
+      if (!pack || byId[m.id][field]) return
+      const row =
+        scope === 'prefecture' ? lookupPref(pack.map, m.id) : lookupArea(pack.map, m.id)
       if (!row || !Number.isFinite(row.value)) return
       byId[m.id][field] = metricRecord({
         value: round2((row.value / total) * 100),
         unit: '%',
-        source: `e-Stat ${statsDataId} / ${pack.cat.code} ÷ ${resolved.total.cat.code}`,
+        source: `e-Stat ${statsDataId} / ${pack.cat.code} ÷ ${resolved.total.cat.code}（${scope}）`,
         referenceDate: row.timeName,
         catName: pack.cat.name,
+        valueType: scope === 'prefecture' ? 'estimate' : 'official',
+        warning,
       })
     }
 
-    if (!byId[m.id].heinousSharePercent) setShare('heinousSharePercent', resolved.heinous)
-    if (!byId[m.id].violentSharePercent) setShare('violentSharePercent', resolved.violent)
-    if (!byId[m.id].theftSharePercent) setShare('theftSharePercent', resolved.theft)
-    if (!byId[m.id].moralsSharePercent) setShare('moralsSharePercent', resolved.morals)
+    setShare('heinousSharePercent', resolved.heinous)
+    setShare('violentSharePercent', resolved.violent)
+    setShare('theftSharePercent', resolved.theft)
+    setShare('moralsSharePercent', resolved.morals)
 
-    if (!byId[m.id].theftPer100People && resolved.theft) {
-      const theftRow = lookupArea(resolved.theft.map, m.id)
-      const pop = byId[m.id].population?.value
-      if (theftRow && pop > 0) {
+    if (!byId[m.id].theftPer100People) {
+      const theftShare = byId[m.id].theftSharePercent?.value
+      const crimeRate = byId[m.id].crimePer100People?.value
+      if (theftShare != null && crimeRate != null) {
         byId[m.id].theftPer100People = metricRecord({
-          value: round2((theftRow.value / pop) * 100),
+          value: round2((crimeRate * theftShare) / 100),
           unit: '件/100人・年',
-          source: `e-Stat ${statsDataId} / ${resolved.theft.cat.code} ÷ population`,
-          referenceDate: theftRow.timeName,
-          catName: resolved.theft.cat.name,
+          source: `crimePer100People × theftSharePercent（${scope}構成比）`,
+          referenceDate: byId[m.id].theftSharePercent?.referenceDate || totalRow.timeName,
+          catName: '窃盗認知率（推計）',
+          valueType: 'computed',
+          warning:
+            scope === 'prefecture'
+              ? '市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計'
+              : '市区町村窃盗率の直接値がないため、刑法犯率×窃盗構成比で推計',
         })
       }
     }
     hits++
   }
-  console.log(`  crime-base filled municipalities: ${hits}`)
+  console.log(`  crime-base filled municipalities: ${hits} (scope=${scope})`)
   return hits
-}
-
-function metricRecord({ value, unit, source, referenceDate, catName }) {
-  return {
-    value,
-    unit,
-    valueType: 'official',
-    source,
-    referenceDate,
-    retrievedAt: new Date().toISOString(),
-    catName,
-  }
 }
 
 function writeMerged(base, stats) {
