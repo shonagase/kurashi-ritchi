@@ -1,6 +1,6 @@
 {
   "meta": {
-    "retrievedAt": "2026-08-14T06:14:12.925Z",
+    "retrievedAt": "2026-08-14T06:17:18.948Z",
     "notes": "e-Statは固定コードのみ使用。overrides の locked 値は人手検証優先。retrievedAtは取得日であり各指標の対象時点ではない。",
     "coding": {
       "population": {
@@ -161,7 +161,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.300Z",
+        "retrievedAt": "2026-08-14T06:16:53.559Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -190,7 +190,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -201,6 +201,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.672Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.83,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 6.74,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 73.21,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.57,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 1.84,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "11203": {
@@ -210,7 +260,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.300Z",
+        "retrievedAt": "2026-08-14T06:16:53.559Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -239,7 +289,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -250,6 +300,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.83,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 6.74,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 73.21,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.57,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 1.96,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "12100": {
@@ -259,7 +359,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.300Z",
+        "retrievedAt": "2026-08-14T06:16:53.559Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -288,7 +388,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -299,6 +399,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.71,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 5.9,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 75.36,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.34,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 1.95,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "12204": {
@@ -308,7 +458,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.300Z",
+        "retrievedAt": "2026-08-14T06:16:53.559Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -337,7 +487,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -348,6 +498,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.71,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 5.9,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 75.36,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.34,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 1.67,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "12207": {
@@ -357,7 +557,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.300Z",
+        "retrievedAt": "2026-08-14T06:16:53.559Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -386,7 +586,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -397,6 +597,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.71,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 5.9,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 75.36,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.34,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 1.7,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "12217": {
@@ -406,7 +656,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.300Z",
+        "retrievedAt": "2026-08-14T06:16:53.559Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -435,7 +685,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -446,6 +696,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.71,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 5.9,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 75.36,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.34,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 1.67,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "12227": {
@@ -457,7 +757,7 @@
         "referenceDate": "2026-04-01",
         "catName": "高齢化率 = 65歳以上 / 総人口",
         "locked": true,
-        "retrievedAt": "2026-08-14T06:14:12.925Z"
+        "retrievedAt": "2026-08-14T06:17:18.948Z"
       },
       "singleHouseholdRate": {
         "value": 36.1,
@@ -467,7 +767,7 @@
         "referenceDate": "2020-10-01",
         "catName": "単独世帯 / 一般世帯",
         "locked": true,
-        "retrievedAt": "2026-08-14T06:14:12.925Z"
+        "retrievedAt": "2026-08-14T06:17:18.948Z"
       },
       "welfareRatePercent": {
         "value": 1.48,
@@ -477,7 +777,7 @@
         "referenceDate": "2020",
         "catName": "生活保護率",
         "locked": true,
-        "retrievedAt": "2026-08-14T06:14:12.925Z"
+        "retrievedAt": "2026-08-14T06:17:18.948Z"
       },
       "crimePer100People": {
         "value": 0.89,
@@ -488,7 +788,7 @@
         "catName": "刑法犯認知件数 / 人口",
         "formula": "501 / 56000 * 100 ≈ 0.89",
         "locked": true,
-        "retrievedAt": "2026-08-14T06:14:12.925Z"
+        "retrievedAt": "2026-08-14T06:17:18.948Z"
       },
       "population": {
         "value": 55860,
@@ -498,7 +798,57 @@
         "referenceDate": "2026-04-01",
         "catName": "総人口",
         "locked": true,
-        "retrievedAt": "2026-08-14T06:14:12.925Z"
+        "retrievedAt": "2026-08-14T06:17:18.948Z"
+      },
+      "heinousSharePercent": {
+        "value": 0.71,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 5.9,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 75.36,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.34,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 2.02,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "13101": {
@@ -508,7 +858,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.300Z",
+        "retrievedAt": "2026-08-14T06:16:53.559Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -537,7 +887,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -548,6 +898,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.86,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 8.27,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 67.22,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.6,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 8.76,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "13103": {
@@ -557,7 +957,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.300Z",
+        "retrievedAt": "2026-08-14T06:16:53.559Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -586,7 +986,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -597,6 +997,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.86,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 8.27,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 67.22,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.6,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 3.23,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "13104": {
@@ -606,7 +1056,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.300Z",
+        "retrievedAt": "2026-08-14T06:16:53.559Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -635,7 +1085,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -646,6 +1096,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.86,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 8.27,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 67.22,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.6,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 2.5,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "13112": {
@@ -655,7 +1155,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.300Z",
+        "retrievedAt": "2026-08-14T06:16:53.559Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -684,7 +1184,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -695,6 +1195,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.86,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 8.27,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 67.22,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.6,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 1.18,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "13113": {
@@ -704,7 +1254,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.300Z",
+        "retrievedAt": "2026-08-14T06:16:53.559Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -733,7 +1283,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -744,6 +1294,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.86,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 8.27,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 67.22,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.6,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 3.35,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "13120": {
@@ -753,7 +1353,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.300Z",
+        "retrievedAt": "2026-08-14T06:16:53.559Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -782,7 +1382,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -793,6 +1393,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.86,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 8.27,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 67.22,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.6,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 1.1,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "13121": {
@@ -802,7 +1452,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.300Z",
+        "retrievedAt": "2026-08-14T06:16:53.559Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -831,7 +1481,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -842,6 +1492,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.86,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 8.27,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 67.22,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.6,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 1.47,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "13122": {
@@ -851,7 +1551,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.300Z",
+        "retrievedAt": "2026-08-14T06:16:53.559Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -880,7 +1580,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -891,6 +1591,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.86,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 8.27,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 67.22,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.6,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 1.2,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "13123": {
@@ -900,7 +1650,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.300Z",
+        "retrievedAt": "2026-08-14T06:16:53.559Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -929,7 +1679,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -940,6 +1690,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.86,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 8.27,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 67.22,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.6,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 1.39,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "14100": {
@@ -949,7 +1749,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.300Z",
+        "retrievedAt": "2026-08-14T06:16:53.559Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -978,7 +1778,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -989,6 +1789,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.87,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 6.99,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 73.28,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.76,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 1.12,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "14130": {
@@ -998,7 +1848,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.300Z",
+        "retrievedAt": "2026-08-14T06:16:53.559Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -1027,7 +1877,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -1038,6 +1888,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.87,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 6.99,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 73.28,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.76,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 1.22,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "14131": {
@@ -1047,7 +1947,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.300Z",
+        "retrievedAt": "2026-08-14T06:16:53.559Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -1076,7 +1976,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -1087,6 +1987,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.87,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 6.99,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 73.28,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.76,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 2.34,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "14150": {
@@ -1096,7 +2046,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.300Z",
+        "retrievedAt": "2026-08-14T06:16:53.559Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -1125,7 +2075,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -1136,6 +2086,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.87,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 6.99,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 73.28,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.76,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 1.37,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "15100": {
@@ -1145,7 +2145,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.301Z",
+        "retrievedAt": "2026-08-14T06:16:53.560Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -1174,7 +2174,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -1185,6 +2185,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.71,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 9.41,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 66.64,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.52,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 1.03,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "20201": {
@@ -1194,7 +2244,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.301Z",
+        "retrievedAt": "2026-08-14T06:16:53.560Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -1223,7 +2273,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -1234,6 +2284,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.77,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 7.29,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 68.99,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 2.15,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 0.88,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "22100": {
@@ -1243,7 +2343,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.300Z",
+        "retrievedAt": "2026-08-14T06:16:53.559Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -1272,7 +2372,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -1283,6 +2383,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 1.13,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 12.36,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 64.98,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.96,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 1.03,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "22130": {
@@ -1292,7 +2442,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.300Z",
+        "retrievedAt": "2026-08-14T06:16:53.559Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -1321,7 +2471,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -1332,6 +2482,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 1.13,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 12.36,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 64.98,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.96,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 0.96,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "23100": {
@@ -1341,7 +2541,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.300Z",
+        "retrievedAt": "2026-08-14T06:16:53.559Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -1370,7 +2570,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -1381,6 +2581,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.79,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 8.18,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 67.23,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.37,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 2.42,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "23200": {
@@ -1432,6 +2682,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.79,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 8.18,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 67.23,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.37,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 0.3,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "26100": {
@@ -1441,7 +2741,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.301Z",
+        "retrievedAt": "2026-08-14T06:16:53.560Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -1470,7 +2770,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -1481,6 +2781,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.86,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 8.23,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 69.8,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 2.05,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 1.79,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "27100": {
@@ -1490,7 +2840,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.301Z",
+        "retrievedAt": "2026-08-14T06:16:53.560Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -1519,7 +2869,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -1530,6 +2880,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.92,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 6.03,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 72.75,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.91,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 2.95,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "27140": {
@@ -1539,7 +2939,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.301Z",
+        "retrievedAt": "2026-08-14T06:16:53.560Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -1568,7 +2968,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -1579,6 +2979,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.92,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 6.03,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 72.75,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.91,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 1.99,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "28100": {
@@ -1588,7 +3038,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.301Z",
+        "retrievedAt": "2026-08-14T06:16:53.560Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -1617,7 +3067,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -1628,6 +3078,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.8,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 11.4,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 61.03,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 2.13,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 1.43,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "34100": {
@@ -1637,7 +3137,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.301Z",
+        "retrievedAt": "2026-08-14T06:16:53.560Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -1666,7 +3166,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -1677,6 +3177,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.75,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 8.37,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 63.46,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.95,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 1,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "40100": {
@@ -1686,7 +3236,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.301Z",
+        "retrievedAt": "2026-08-14T06:16:53.560Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -1715,7 +3265,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -1726,6 +3276,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.65,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 10.03,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 66.4,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.84,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 1.47,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "40130": {
@@ -1735,7 +3335,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.301Z",
+        "retrievedAt": "2026-08-14T06:16:53.560Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -1764,7 +3364,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -1775,6 +3375,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.65,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 10.03,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 66.4,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.84,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 1.77,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "43100": {
@@ -1784,7 +3434,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.301Z",
+        "retrievedAt": "2026-08-14T06:16:53.560Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -1813,7 +3463,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -1824,6 +3474,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 1.2,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 12.05,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 65.37,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 2.25,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 1.08,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "47201": {
@@ -1833,7 +3533,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.301Z",
+        "retrievedAt": "2026-08-14T06:16:53.560Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -1862,7 +3562,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -1873,6 +3573,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 0.78,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 11,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 65.6,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 1.12,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 1.2,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "01100": {
@@ -1882,7 +3632,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.301Z",
+        "retrievedAt": "2026-08-14T06:16:53.560Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -1911,7 +3661,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -1922,6 +3672,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 1.03,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 15.6,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 62.74,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 2.33,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 1.07,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     },
     "04100": {
@@ -1931,7 +3731,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020301 / #A03506",
         "referenceDate": "2020年度",
-        "retrievedAt": "2026-08-14T06:13:57.301Z",
+        "retrievedAt": "2026-08-14T06:16:53.560Z",
         "catName": "#A03506_65歳以上人口割合"
       },
       "singleHouseholdRate": {
@@ -1960,7 +3760,7 @@
         "valueType": "official",
         "source": "e-Stat 0000020311 / #K06101",
         "referenceDate": "2005年度",
-        "retrievedAt": "2026-08-14T06:14:00.809Z",
+        "retrievedAt": "2026-08-14T06:16:58.887Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
       },
       "population": {
@@ -1971,6 +3771,56 @@
         "referenceDate": "seed",
         "retrievedAt": "2026-08-14T05:30:24.674Z",
         "catName": "総人口"
+      },
+      "heinousSharePercent": {
+        "value": 1.1,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420101_凶悪犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "violentSharePercent": {
+        "value": 7.31,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420102_粗暴犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftSharePercent": {
+        "value": 66.3,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420103_窃盗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "moralsSharePercent": {
+        "value": 2.05,
+        "unit": "%",
+        "valueType": "estimate",
+        "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "K420105_風俗犯認知件数",
+        "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+      },
+      "theftPer100People": {
+        "value": 1.14,
+        "unit": "件/100人・年",
+        "valueType": "computed",
+        "source": "crimePer100People × theftSharePercent（prefecture構成比）",
+        "referenceDate": "2023年度",
+        "retrievedAt": "2026-08-14T06:17:18.948Z",
+        "catName": "窃盗認知率（推計）",
+        "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
       }
     }
   }
