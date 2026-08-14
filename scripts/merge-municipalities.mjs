@@ -6,6 +6,16 @@ import { fileURLToPath } from 'node:url'
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const base = JSON.parse(fs.readFileSync(path.join(root, 'data/municipalities.base.json'), 'utf8'))
 const stats = JSON.parse(fs.readFileSync(path.join(root, 'data/municipalities.stats.json'), 'utf8'))
+const overrides = fs.existsSync(path.join(root, 'data/municipalities.overrides.json'))
+  ? JSON.parse(fs.readFileSync(path.join(root, 'data/municipalities.overrides.json'), 'utf8'))
+  : {}
+
+for (const [id, fields] of Object.entries(overrides)) {
+  stats.byId[id] = stats.byId[id] || {}
+  for (const [field, metric] of Object.entries(fields)) {
+    stats.byId[id][field] = metric
+  }
+}
 
 function readMetric(row, key) {
   const v = row?.[key]

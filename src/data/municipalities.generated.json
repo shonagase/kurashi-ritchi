@@ -972,46 +972,47 @@
       "lon": 140.366,
       "industryType": "郊外住宅・商業",
       "industryNote": "千葉県東部の郊外都市。住宅団地と幹線沿い商業が中心。",
-      "agingRate": 17.5,
+      "agingRate": 33.2,
       "singleHouseholdRate": 36.1,
       "welfareRatePercent": 1.48,
-      "crimePer100People": 2.68,
+      "crimePer100People": 0.89,
       "metrics": {
         "agingRate": {
-          "value": 17.5,
+          "value": 33.2,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
-          "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
-          "catName": "#A03506_65歳以上人口割合"
+          "source": "東金市 住民基本台帳（人手検証）",
+          "referenceDate": "2026-04-01",
+          "catName": "高齢化率 = 65歳以上 / 総人口",
+          "locked": true
         },
         "singleHouseholdRate": {
           "value": 36.1,
           "unit": "%",
           "valueType": "official",
-          "source": "国勢調査2020 / 東金市資料（レビュー検証）",
+          "source": "国勢調査2020 / 東金市資料（人手検証）",
           "referenceDate": "2020-10-01",
-          "retrievedAt": "2026-08-14T05:16:52.890Z",
-          "catName": "単独世帯 / 一般世帯"
+          "catName": "単独世帯 / 一般世帯",
+          "locked": true
         },
         "welfareRatePercent": {
           "value": 1.48,
           "unit": "%",
           "valueType": "official",
-          "source": "東金市公表 生活保護率 14.80‰（レビュー検証）",
+          "source": "東金市公表 生活保護率 14.80‰（人手検証）",
           "referenceDate": "2020",
-          "retrievedAt": "2026-08-14T05:16:52.890Z",
-          "catName": "生活保護率"
+          "catName": "生活保護率",
+          "locked": true
         },
         "crimePer100People": {
-          "value": 2.68,
+          "value": 0.89,
           "unit": "件/100人・年",
-          "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
-          "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
-          "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+          "valueType": "computed",
+          "source": "千葉県警2025年確定 501件 ÷ 人口約5.6万人（人手検証）",
+          "referenceDate": "2025",
+          "catName": "刑法犯認知件数 / 人口",
+          "formula": "501 / 56000 * 100 ≈ 0.89",
+          "locked": true
         }
       }
     },

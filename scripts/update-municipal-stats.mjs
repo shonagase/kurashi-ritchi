@@ -100,11 +100,11 @@ function findBestCat(items, { must = [], prefer = [], exclude = [], forbid = [] 
     if (exclude.some((e) => name.includes(e))) continue
     if (forbid.some((e) => name.includes(e))) continue
     if (!must.every((k) => name.includes(k))) continue
-    let score = 10
-    for (const p of prefer) {
-      if (name.includes(p)) score += 5
-    }
-    // 短い名称（より一般的）をやや優先
+    const preferHits = prefer.filter((p) => name.includes(p)).length
+    if (prefer.length && preferHits === 0 && must.length === 0) continue
+    let score = 10 + preferHits * 8
+    if (name === '高齢化率' || name.endsWith('_高齢化率')) score += 20
+    if (name.includes('単独世帯割合') && !name.includes('65')) score += 15
     score -= Math.min(name.length, 40) * 0.01
     if (score > bestScore) {
       bestScore = score
@@ -139,20 +139,19 @@ async function fetchLatestByArea(statsDataId, cdCat01) {
 
   const values = data?.GET_STATS_DATA?.STATISTICAL_DATA?.DATA_INF?.VALUE || []
   const list = Array.isArray(values) ? values : [values]
-  /** @type {Map<string, {time:string, timeName:string, value:number}>} */
+  /** @type {Map<string, {time:string, timeName:string, value:number, year:number}>} */
   const map = new Map()
   for (const v of list) {
     const area = String(v['@area'] || '')
     const time = String(v['@time'] || '')
+    const timeName = timeLabel[time] || time
     const num = Number(String(v.$ ?? '').replace(/,/g, ''))
     if (!area || !Number.isFinite(num)) continue
+    const yearMatch = timeName.match(/(19|20)\d{2}/)
+    const year = yearMatch ? Number(yearMatch[0]) : Number(time.replace(/\D/g, '').slice(0, 4)) || 0
     const prev = map.get(area)
-    if (!prev || time > prev.time) {
-      map.set(area, {
-        time,
-        timeName: timeLabel[time] || time,
-        value: num,
-      })
+    if (!prev || year > prev.year || (year === prev.year && time > prev.time)) {
+      map.set(area, { time, timeName, value: num, year })
     }
   }
   return map
@@ -274,6 +273,10 @@ async function main() {
   mustAppId()
   const base = JSON.parse(fs.readFileSync(basePath, 'utf8'))
   const prev = JSON.parse(fs.readFileSync(statsPath, 'utf8'))
+  const overridesPath = path.join(root, 'data/municipalities.overrides.json')
+  const overrides = fs.existsSync(overridesPath)
+    ? JSON.parse(fs.readFileSync(overridesPath, 'utf8'))
+    : {}
 
   // 旧形式（平たい数値）からの移行も吸収
   /** @type {Record<string, any>} */
@@ -340,9 +343,9 @@ async function main() {
       (t) => t.includes('人口・世帯') && !t.includes('都道府県'),
     ],
     catOpts: {
-      must: ['65歳以上'],
-      prefer: ['高齢化率', '人口割合', '割合'],
-      exclude: ['世帯', '単独', '対前年', '男', '女', '外国人'],
+      must: [],
+      prefer: ['高齢化率', '65歳以上人口割合', '老年人口割合'],
+      exclude: ['世帯', '単独', '対前年', '男', '女', '外国人', '千人当たり', '人口千'],
       forbid: ['15歳未満', '生産年齢', '年少'],
     },
     convert: (v) => round1(v),
@@ -413,11 +416,22 @@ async function main() {
     throw new Error('統計値を1件も更新できませんでした')
   }
 
+  // 人手検証の locked 値は API 結果で上書きしない
+  for (const [id, fields] of Object.entries(overrides)) {
+    byId[id] = byId[id] || {}
+    for (const [field, metric] of Object.entries(fields)) {
+      byId[id][field] = {
+        ...metric,
+        retrievedAt: new Date().toISOString(),
+      }
+    }
+  }
+
   const stats = {
     meta: {
       retrievedAt: new Date().toISOString(),
       notes:
-        '各指標は field ごとに referenceDate / source を持つ。retrievedAt は取得日時であり、統計の対象時点ではない。',
+        '各指標は field ごとに referenceDate / source を持つ。retrievedAt は取得日時であり、統計の対象時点ではない。overrides の locked 値は人手検証優先。',
       fields: {
         agingRate: '高齢化率（65歳以上人口割合）',
         singleHouseholdRate: '一般世帯に占める単独世帯割合（高齢単独世帯は除外）',
