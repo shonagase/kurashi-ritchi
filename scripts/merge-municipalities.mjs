@@ -39,6 +39,11 @@ const municipalities = base.map((b) => {
   const welfare = readMetric(row, 'welfareRatePercent')
   const crime = readMetric(row, 'crimePer100People')
   const population = readMetric(row, 'population')
+  const theft = readMetric(row, 'theftPer100People')
+  const heinous = readMetric(row, 'heinousSharePercent')
+  const violent = readMetric(row, 'violentSharePercent')
+  const theftShare = readMetric(row, 'theftSharePercent')
+  const morals = readMetric(row, 'moralsSharePercent')
   return {
     ...b,
     agingRate: aging.value,
@@ -46,12 +51,22 @@ const municipalities = base.map((b) => {
     welfareRatePercent: welfare.value,
     crimePer100People: crime.value,
     population: population.value,
+    theftPer100People: theft.value,
+    heinousSharePercent: heinous.value,
+    violentSharePercent: violent.value,
+    theftSharePercent: theftShare.value,
+    moralsSharePercent: morals.value,
     metrics: {
       agingRate: aging.metric,
       singleHouseholdRate: single.metric,
       welfareRatePercent: welfare.metric,
       crimePer100People: crime.metric,
       population: population.metric,
+      theftPer100People: theft.metric,
+      heinousSharePercent: heinous.metric,
+      violentSharePercent: violent.metric,
+      theftSharePercent: theftShare.metric,
+      moralsSharePercent: morals.metric,
     },
   }
 })

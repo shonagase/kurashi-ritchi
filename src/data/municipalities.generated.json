@@ -24,6 +24,11 @@
       "welfareRatePercent": 0.7,
       "crimePer100People": 13.03,
       "population": 67000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 16.3,
@@ -71,7 +76,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -87,6 +97,11 @@
       "welfareRatePercent": 0.8,
       "crimePer100People": 4.81,
       "population": 260000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 16.3,
@@ -134,7 +149,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -150,6 +170,11 @@
       "welfareRatePercent": 1.6,
       "crimePer100People": 3.72,
       "population": 350000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 18.1,
@@ -197,7 +222,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -213,6 +243,11 @@
       "welfareRatePercent": 0.9,
       "crimePer100People": 1.75,
       "population": 940000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 20.1,
@@ -260,7 +295,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -276,6 +316,11 @@
       "welfareRatePercent": 1,
       "crimePer100People": 4.99,
       "population": 230000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 16.9,
@@ -323,7 +368,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -339,6 +389,11 @@
       "welfareRatePercent": 1.3,
       "crimePer100People": 1.63,
       "population": 750000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 21.2,
@@ -386,7 +441,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -402,6 +462,11 @@
       "welfareRatePercent": 3.2,
       "crimePer100People": 2.19,
       "population": 690000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 24.5,
@@ -449,7 +514,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -465,6 +535,11 @@
       "welfareRatePercent": 2.8,
       "crimePer100People": 1.78,
       "population": 460000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 24.7,
@@ -512,7 +587,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -528,6 +608,11 @@
       "welfareRatePercent": 1.9,
       "crimePer100People": 2.07,
       "population": 700000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 20.9,
@@ -575,7 +660,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -591,6 +681,11 @@
       "welfareRatePercent": 1.7,
       "crimePer100People": 1.53,
       "population": 3770000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 24.4,
@@ -638,7 +733,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -654,6 +754,11 @@
       "welfareRatePercent": 1.8,
       "crimePer100People": 1.67,
       "population": 1540000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 19.6,
@@ -701,7 +806,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -717,6 +827,11 @@
       "welfareRatePercent": 1.5,
       "crimePer100People": 1.87,
       "population": 720000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 25.5,
@@ -764,7 +879,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -780,6 +900,11 @@
       "welfareRatePercent": 1.4,
       "crimePer100People": 2.51,
       "population": 1324000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 23,
@@ -827,7 +952,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.672Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -843,6 +973,11 @@
       "welfareRatePercent": 1.8,
       "crimePer100People": 2.68,
       "population": 607000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 23.2,
@@ -890,7 +1025,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -906,6 +1046,11 @@
       "welfareRatePercent": 1.6,
       "crimePer100People": 2.59,
       "population": 975000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 25.6,
@@ -953,7 +1098,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -969,6 +1119,11 @@
       "welfareRatePercent": 1.5,
       "crimePer100People": 2.21,
       "population": 645000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 23.8,
@@ -1016,7 +1171,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -1032,6 +1192,11 @@
       "welfareRatePercent": 1.7,
       "crimePer100People": 2.26,
       "population": 498000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 25.6,
@@ -1079,7 +1244,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -1095,6 +1265,11 @@
       "welfareRatePercent": 1.2,
       "crimePer100People": 2.22,
       "population": 426000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 25.8,
@@ -1142,7 +1317,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -1158,6 +1338,11 @@
       "welfareRatePercent": 1.48,
       "crimePer100People": 0.89,
       "population": 55860,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 33.2,
@@ -1204,7 +1389,12 @@
           "referenceDate": "2026-04-01",
           "catName": "総人口",
           "locked": true
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -1220,6 +1410,11 @@
       "welfareRatePercent": 1.1,
       "crimePer100People": 3.2,
       "population": 440000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 21.3,
@@ -1267,7 +1462,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -1283,6 +1483,11 @@
       "welfareRatePercent": 1.5,
       "crimePer100People": 1.59,
       "population": 690000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 30.2,
@@ -1330,7 +1535,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -1346,6 +1556,11 @@
       "welfareRatePercent": 1.4,
       "crimePer100People": 1.47,
       "population": 790000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 27.9,
@@ -1393,7 +1608,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -1409,6 +1629,11 @@
       "welfareRatePercent": 1.9,
       "crimePer100People": 3.6,
       "population": 2330000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 24.3,
@@ -1456,7 +1681,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -1472,6 +1702,11 @@
       "welfareRatePercent": 0.9,
       "crimePer100People": 0.45,
       "population": 420000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 24,
@@ -1521,7 +1756,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -1537,6 +1777,11 @@
       "welfareRatePercent": 3.8,
       "crimePer100People": 4.06,
       "population": 2750000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 24.6,
@@ -1584,7 +1829,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -1600,6 +1850,11 @@
       "welfareRatePercent": 2.2,
       "crimePer100People": 2.73,
       "population": 820000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 28.2,
@@ -1647,7 +1902,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -1663,6 +1923,11 @@
       "welfareRatePercent": 2,
       "crimePer100People": 2.35,
       "population": 1520000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 27.5,
@@ -1710,7 +1975,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -1726,6 +1996,11 @@
       "welfareRatePercent": 1.8,
       "crimePer100People": 2.57,
       "population": 1460000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 26.9,
@@ -1773,7 +2048,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -1789,6 +2069,11 @@
       "welfareRatePercent": 1.7,
       "crimePer100People": 1.57,
       "population": 1200000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 25.1,
@@ -1836,7 +2121,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -1852,6 +2142,11 @@
       "welfareRatePercent": 3.5,
       "crimePer100People": 2.21,
       "population": 930000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 30.5,
@@ -1899,7 +2194,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -1915,6 +2215,11 @@
       "welfareRatePercent": 1.8,
       "crimePer100People": 2.66,
       "population": 1630000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 21,
@@ -1962,7 +2267,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -1978,6 +2288,11 @@
       "welfareRatePercent": 2.1,
       "crimePer100People": 1.7,
       "population": 1973000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 27.4,
@@ -2025,7 +2340,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -2041,6 +2361,11 @@
       "welfareRatePercent": 1.6,
       "crimePer100People": 1.72,
       "population": 1096000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 23.5,
@@ -2088,7 +2413,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -2104,6 +2434,11 @@
       "welfareRatePercent": 1.7,
       "crimePer100People": 1.65,
       "population": 740000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 25.9,
@@ -2151,7 +2486,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -2167,6 +2507,11 @@
       "welfareRatePercent": 2.9,
       "crimePer100People": 1.83,
       "population": 320000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 22.8,
@@ -2214,7 +2559,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -2230,6 +2580,11 @@
       "welfareRatePercent": 1.5,
       "crimePer100People": 1.54,
       "population": 780000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 29.3,
@@ -2277,7 +2632,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     },
     {
@@ -2293,6 +2653,11 @@
       "welfareRatePercent": 1.4,
       "crimePer100People": 1.28,
       "population": 370000,
+      "theftPer100People": 0,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 0,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 29,
@@ -2340,7 +2705,12 @@
           "referenceDate": "seed",
           "retrievedAt": "2026-08-14T05:30:24.674Z",
           "catName": "総人口"
-        }
+        },
+        "theftPer100People": null,
+        "heinousSharePercent": null,
+        "violentSharePercent": null,
+        "theftSharePercent": null,
+        "moralsSharePercent": null
       }
     }
   ]

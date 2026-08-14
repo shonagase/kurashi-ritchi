@@ -155,6 +155,20 @@ a {
   cursor: pointer;
 }
 
+.region-subtabs {
+  margin: 0 0 1rem;
+}
+
+.crime-est-counts {
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.crime-breakdown-table th,
+.crime-breakdown-table td {
+  white-space: nowrap;
+}
+
 .cell-stack {
   display: flex;
   flex-wrap: wrap;

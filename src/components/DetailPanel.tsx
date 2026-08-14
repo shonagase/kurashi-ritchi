@@ -217,6 +217,35 @@ export function DetailPanel({ candidate }: Props) {
         />
         <MetricLine label="生活保護" display={formatWelfare(m)} meta={m.metrics?.welfareRatePercent} />
         <MetricLine label="犯罪認知" display={formatCrime(m)} meta={m.metrics?.crimePer100People} />
+        <MetricLine
+          label="窃盗認知"
+          display={
+            m.metrics?.theftPer100People
+              ? `年${m.theftPer100People.toFixed(2)}件/100人`
+              : '—'
+          }
+          meta={m.metrics?.theftPer100People}
+        />
+        <MetricLine
+          label="凶悪犯の割合"
+          display={m.metrics?.heinousSharePercent ? `${m.heinousSharePercent.toFixed(2)}%` : '—'}
+          meta={m.metrics?.heinousSharePercent}
+        />
+        <MetricLine
+          label="粗暴犯の割合"
+          display={m.metrics?.violentSharePercent ? `${m.violentSharePercent.toFixed(2)}%` : '—'}
+          meta={m.metrics?.violentSharePercent}
+        />
+        <MetricLine
+          label="窃盗犯の割合"
+          display={m.metrics?.theftSharePercent ? `${m.theftSharePercent.toFixed(2)}%` : '—'}
+          meta={m.metrics?.theftSharePercent}
+        />
+        <MetricLine
+          label="風俗犯の割合"
+          display={m.metrics?.moralsSharePercent ? `${m.moralsSharePercent.toFixed(2)}%` : '—'}
+          meta={m.metrics?.moralsSharePercent}
+        />
       </ul>
       <p className="source-line">
         出典ポータル:{' '}

@@ -24,6 +24,11 @@ export type MunicipalityProfile = {
   singleHouseholdRate: number
   welfareRatePercent: number
   crimePer100People: number
+  theftPer100People: number
+  heinousSharePercent: number
+  violentSharePercent: number
+  theftSharePercent: number
+  moralsSharePercent: number
   industryType: string
   industryNote: string
   metrics?: {
@@ -32,6 +37,11 @@ export type MunicipalityProfile = {
     singleHouseholdRate?: MetricMeta | null
     welfareRatePercent?: MetricMeta | null
     crimePer100People?: MetricMeta | null
+    theftPer100People?: MetricMeta | null
+    heinousSharePercent?: MetricMeta | null
+    violentSharePercent?: MetricMeta | null
+    theftSharePercent?: MetricMeta | null
+    moralsSharePercent?: MetricMeta | null
   }
 }
 
