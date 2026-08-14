@@ -1,5 +1,6 @@
 import type { MunicipalityProfile } from './data/municipalities'
 import type { TransitStop } from './lib/geo'
+import type { ZoneAssessment } from './lib/hazardZones'
 import type { HazardLevel } from './lib/risk'
 
 export type Candidate = {
@@ -10,14 +11,14 @@ export type Candidate = {
   lat: number
   lon: number
   elevationM: number | null
+  /** 損害側ティア（区域該当から選定） */
   hazardLevel: HazardLevel
+  /** 発生側: 公式ハザード区域判定 */
+  zones: ZoneAssessment
   municipality: MunicipalityProfile
-  /** 徒歩30分圏内の駅（近い順） */
   stations: TransitStop[]
-  /** 徒歩30分圏内のバス停（近い順） */
   buses: TransitStop[]
   transitFetchFailed: boolean
-  /** 比較表用: 最寄り */
   stationName: string | null
   stationWalkMin: number | null
   busName: string | null

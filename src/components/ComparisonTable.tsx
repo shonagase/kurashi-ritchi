@@ -61,7 +61,7 @@ export function ComparisonTable({
         {(
           [
             ['lossImpact', '損害額比率'],
-            ['hazard', '標高区分'],
+            ['hazard', '損害ティア'],
             ['stationWalk', '駅(直線)'],
             ['aging', '高齢化率'],
             ['purchase', '購入額'],
@@ -82,8 +82,8 @@ export function ComparisonTable({
           <tr>
             <th>候補</th>
             <th>購入額</th>
-            <th>危険度</th>
-            <th>想定修理費</th>
+            <th>発生側（公式区域）</th>
+            <th>損害側（修理費）</th>
             <th>損害額比率</th>
             <th>駅(直線)</th>
             <th>バス停(直線)</th>
@@ -107,13 +107,33 @@ export function ComparisonTable({
                 </td>
                 <td>{c.purchaseManYen}万円</td>
                 <td>
-                  <span className={`badge badge-${c.hazardLevel}`}>{hazardLabel(c.hazardLevel)}</span>
-                  {c.elevationM != null && (
-                    <div className="muted small">標高 {c.elevationM.toFixed(1)}m</div>
+                  {c.zones.fetchFailed ? (
+                    <span className="muted">判定失敗</span>
+                  ) : c.zones.anyOfficialZone ? (
+                    <>
+                      <span className="badge badge-high">区域該当あり</span>
+                      <div className="muted small">
+                        {[
+                          c.zones.flood.inZone ? '洪水' : null,
+                          c.zones.sedimentSteep.inZone ||
+                          c.zones.sedimentDebris.inZone ||
+                          c.zones.sedimentSlide.inZone
+                            ? '土砂'
+                            : null,
+                        ]
+                          .filter(Boolean)
+                          .join('・')}
+                      </div>
+                    </>
+                  ) : (
+                    <span className="badge badge-low">区域外</span>
                   )}
                 </td>
                 <td>
-                  {range.min}〜{range.max}万円
+                  <span className={`badge badge-${c.hazardLevel}`}>{hazardLabel(c.hazardLevel)}</span>
+                  <div className="muted small">
+                    {range.min}〜{range.max}万円
+                  </div>
                 </td>
                 <td>
                   <strong className={impact >= 60 ? 'warn-text' : ''}>

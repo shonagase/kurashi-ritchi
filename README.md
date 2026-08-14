@@ -32,7 +32,9 @@ GitHub Pages で公開します。
    `ESTAT_APP_ID` を追加
 3. Actions タブで **Update municipal stats** を手動実行（または毎週月曜に自動実行）
 
-更新されると `data/municipalities.stats.json` と `src/data/municipalities.generated.json` がコミットされ、Pages も再デプロイされます。
+更新されると `data/municipalities.stats.json` と `src/data/municipalities.generated.json` がコミットされ、Pages も再デプロイされます。  
+指標コードは `scripts/estat-fixed-codes.mjs` に固定しています（名称あいまいマッチは使いません）。  
+人手検証値は `data/municipalities.overrides.json` が優先されます。
 
 ローカル手動更新:
 

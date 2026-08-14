@@ -80,6 +80,10 @@ export const DATA_SOURCES = {
     label: 'e-Stat API（社会・人口統計体系）',
     url: 'https://www.e-stat.go.jp/api/',
   },
+  hazardTiles: {
+    label: 'ハザードマップポータル 配信タイル（オープンデータ）',
+    url: 'https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html',
+  },
 } as const
 
 export const statsMeta: StatsMeta = generated.meta as StatsMeta

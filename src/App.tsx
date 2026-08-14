@@ -4,7 +4,7 @@ import { DetailPanel } from './components/DetailPanel'
 import { MapView } from './components/MapView'
 import { DATA_SOURCES, findNearestMunicipality, statsMeta } from './data/municipalities'
 import { fetchElevation, fetchNearbyTransit, searchAddress } from './lib/geo'
-import { estimateHazardFromElevation } from './lib/risk'
+import { assessOfficialHazardZones, damageTierFromZones } from './lib/hazardZones'
 import type { Candidate, SortKey } from './types'
 import './App.css'
 
@@ -47,11 +47,12 @@ export default function App() {
     lat: number
     lon: number
   }): Promise<Candidate> {
-    const [elevationM, transit] = await Promise.all([
+    const [elevationM, transit, zones] = await Promise.all([
       fetchElevation(input.lat, input.lon),
       fetchNearbyTransit(input.lat, input.lon),
+      assessOfficialHazardZones(input.lat, input.lon),
     ])
-    const hazardLevel = estimateHazardFromElevation(elevationM)
+    const hazardLevel = damageTierFromZones(zones, elevationM)
     const municipality = findNearestMunicipality(input.lat, input.lon)
 
     return {
@@ -63,6 +64,7 @@ export default function App() {
       lon: input.lon,
       elevationM,
       hazardLevel,
+      zones,
       municipality,
       stations: transit.stations,
       buses: transit.buses,
@@ -212,7 +214,7 @@ export default function App() {
               デモ3件を読み込む
             </button>
           </div>
-          {loading && <p className="status">分析中…（標高・周辺交通を取得）</p>}
+          {loading && <p className="status">分析中…（標高・公式ハザード区域・周辺交通を取得）</p>}
           {error && <p className="error">{error}</p>}
         </section>
 
@@ -254,11 +256,17 @@ export default function App() {
         </p>
         <ul className="source-list">
           <li>
+            公式ハザード区域判定:{' '}
+            <a href={DATA_SOURCES.hazardTiles.url} target="_blank" rel="noreferrer">
+              {DATA_SOURCES.hazardTiles.label}
+            </a>
+          </li>
+          <li>
             地域統計の自動更新:{' '}
             <a href={DATA_SOURCES.estatApi.url} target="_blank" rel="noreferrer">
               {DATA_SOURCES.estatApi.label}
             </a>
-            （週次 GitHub Actions）
+            （週次 / 固定コード）
           </li>
           <li>
             背景地図:{' '}

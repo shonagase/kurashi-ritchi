@@ -79,26 +79,52 @@ export function DetailPanel({ candidate }: Props) {
         </div>
         <div>
           <span className="stat-label">
+            <TypeBadge type="official" /> 発生側
+          </span>
+          <strong>
+            {candidate.zones.fetchFailed
+              ? '判定失敗'
+              : candidate.zones.anyOfficialZone
+                ? '公式区域に該当'
+                : '公式区域外'}
+          </strong>
+          <div className="muted small">{FORMULAS.officialZone.note}</div>
+        </div>
+        <div>
+          <span className="stat-label">
             <TypeBadge type="computed" /> 損害額比率
           </span>
           <strong className={impact >= 60 ? 'warn-text' : ''}>
             最大{range.max}万円（{impact}%）
           </strong>
-          <div className="muted small">{FORMULAS.lossImpact.formula}</div>
           <div className="muted small">{FORMULAS.lossImpact.note}</div>
-        </div>
-        <div>
-          <span className="stat-label">
-            <TypeBadge type="judgment" /> 標高ベース区分
-          </span>
-          <strong>{hazardLabel(level)}</strong>
-          <div className="muted small">{FORMULAS.hazardFromElevation.formula}</div>
-          <div className="muted small">{FORMULAS.hazardFromElevation.note}</div>
         </div>
       </div>
 
       <h3>
-        <TypeBadge type="estimate" /> 被災時の想定修理費
+        <TypeBadge type="official" /> 発生側：公式ハザード区域
+      </h3>
+      <ul className="plain-list">
+        {[
+          candidate.zones.flood,
+          candidate.zones.sedimentSteep,
+          candidate.zones.sedimentDebris,
+          candidate.zones.sedimentSlide,
+        ].map((z) => (
+          <li key={z.id}>
+            <strong>{z.label}</strong>: {z.detail}
+            <div className="muted small">方法: ラスタタイル地点サンプリング（z={candidate.zones.sampledAtZoom}）</div>
+          </li>
+        ))}
+      </ul>
+      {candidate.elevationM != null && (
+        <p className="muted small">
+          標高補助: {candidate.elevationM.toFixed(1)}m（{FORMULAS.hazardFromElevation.note}）
+        </p>
+      )}
+
+      <h3>
+        <TypeBadge type="estimate" /> 損害側：想定修理費（{hazardLabel(level)}）
       </h3>
       <ul className="scenario-list">
         {scenarios.map((s) => (
@@ -114,8 +140,8 @@ export function DetailPanel({ candidate }: Props) {
         ))}
       </ul>
       <p className="note">
-        ※これは発生確率を掛けた期待損失ではありません。修理費テーブルによる推定です。
-        公式ハザード区域への該当判定は別途「重ねるハザードマップ」で確認してください。
+        ※発生側（区域該当）と損害側（修理費）は分離しています。期待損失（発生確率×損害額）は未計算です。
+        最終確認は公式地図で行ってください。
       </p>
 
       <h3>
