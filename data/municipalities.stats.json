@@ -61,7 +61,8 @@
       "agingRate": "65歳以上人口割合（高齢化率）",
       "singleHouseholdRate": "単独世帯割合",
       "welfareRatePercent": "生活保護被保護実人員（人口千人当たり）→%",
-      "crimePer100People": "刑法犯認知件数（人口千人当たり）→100人あたり"
+      "crimePer100People": "刑法犯認知件数（人口千人当たり）→100人あたり",
+      "population": "総人口"
     }
   },
   "byId": {
@@ -103,6 +104,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 1324000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.672Z",
+        "catName": "総人口"
       }
     },
     "11203": {
@@ -143,6 +153,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 607000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "12100": {
@@ -183,6 +202,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 975000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "12204": {
@@ -223,6 +251,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 645000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "12207": {
@@ -263,6 +300,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 498000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "12217": {
@@ -303,6 +349,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 426000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "12227": {
@@ -346,6 +401,15 @@
         "formula": "501 / 56000 * 100 ≈ 0.89",
         "locked": true,
         "retrievedAt": "2026-08-14T05:27:48.693Z"
+      },
+      "population": {
+        "value": 55860,
+        "unit": "人",
+        "valueType": "official",
+        "source": "東金市 住民基本台帳（人手検証）",
+        "referenceDate": "2026-04-01",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "13101": {
@@ -386,6 +450,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 67000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "13103": {
@@ -426,6 +499,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 260000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "13104": {
@@ -466,6 +548,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 350000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "13112": {
@@ -506,6 +597,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 940000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "13113": {
@@ -546,6 +646,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 230000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "13120": {
@@ -586,6 +695,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 750000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "13121": {
@@ -626,6 +744,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 690000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "13122": {
@@ -666,6 +793,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 460000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "13123": {
@@ -706,6 +842,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 700000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "14100": {
@@ -746,6 +891,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 3770000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "14130": {
@@ -786,6 +940,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 1540000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "14131": {
@@ -826,6 +989,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 440000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "14150": {
@@ -866,6 +1038,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 720000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "15100": {
@@ -906,6 +1087,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 780000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "20201": {
@@ -946,6 +1136,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 370000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "22100": {
@@ -986,6 +1185,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 690000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "22130": {
@@ -1026,6 +1234,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 790000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "23100": {
@@ -1066,6 +1283,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 2330000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "23200": {
@@ -1108,6 +1334,15 @@
         "retrievedAt": "2026-08-14T04:43:09.610Z",
         "catName": "legacy-flat",
         "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+      },
+      "population": {
+        "value": 420000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "26100": {
@@ -1148,6 +1383,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 1460000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "27100": {
@@ -1188,6 +1432,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 2750000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "27140": {
@@ -1228,6 +1481,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 820000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "28100": {
@@ -1268,6 +1530,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 1520000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "34100": {
@@ -1308,6 +1579,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 1200000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "40100": {
@@ -1348,6 +1628,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 930000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "40130": {
@@ -1388,6 +1677,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 1630000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "43100": {
@@ -1428,6 +1726,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 740000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "47201": {
@@ -1468,6 +1775,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 320000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "01100": {
@@ -1508,6 +1824,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 1973000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     },
     "04100": {
@@ -1548,6 +1873,15 @@
         "referenceDate": "2005年度",
         "retrievedAt": "2026-08-14T05:27:48.693Z",
         "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+      },
+      "population": {
+        "value": 1096000,
+        "unit": "人",
+        "valueType": "estimate",
+        "source": "人口シード（概算・後でe-Stat総人口で更新）",
+        "referenceDate": "seed",
+        "retrievedAt": "2026-08-14T05:30:24.674Z",
+        "catName": "総人口"
       }
     }
   }

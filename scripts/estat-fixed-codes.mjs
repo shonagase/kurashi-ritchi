@@ -6,6 +6,15 @@
  * 上書きが必要な自治体は data/municipalities.overrides.json を優先。
  */
 export const ESTAT_FIXED_METRICS = {
+  population: {
+    field: 'population',
+    statsDataId: '0000020301',
+    cdCat01: '#A1101',
+    fallbackCat01: ['#A110101'],
+    unit: '人',
+    label: '総人口',
+    convert: 'identity',
+  },
   agingRate: {
     field: 'agingRate',
     statsDataId: '0000020301',

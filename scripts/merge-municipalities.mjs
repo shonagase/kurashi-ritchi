@@ -38,17 +38,20 @@ const municipalities = base.map((b) => {
   const single = readMetric(row, 'singleHouseholdRate')
   const welfare = readMetric(row, 'welfareRatePercent')
   const crime = readMetric(row, 'crimePer100People')
+  const population = readMetric(row, 'population')
   return {
     ...b,
     agingRate: aging.value,
     singleHouseholdRate: single.value,
     welfareRatePercent: welfare.value,
     crimePer100People: crime.value,
+    population: population.value,
     metrics: {
       agingRate: aging.metric,
       singleHouseholdRate: single.metric,
       welfareRatePercent: welfare.metric,
       crimePer100People: crime.metric,
+      population: population.metric,
     },
   }
 })

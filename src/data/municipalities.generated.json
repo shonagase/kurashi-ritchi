@@ -2,66 +2,12 @@
   "meta": {
     "retrievedAt": "2026-08-14T05:27:48.693Z",
     "notes": "e-Statは固定コードのみ使用。overrides の locked 値は人手検証優先。retrievedAtは取得日であり各指標の対象時点ではない。",
-    "coding": {
-      "agingRate": {
-        "field": "agingRate",
-        "statsDataId": "0000020301",
-        "cdCat01": "#A03503",
-        "fallbackCat01": [
-          "#A03506",
-          "#A4101"
-        ],
-        "unit": "%",
-        "label": "65歳以上人口割合（高齢化率）",
-        "convert": "percent"
-      },
-      "singleHouseholdRate": {
-        "field": "singleHouseholdRate",
-        "statsDataId": "0000020301",
-        "cdCat01": "#A06205",
-        "fallbackCat01": [
-          "#A06301"
-        ],
-        "unit": "%",
-        "label": "単独世帯割合",
-        "convert": "percent",
-        "forbiddenNameSubstrings": [
-          "65歳以上世帯員"
-        ]
-      },
-      "welfareRatePercent": {
-        "field": "welfareRatePercent",
-        "statsDataId": "0000020310",
-        "cdCat01": "#J01107",
-        "fallbackCat01": [
-          "#J2301",
-          "#J01101"
-        ],
-        "fallbackStatsDataIds": [
-          "0000020210",
-          "0000020301"
-        ],
-        "unit": "%",
-        "label": "生活保護被保護実人員（人口千人当たり）→%",
-        "convert": "perThousandToPercent"
-      },
-      "crimePer100People": {
-        "field": "crimePer100People",
-        "statsDataId": "0000020311",
-        "cdCat01": "#K06101",
-        "fallbackCat01": [
-          "#K4101"
-        ],
-        "unit": "件/100人・年",
-        "label": "刑法犯認知件数（人口千人当たり）→100人あたり",
-        "convert": "perThousandToPer100"
-      }
-    },
     "fields": {
       "agingRate": "65歳以上人口割合（高齢化率）",
       "singleHouseholdRate": "単独世帯割合",
       "welfareRatePercent": "生活保護被保護実人員（人口千人当たり）→%",
-      "crimePer100People": "刑法犯認知件数（人口千人当たり）→100人あたり"
+      "crimePer100People": "刑法犯認知件数（人口千人当たり）→100人あたり",
+      "population": "総人口"
     }
   },
   "municipalities": [
@@ -77,6 +23,7 @@
       "singleHouseholdRate": 9.2,
       "welfareRatePercent": 0.7,
       "crimePer100People": 13.03,
+      "population": 67000,
       "metrics": {
         "agingRate": {
           "value": 16.3,
@@ -115,6 +62,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 67000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -130,6 +86,7 @@
       "singleHouseholdRate": 9.6,
       "welfareRatePercent": 0.8,
       "crimePer100People": 4.81,
+      "population": 260000,
       "metrics": {
         "agingRate": {
           "value": 16.3,
@@ -168,6 +125,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 260000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -183,6 +149,7 @@
       "singleHouseholdRate": 9.7,
       "welfareRatePercent": 1.6,
       "crimePer100People": 3.72,
+      "population": 350000,
       "metrics": {
         "agingRate": {
           "value": 18.1,
@@ -221,6 +188,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 350000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -236,6 +212,7 @@
       "singleHouseholdRate": 11,
       "welfareRatePercent": 0.9,
       "crimePer100People": 1.75,
+      "population": 940000,
       "metrics": {
         "agingRate": {
           "value": 20.1,
@@ -274,6 +251,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 940000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -289,6 +275,7 @@
       "singleHouseholdRate": 8.2,
       "welfareRatePercent": 1,
       "crimePer100People": 4.99,
+      "population": 230000,
       "metrics": {
         "agingRate": {
           "value": 16.9,
@@ -327,6 +314,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 230000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -342,6 +338,7 @@
       "singleHouseholdRate": 10.4,
       "welfareRatePercent": 1.3,
       "crimePer100People": 1.63,
+      "population": 750000,
       "metrics": {
         "agingRate": {
           "value": 21.2,
@@ -380,6 +377,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 750000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -395,6 +401,7 @@
       "singleHouseholdRate": 13.2,
       "welfareRatePercent": 3.2,
       "crimePer100People": 2.19,
+      "population": 690000,
       "metrics": {
         "agingRate": {
           "value": 24.5,
@@ -433,6 +440,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 690000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -448,6 +464,7 @@
       "singleHouseholdRate": 13.5,
       "welfareRatePercent": 2.8,
       "crimePer100People": 1.78,
+      "population": 460000,
       "metrics": {
         "agingRate": {
           "value": 24.7,
@@ -486,6 +503,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 460000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -501,6 +527,7 @@
       "singleHouseholdRate": 11,
       "welfareRatePercent": 1.9,
       "crimePer100People": 2.07,
+      "population": 700000,
       "metrics": {
         "agingRate": {
           "value": 20.9,
@@ -539,6 +566,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 700000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -554,6 +590,7 @@
       "singleHouseholdRate": 11.2,
       "welfareRatePercent": 1.7,
       "crimePer100People": 1.53,
+      "population": 3770000,
       "metrics": {
         "agingRate": {
           "value": 24.4,
@@ -592,6 +629,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 3770000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -607,6 +653,7 @@
       "singleHouseholdRate": 8.9,
       "welfareRatePercent": 1.8,
       "crimePer100People": 1.67,
+      "population": 1540000,
       "metrics": {
         "agingRate": {
           "value": 19.6,
@@ -645,6 +692,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 1540000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -660,6 +716,7 @@
       "singleHouseholdRate": 10.1,
       "welfareRatePercent": 1.5,
       "crimePer100People": 1.87,
+      "population": 720000,
       "metrics": {
         "agingRate": {
           "value": 25.5,
@@ -698,6 +755,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 720000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -713,6 +779,7 @@
       "singleHouseholdRate": 9.6,
       "welfareRatePercent": 1.4,
       "crimePer100People": 2.51,
+      "population": 1324000,
       "metrics": {
         "agingRate": {
           "value": 23,
@@ -751,6 +818,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 1324000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.672Z",
+          "catName": "総人口"
         }
       }
     },
@@ -766,6 +842,7 @@
       "singleHouseholdRate": 10.3,
       "welfareRatePercent": 1.8,
       "crimePer100People": 2.68,
+      "population": 607000,
       "metrics": {
         "agingRate": {
           "value": 23.2,
@@ -804,6 +881,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 607000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -819,6 +905,7 @@
       "singleHouseholdRate": 10.8,
       "welfareRatePercent": 1.6,
       "crimePer100People": 2.59,
+      "population": 975000,
       "metrics": {
         "agingRate": {
           "value": 25.6,
@@ -857,6 +944,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 975000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -872,6 +968,7 @@
       "singleHouseholdRate": 10.2,
       "welfareRatePercent": 1.5,
       "crimePer100People": 2.21,
+      "population": 645000,
       "metrics": {
         "agingRate": {
           "value": 23.8,
@@ -910,6 +1007,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 645000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -925,6 +1031,7 @@
       "singleHouseholdRate": 11.8,
       "welfareRatePercent": 1.7,
       "crimePer100People": 2.26,
+      "population": 498000,
       "metrics": {
         "agingRate": {
           "value": 25.6,
@@ -963,6 +1070,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 498000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -978,6 +1094,7 @@
       "singleHouseholdRate": 9.9,
       "welfareRatePercent": 1.2,
       "crimePer100People": 2.22,
+      "population": 426000,
       "metrics": {
         "agingRate": {
           "value": 25.8,
@@ -1016,6 +1133,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 426000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -1031,6 +1157,7 @@
       "singleHouseholdRate": 36.1,
       "welfareRatePercent": 1.48,
       "crimePer100People": 0.89,
+      "population": 55860,
       "metrics": {
         "agingRate": {
           "value": 33.2,
@@ -1039,8 +1166,7 @@
           "source": "東金市 住民基本台帳（人手検証）",
           "referenceDate": "2026-04-01",
           "catName": "高齢化率 = 65歳以上 / 総人口",
-          "locked": true,
-          "retrievedAt": "2026-08-14T05:27:48.693Z"
+          "locked": true
         },
         "singleHouseholdRate": {
           "value": 36.1,
@@ -1049,8 +1175,7 @@
           "source": "国勢調査2020 / 東金市資料（人手検証）",
           "referenceDate": "2020-10-01",
           "catName": "単独世帯 / 一般世帯",
-          "locked": true,
-          "retrievedAt": "2026-08-14T05:27:48.693Z"
+          "locked": true
         },
         "welfareRatePercent": {
           "value": 1.48,
@@ -1059,8 +1184,7 @@
           "source": "東金市公表 生活保護率 14.80‰（人手検証）",
           "referenceDate": "2020",
           "catName": "生活保護率",
-          "locked": true,
-          "retrievedAt": "2026-08-14T05:27:48.693Z"
+          "locked": true
         },
         "crimePer100People": {
           "value": 0.89,
@@ -1070,8 +1194,16 @@
           "referenceDate": "2025",
           "catName": "刑法犯認知件数 / 人口",
           "formula": "501 / 56000 * 100 ≈ 0.89",
-          "locked": true,
-          "retrievedAt": "2026-08-14T05:27:48.693Z"
+          "locked": true
+        },
+        "population": {
+          "value": 55860,
+          "unit": "人",
+          "valueType": "official",
+          "source": "東金市 住民基本台帳（人手検証）",
+          "referenceDate": "2026-04-01",
+          "catName": "総人口",
+          "locked": true
         }
       }
     },
@@ -1087,6 +1219,7 @@
       "singleHouseholdRate": 10.9,
       "welfareRatePercent": 1.1,
       "crimePer100People": 3.2,
+      "population": 440000,
       "metrics": {
         "agingRate": {
           "value": 21.3,
@@ -1125,6 +1258,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 440000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -1140,6 +1282,7 @@
       "singleHouseholdRate": 12.1,
       "welfareRatePercent": 1.5,
       "crimePer100People": 1.59,
+      "population": 690000,
       "metrics": {
         "agingRate": {
           "value": 30.2,
@@ -1178,6 +1321,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 690000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -1193,6 +1345,7 @@
       "singleHouseholdRate": 10,
       "welfareRatePercent": 1.4,
       "crimePer100People": 1.47,
+      "population": 790000,
       "metrics": {
         "agingRate": {
           "value": 27.9,
@@ -1231,6 +1384,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 790000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -1246,6 +1408,7 @@
       "singleHouseholdRate": 11.6,
       "welfareRatePercent": 1.9,
       "crimePer100People": 3.6,
+      "population": 2330000,
       "metrics": {
         "agingRate": {
           "value": 24.3,
@@ -1284,6 +1447,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 2330000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -1299,6 +1471,7 @@
       "singleHouseholdRate": 32,
       "welfareRatePercent": 0.9,
       "crimePer100People": 0.45,
+      "population": 420000,
       "metrics": {
         "agingRate": {
           "value": 24,
@@ -1339,6 +1512,15 @@
           "retrievedAt": "2026-08-14T04:43:09.610Z",
           "catName": "legacy-flat",
           "warning": "旧マッチングの可能性があるため、再取得まで参考値"
+        },
+        "population": {
+          "value": 420000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -1354,6 +1536,7 @@
       "singleHouseholdRate": 14.6,
       "welfareRatePercent": 3.8,
       "crimePer100People": 4.06,
+      "population": 2750000,
       "metrics": {
         "agingRate": {
           "value": 24.6,
@@ -1392,6 +1575,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 2750000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -1407,6 +1599,7 @@
       "singleHouseholdRate": 14.1,
       "welfareRatePercent": 2.2,
       "crimePer100People": 2.73,
+      "population": 820000,
       "metrics": {
         "agingRate": {
           "value": 28.2,
@@ -1445,6 +1638,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 820000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -1460,6 +1662,7 @@
       "singleHouseholdRate": 13.9,
       "welfareRatePercent": 2,
       "crimePer100People": 2.35,
+      "population": 1520000,
       "metrics": {
         "agingRate": {
           "value": 27.5,
@@ -1498,6 +1701,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 1520000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -1513,6 +1725,7 @@
       "singleHouseholdRate": 13.1,
       "welfareRatePercent": 1.8,
       "crimePer100People": 2.57,
+      "population": 1460000,
       "metrics": {
         "agingRate": {
           "value": 26.9,
@@ -1551,6 +1764,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 1460000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -1566,6 +1788,7 @@
       "singleHouseholdRate": 11.5,
       "welfareRatePercent": 1.7,
       "crimePer100People": 1.57,
+      "population": 1200000,
       "metrics": {
         "agingRate": {
           "value": 25.1,
@@ -1604,6 +1827,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 1200000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -1619,6 +1851,7 @@
       "singleHouseholdRate": 15,
       "welfareRatePercent": 3.5,
       "crimePer100People": 2.21,
+      "population": 930000,
       "metrics": {
         "agingRate": {
           "value": 30.5,
@@ -1657,6 +1890,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 930000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -1672,6 +1914,7 @@
       "singleHouseholdRate": 9.8,
       "welfareRatePercent": 1.8,
       "crimePer100People": 2.66,
+      "population": 1630000,
       "metrics": {
         "agingRate": {
           "value": 21,
@@ -1710,6 +1953,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 1630000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -1725,6 +1977,7 @@
       "singleHouseholdRate": 12.6,
       "welfareRatePercent": 2.1,
       "crimePer100People": 1.7,
+      "population": 1973000,
       "metrics": {
         "agingRate": {
           "value": 27.4,
@@ -1763,6 +2016,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 1973000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -1778,6 +2040,7 @@
       "singleHouseholdRate": 9.1,
       "welfareRatePercent": 1.6,
       "crimePer100People": 1.72,
+      "population": 1096000,
       "metrics": {
         "agingRate": {
           "value": 23.5,
@@ -1816,6 +2079,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 1096000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -1831,6 +2103,7 @@
       "singleHouseholdRate": 11.2,
       "welfareRatePercent": 1.7,
       "crimePer100People": 1.65,
+      "population": 740000,
       "metrics": {
         "agingRate": {
           "value": 25.9,
@@ -1869,6 +2142,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 740000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -1884,6 +2166,7 @@
       "singleHouseholdRate": 12.4,
       "welfareRatePercent": 2.9,
       "crimePer100People": 1.83,
+      "population": 320000,
       "metrics": {
         "agingRate": {
           "value": 22.8,
@@ -1922,6 +2205,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 320000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -1937,6 +2229,7 @@
       "singleHouseholdRate": 10.6,
       "welfareRatePercent": 1.5,
       "crimePer100People": 1.54,
+      "population": 780000,
       "metrics": {
         "agingRate": {
           "value": 29.3,
@@ -1975,6 +2268,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 780000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     },
@@ -1990,6 +2292,7 @@
       "singleHouseholdRate": 10.5,
       "welfareRatePercent": 1.4,
       "crimePer100People": 1.28,
+      "population": 370000,
       "metrics": {
         "agingRate": {
           "value": 29,
@@ -2028,6 +2331,15 @@
           "referenceDate": "2005年度",
           "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
+        },
+        "population": {
+          "value": 370000,
+          "unit": "人",
+          "valueType": "estimate",
+          "source": "人口シード（概算・後でe-Stat総人口で更新）",
+          "referenceDate": "seed",
+          "retrievedAt": "2026-08-14T05:30:24.674Z",
+          "catName": "総人口"
         }
       }
     }

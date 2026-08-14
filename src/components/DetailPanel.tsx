@@ -201,6 +201,11 @@ export function DetailPanel({ candidate }: Props) {
       </p>
       <ul className="plain-list">
         <MetricLine
+          label="総人口"
+          display={m.population ? `${Math.round(m.population).toLocaleString('ja-JP')}人` : '—'}
+          meta={m.metrics?.population}
+        />
+        <MetricLine
           label="高齢化率"
           display={`${m.agingRate}%`}
           meta={m.metrics?.agingRate}

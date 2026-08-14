@@ -103,6 +103,7 @@ function round2(n) {
 }
 
 function convertValue(raw, convert, unit, name) {
+  if (convert === 'identity') return Math.round(raw)
   if (convert === 'percent') return round1(raw)
   if (convert === 'perThousandToPercent') {
     if (unit.includes('千') || name.includes('千')) return round1(raw / 10)
@@ -136,11 +137,13 @@ function writeMerged(base, stats) {
       singleHouseholdRate: s.singleHouseholdRate?.value ?? 0,
       welfareRatePercent: s.welfareRatePercent?.value ?? 0,
       crimePer100People: s.crimePer100People?.value ?? 0,
+      population: s.population?.value ?? 0,
       metrics: {
         agingRate: s.agingRate || null,
         singleHouseholdRate: s.singleHouseholdRate || null,
         welfareRatePercent: s.welfareRatePercent || null,
         crimePer100People: s.crimePer100People || null,
+        population: s.population || null,
       },
     }
   })
@@ -241,6 +244,7 @@ async function main() {
         'e-Statは固定コードのみ使用。overrides の locked 値は人手検証優先。retrievedAtは取得日であり各指標の対象時点ではない。',
       coding: ESTAT_FIXED_METRICS,
       fields: {
+        population: ESTAT_FIXED_METRICS.population.label,
         agingRate: ESTAT_FIXED_METRICS.agingRate.label,
         singleHouseholdRate: ESTAT_FIXED_METRICS.singleHouseholdRate.label,
         welfareRatePercent: ESTAT_FIXED_METRICS.welfareRatePercent.label,

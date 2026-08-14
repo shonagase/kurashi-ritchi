@@ -19,6 +19,7 @@ export type MunicipalityProfile = {
   pref: string
   lat: number
   lon: number
+  population: number
   agingRate: number
   singleHouseholdRate: number
   welfareRatePercent: number
@@ -26,6 +27,7 @@ export type MunicipalityProfile = {
   industryType: string
   industryNote: string
   metrics?: {
+    population?: MetricMeta | null
     agingRate?: MetricMeta | null
     singleHouseholdRate?: MetricMeta | null
     welfareRatePercent?: MetricMeta | null

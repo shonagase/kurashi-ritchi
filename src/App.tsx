@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { ComparisonTable } from './components/ComparisonTable'
 import { DetailPanel } from './components/DetailPanel'
 import { MapView } from './components/MapView'
+import { RegionStatsTab } from './components/RegionStatsTab'
 import { DATA_SOURCES, findNearestMunicipality, statsMeta } from './data/municipalities'
 import { fetchElevation, fetchNearbyTransit, searchAddress } from './lib/geo'
 import { assessOfficialHazardZones, damageTierFromZones } from './lib/hazardZones'
@@ -18,7 +19,10 @@ const DEMO_POINTS = [
   { name: '候補C（ターミナル近傍）', address: '神奈川県横浜市西区南幸', purchaseManYen: 500 },
 ]
 
+type AppTab = 'location' | 'region'
+
 export default function App() {
+  const [tab, setTab] = useState<AppTab>('location')
   const [candidates, setCandidates] = useState<Candidate[]>([])
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [sortKey, setSortKey] = useState<SortKey>('lossImpact')
@@ -32,6 +36,11 @@ export default function App() {
   const selected = useMemo(
     () => candidates.find((c) => c.id === selectedId) ?? null,
     [candidates, selectedId],
+  )
+
+  const highlightMunicipalityIds = useMemo(
+    () => [...new Set(candidates.map((c) => c.municipality.id))],
+    [candidates],
   )
 
   const mapCenter: [number, number] = selected
@@ -169,84 +178,107 @@ export default function App() {
         </div>
       </header>
 
-      <main className="layout">
-        <section className="panel add-panel">
-          <h2>候補を追加</h2>
-          <div className="form-grid">
-            <label>
-              名前（任意）
-              <input value={name} onChange={(e) => setName(e.target.value)} placeholder="例: 候補A" />
-            </label>
-            <label>
-              購入額（万円）
-              <input
-                type="number"
-                min={1}
-                value={price}
-                onChange={(e) => setPrice(Number(e.target.value) || 0)}
-              />
-            </label>
-            <label className="wide">
-              住所
-              <input
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                placeholder="例: 東京都世田谷区成城"
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') void addFromAddress()
-                }}
-              />
-            </label>
-          </div>
-          <div className="actions">
-            <button type="button" className="button" disabled={loading} onClick={() => void addFromAddress()}>
-              住所から追加
-            </button>
-            <button
-              type="button"
-              className={`button secondary ${pickMode ? 'active' : ''}`}
-              disabled={loading}
-              onClick={() => setPickMode((v) => !v)}
-            >
-              {pickMode ? '地図選択中…' : '地図をクリックして追加'}
-            </button>
-            <button type="button" className="button ghost" disabled={loading} onClick={() => void loadDemo()}>
-              デモ3件を読み込む
-            </button>
-          </div>
-          {loading && <p className="status">分析中…（標高・公式ハザード区域・周辺交通を取得）</p>}
-          {error && <p className="error">{error}</p>}
-        </section>
+      <nav className="app-tabs" aria-label="比較モード">
+        <button
+          type="button"
+          className={tab === 'location' ? 'app-tab active' : 'app-tab'}
+          onClick={() => setTab('location')}
+        >
+          立地リスク比較
+        </button>
+        <button
+          type="button"
+          className={tab === 'region' ? 'app-tab active' : 'app-tab'}
+          onClick={() => setTab('region')}
+        >
+          地域統計比較
+        </button>
+      </nav>
 
-        <section className="panel map-panel">
-          <h2>地図</h2>
-          <MapView
-            center={mapCenter}
-            candidates={candidates}
-            selectedId={selectedId}
-            pickMode={pickMode}
-            onPick={(lat, lon) => void addFromMap(lat, lon)}
-            onSelect={setSelectedId}
-          />
-        </section>
+      {tab === 'location' ? (
+        <main className="layout">
+          <section className="panel add-panel">
+            <h2>候補を追加</h2>
+            <div className="form-grid">
+              <label>
+                名前（任意）
+                <input value={name} onChange={(e) => setName(e.target.value)} placeholder="例: 候補A" />
+              </label>
+              <label>
+                購入額（万円）
+                <input
+                  type="number"
+                  min={1}
+                  value={price}
+                  onChange={(e) => setPrice(Number(e.target.value) || 0)}
+                />
+              </label>
+              <label className="wide">
+                住所
+                <input
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  placeholder="例: 東京都世田谷区成城"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') void addFromAddress()
+                  }}
+                />
+              </label>
+            </div>
+            <div className="actions">
+              <button type="button" className="button" disabled={loading} onClick={() => void addFromAddress()}>
+                住所から追加
+              </button>
+              <button
+                type="button"
+                className={`button secondary ${pickMode ? 'active' : ''}`}
+                disabled={loading}
+                onClick={() => setPickMode((v) => !v)}
+              >
+                {pickMode ? '地図選択中…' : '地図をクリックして追加'}
+              </button>
+              <button type="button" className="button ghost" disabled={loading} onClick={() => void loadDemo()}>
+                デモ3件を読み込む
+              </button>
+            </div>
+            {loading && <p className="status">分析中…（標高・公式ハザード区域・周辺交通を取得）</p>}
+            {error && <p className="error">{error}</p>}
+          </section>
 
-        <section className="panel table-panel">
-          <h2>比較リスト</h2>
-          <ComparisonTable
-            candidates={candidates}
-            selectedId={selectedId}
-            sortKey={sortKey}
-            onSort={setSortKey}
-            onSelect={setSelectedId}
-            onRemove={(id) => {
-              setCandidates((prev) => prev.filter((c) => c.id !== id))
-              if (selectedId === id) setSelectedId(null)
-            }}
-          />
-        </section>
+          <section className="panel map-panel">
+            <h2>地図</h2>
+            <MapView
+              center={mapCenter}
+              candidates={candidates}
+              selectedId={selectedId}
+              pickMode={pickMode}
+              onPick={(lat, lon) => void addFromMap(lat, lon)}
+              onSelect={setSelectedId}
+            />
+          </section>
 
-        <DetailPanel candidate={selected} />
-      </main>
+          <section className="panel table-panel">
+            <h2>比較リスト</h2>
+            <ComparisonTable
+              candidates={candidates}
+              selectedId={selectedId}
+              sortKey={sortKey}
+              onSort={setSortKey}
+              onSelect={setSelectedId}
+              onRemove={(id) => {
+                setCandidates((prev) => prev.filter((c) => c.id !== id))
+                if (selectedId === id) setSelectedId(null)
+              }}
+            />
+          </section>
+
+          <DetailPanel candidate={selected} />
+        </main>
+      ) : (
+        <main className="layout region-layout">
+          <RegionStatsTab highlightIds={highlightMunicipalityIds} />
+        </main>
+      )}
 
       <footer className="footer">
         <h2>データと免責</h2>
@@ -325,7 +357,7 @@ export default function App() {
         </ul>
         <p>
           本サービスは住宅購入の参考比較ツールです。画面上の値は「入力値 / 公的統計 / 計算値 / 推定 /
-          独自評価」を区別して表示します。損害額比率は危険度そのものではありません。標高区分は公式ハザード区域判定の代替ではありません。犯罪は被害確率ではなく認知件数ベースです。
+          独自評価」を区別して表示します。損害額比率は危険度そのものではありません。標高区分は公式ハザード区域判定の代替ではありません。犯罪は被害確率ではなく認知件数ベースです。地域統計タブの保護人員・認知件数は率×人口の推計です。
         </p>
       </footer>
     </div>
