@@ -1,6 +1,12 @@
+import { inferGeocodePrecision, type GeocodeQuality } from './geocodePrecision'
 import { haversineMeters, walkMinutesFromMeters } from './risk'
 
-export type GeoPoint = { lat: number; lon: number; label: string }
+export type GeoPoint = {
+  lat: number
+  lon: number
+  label: string
+  geocode: GeocodeQuality
+}
 
 export type TransitStop = {
   name: string
@@ -35,7 +41,13 @@ export async function searchAddress(query: string): Promise<GeoPoint | null> {
       const data = (await res.json()) as GsiAddressHit[]
       if (data?.length) {
         const [lon, lat] = data[0].geometry.coordinates
-        return { lat, lon, label: data[0].properties.title || q }
+        const label = data[0].properties.title || q
+        return {
+          lat,
+          lon,
+          label,
+          geocode: inferGeocodePrecision({ query: q, resultLabel: label, source: 'gsi' }),
+        }
       }
     }
   } catch {
@@ -52,10 +64,12 @@ export async function searchAddress(query: string): Promise<GeoPoint | null> {
     if (res.ok) {
       const data = (await res.json()) as Array<{ lat: string; lon: string; display_name: string }>
       if (data?.length) {
+        const label = data[0].display_name
         return {
           lat: Number(data[0].lat),
           lon: Number(data[0].lon),
-          label: data[0].display_name,
+          label,
+          geocode: inferGeocodePrecision({ query: q, resultLabel: label, source: 'nominatim' }),
         }
       }
     }

@@ -83,6 +83,7 @@ export function ComparisonTable({
           <tr>
             <th>候補</th>
             <th>購入額</th>
+            <th>法務ゲート</th>
             <th>発生側（機械判定）</th>
             <th>損害側（シナリオ）</th>
             <th>シナリオ上限比</th>
@@ -107,6 +108,21 @@ export function ComparisonTable({
                   <div className="muted small">{c.address}</div>
                 </td>
                 <td>{c.purchaseManYen}万円</td>
+                <td>
+                  {c.legal.status === 'attention' ? (
+                    <>
+                      <span className="badge badge-mid">地区計画注意</span>
+                      <div className="muted small">
+                        {c.legal.districtPlan?.name ?? '制限の確認を'}
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <span className="badge badge-low">法務未評価あり</span>
+                      <div className="muted small">再建築・接道など</div>
+                    </>
+                  )}
+                </td>
                 <td>
                   {c.zones.status === 'in_zone' ? (
                     <>
@@ -151,7 +167,8 @@ export function ComparisonTable({
                 <td>
                   {c.stationWalkMin != null ? (
                     <>
-                      直線換算{c.stationWalkMin}分
+                      参考換算{c.stationWalkMin}分
+                      <div className="muted small">実歩行未取得</div>
                       <div className="muted small">
                         圏内{c.stations.length}駅
                         {c.stations[0] ? ` / ${(c.stations[0].meters / 1000).toFixed(2)}km` : ''}
@@ -166,8 +183,8 @@ export function ComparisonTable({
                 <td>
                   {c.busWalkMin != null ? (
                     <>
-                      直線換算{c.busWalkMin}分
-                      <div className="muted small">圏内{c.buses.length}停留所</div>
+                      参考換算{c.busWalkMin}分
+                      <div className="muted small">最寄ほか本数未取得</div>
                     </>
                   ) : c.transitFetchFailed ? (
                     '取得失敗'

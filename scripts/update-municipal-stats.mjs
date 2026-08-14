@@ -381,6 +381,81 @@ async function main() {
     }
   }
 
+  // 刑法犯だけ上書きして窃盗が古い推計のまま残るのを防ぐ
+  for (const [id, row] of Object.entries(byId)) {
+    const crime = row.crimePer100People
+    const share = row.theftSharePercent
+    const theft = row.theftPer100People
+    const yearOf = (ref) => {
+      const m = String(ref || '').match(/20\d{2}/)
+      return m ? m[0] : null
+    }
+    const cy = yearOf(crime?.referenceDate)
+    for (const field of [
+      'heinousSharePercent',
+      'violentSharePercent',
+      'theftSharePercent',
+      'moralsSharePercent',
+      'theftPer100People',
+    ]) {
+      const m = row[field]
+      if (!crime?.locked || !m || m.locked || m.unavailable) continue
+      const my = yearOf(m.referenceDate)
+      const pref =
+        String(m.source || '').includes('prefecture') ||
+        String(m.warning || '').includes('都道府県')
+      if ((cy && my && cy !== my) || pref) {
+        row[field] = {
+          unavailable: true,
+          valueType: 'estimate',
+          source: 'update: dropped cross-year/prefecture estimate',
+          referenceDate: crime.referenceDate,
+          warning:
+            '同一地点・同一年度の直接値がないため非表示（異年度・上位地域推計は適用しない）',
+          retrievedAt: new Date().toISOString(),
+        }
+      }
+    }
+    if (
+      crime?.value != null &&
+      !crime.unavailable &&
+      share?.value != null &&
+      !share.unavailable &&
+      (!theft || !theft.locked)
+    ) {
+      const sy = yearOf(share.referenceDate)
+      if (!cy || !sy || cy === sy) {
+        row.theftPer100People = {
+          value: Math.round(crime.value * share.value) / 100,
+          unit: '件/100人・年',
+          valueType: 'computed',
+          source: 'crimePer100People × theftSharePercent（同一年再計算）',
+          referenceDate: crime.referenceDate || share.referenceDate,
+          catName: '窃盗認知率（計算）',
+          retrievedAt: new Date().toISOString(),
+        }
+      }
+    }
+    const t = row.theftPer100People
+    if (
+      crime?.value != null &&
+      t?.value != null &&
+      !t.unavailable &&
+      t.value > crime.value + 1e-6
+    ) {
+      console.warn(`invariant: ${id} theft ${t.value} > crime ${crime.value}`)
+      if (!t.locked) {
+        row.theftPer100People = {
+          unavailable: true,
+          valueType: 'estimate',
+          source: 'update: blocked by invariant',
+          warning: '窃盗率が刑法犯率を超えたため公開停止',
+          retrievedAt: new Date().toISOString(),
+        }
+      }
+    }
+  }
+
   if (okCount === 0) throw new Error('固定コードでの更新が0件でした')
 
   const stats = {

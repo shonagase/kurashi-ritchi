@@ -438,6 +438,86 @@ input:focus {
   color: var(--warn);
 }
 
+.location-gate {
+  margin: 0.75rem 0 1rem;
+  padding: 0.75rem 0.9rem;
+  border-left: 3px solid var(--moss);
+  background: color-mix(in srgb, var(--moss) 8%, transparent);
+}
+
+.location-gate.warn {
+  border-left-color: var(--warn);
+  background: color-mix(in srgb, var(--warn) 10%, transparent);
+}
+
+.location-gate .gate-message {
+  margin: 0.4rem 0 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.legal-gate {
+  margin: 0 0 1.1rem;
+  padding: 0.85rem 0.95rem;
+  border-left: 3px solid var(--moss);
+  background: color-mix(in srgb, var(--moss) 7%, transparent);
+}
+
+.legal-gate.warn {
+  border-left-color: var(--warn);
+  background: color-mix(in srgb, var(--warn) 9%, transparent);
+}
+
+.legal-gate.mid {
+  border-left-color: #8a6d3b;
+  background: color-mix(in srgb, #8a6d3b 8%, transparent);
+}
+
+.legal-checklist {
+  margin-top: 0.55rem;
+}
+
+.legal-status {
+  display: inline-block;
+  margin-right: 0.35rem;
+  padding: 0.05rem 0.35rem;
+  font-size: 0.72rem;
+  border: 1px solid color-mix(in srgb, var(--ink) 20%, transparent);
+}
+
+.legal-status.status-matched,
+.legal-status.status-likely_matched,
+.legal-status.status-needs_verify {
+  border-color: var(--warn);
+  color: var(--warn);
+}
+
+.legal-status.status-unevaluated,
+.legal-status.status-not_in_catalog {
+  color: var(--ink-soft);
+}
+
+.invariant-banner {
+  margin: 0 0 1rem;
+  padding: 0.7rem 0.9rem;
+  font-size: 0.88rem;
+}
+
+.invariant-banner ul {
+  margin: 0.35rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.invariant-banner.error {
+  border-left: 3px solid #b42318;
+  background: color-mix(in srgb, #b42318 10%, transparent);
+}
+
+.invariant-banner.warn {
+  border-left: 3px solid var(--warn);
+  background: color-mix(in srgb, var(--warn) 10%, transparent);
+}
+
 .linkish {
   border: none;
   background: none;

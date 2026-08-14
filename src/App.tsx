@@ -5,8 +5,12 @@ import { MapView } from './components/MapView'
 import { RegionStatsTab } from './components/RegionStatsTab'
 import { DATA_SOURCES, findNearestMunicipality, statsMeta } from './data/municipalities'
 import { fetchElevation, fetchNearbyTransit, searchAddress } from './lib/geo'
+import { inferGeocodePrecision, type GeocodeQuality } from './lib/geocodePrecision'
 import { assessOfficialHazardZones, damageTierFromZones } from './lib/hazardZones'
+import { checkMunicipalityInvariants, checkZoneInvariants } from './lib/invariants'
+import { assessLegalGate } from './lib/legalGate'
 import { fetchRainContext } from './lib/rainContext'
+import { assessVectorHazards } from './lib/vectorHazard'
 import type { Candidate, SortKey } from './types'
 import './App.css'
 
@@ -56,7 +60,11 @@ export default function App() {
     purchaseManYen: number
     lat: number
     lon: number
+    geocode?: GeocodeQuality
   }): Promise<Candidate> {
+    const geocode =
+      input.geocode ??
+      inferGeocodePrecision({ query: input.address, resultLabel: input.address, source: 'demo' })
     const [elevation, transit, zones, rain] = await Promise.all([
       fetchElevation(input.lat, input.lon),
       fetchNearbyTransit(input.lat, input.lon),
@@ -66,6 +74,18 @@ export default function App() {
     const elevationM = elevation?.elevationM ?? null
     const hazardLevel = damageTierFromZones(zones, elevationM)
     const municipality = findNearestMunicipality(input.lat, input.lon)
+    const legal = assessLegalGate({
+      address: input.address,
+      municipalityId: municipality.id,
+      municipalityName: municipality.name,
+      lat: input.lat,
+      lon: input.lon,
+    })
+    const vectorHazards = assessVectorHazards(input.lat, input.lon)
+    const invariantIssues = [
+      ...checkMunicipalityInvariants(municipality),
+      ...checkZoneInvariants(zones),
+    ]
 
     return {
       id: uid(),
@@ -74,12 +94,16 @@ export default function App() {
       purchaseManYen: input.purchaseManYen,
       lat: input.lat,
       lon: input.lon,
+      geocode,
+      legal,
       elevationM,
       elevationHsrc: elevation?.hsrc ?? null,
       hazardLevel,
       zones,
+      vectorHazards,
       rain,
       municipality,
+      invariantIssues,
       stations: transit.stations,
       buses: transit.buses,
       transitFetchFailed: transit.fetchFailed,
@@ -110,6 +134,7 @@ export default function App() {
         purchaseManYen: price,
         lat: hit.lat,
         lon: hit.lon,
+        geocode: hit.geocode,
       })
       setCandidates((prev) => [...prev, candidate])
       setSelectedId(candidate.id)
@@ -131,6 +156,7 @@ export default function App() {
         purchaseManYen: price,
         lat,
         lon,
+        geocode: inferGeocodePrecision({ source: 'map_pick' }),
       })
       setCandidates((prev) => [...prev, candidate])
       setSelectedId(candidate.id)
@@ -156,6 +182,7 @@ export default function App() {
             purchaseManYen: demo.purchaseManYen,
             lat: hit.lat,
             lon: hit.lon,
+            geocode: hit.geocode,
           }),
         )
       }

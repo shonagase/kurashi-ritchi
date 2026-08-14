@@ -17,10 +17,132 @@ for (const [id, fields] of Object.entries(overrides)) {
   }
 }
 
+function yearKey(ref) {
+  if (!ref) return null
+  const m = String(ref).match(/20\d{2}/)
+  return m ? m[0] : null
+}
+
+function round2(n) {
+  return Math.round(n * 100) / 100
+}
+
+/**
+ * データ選択ルール:
+ * 同一地点・同一年度の直接値 → 近接年度 → 上位地域推計 → unavailable
+ * overrides 後に、異年度推計の取り残しと theft>crime を掃除・再計算する。
+ */
+function reconcileCrimeRow(row) {
+  if (!row) return []
+  const issues = []
+  const crime = row.crimePer100People
+  const cy = yearKey(crime?.referenceDate)
+
+  const shareFields = [
+    'heinousSharePercent',
+    'violentSharePercent',
+    'theftSharePercent',
+    'moralsSharePercent',
+  ]
+
+  // locked crime があるとき、未 lock の異年度・都道府県推計を落とす
+  if (crime?.locked) {
+    for (const field of [...shareFields, 'theftPer100People']) {
+      const m = row[field]
+      if (!m || m.locked || m.unavailable) continue
+      const my = yearKey(m.referenceDate)
+      const crossYear = cy && my && cy !== my
+      const prefEstimate =
+        String(m.source || '').includes('prefecture') ||
+        String(m.warning || '').includes('都道府県')
+      if (crossYear || prefEstimate) {
+        row[field] = {
+          unavailable: true,
+          valueType: 'estimate',
+          source: 'reconcile: dropped cross-year/prefecture estimate',
+          referenceDate: crime.referenceDate,
+          warning:
+            '同一地点・同一年度の直接値がないため非表示（異年度・上位地域推計は適用しない）',
+        }
+      }
+    }
+  }
+
+  const share = row.theftSharePercent
+  const theft = row.theftPer100People
+  if (
+    crime?.value != null &&
+    !crime.unavailable &&
+    share?.value != null &&
+    !share.unavailable &&
+    (!theft || !theft.locked)
+  ) {
+    const sy = yearKey(share.referenceDate)
+    if (!cy || !sy || cy === sy) {
+      row.theftPer100People = {
+        value: round2((crime.value * share.value) / 100),
+        unit: '件/100人・年',
+        valueType: 'computed',
+        source: `crimePer100People × theftSharePercent（同一年再計算）`,
+        referenceDate: crime.referenceDate || share.referenceDate,
+        catName: '窃盗認知率（計算）',
+        warning: share.warning,
+      }
+    }
+  }
+
+  const t = row.theftPer100People
+  if (
+    crime?.value != null &&
+    t?.value != null &&
+    !crime.unavailable &&
+    !t.unavailable &&
+    t.value > crime.value + 1e-6
+  ) {
+    issues.push(
+      `${crime.catName || 'crime'}: theft ${t.value} > crime ${crime.value}`,
+    )
+    if (!t.locked) {
+      row.theftPer100People = {
+        unavailable: true,
+        valueType: 'estimate',
+        source: 'reconcile: blocked by invariant theft_rate <= crime_rate',
+        referenceDate: t.referenceDate,
+        warning: '窃盗率が刑法犯率を超えたため公開停止（整合性エラー）',
+      }
+    }
+  }
+
+  return issues
+}
+
+const reconcileIssues = []
+for (const [id, row] of Object.entries(stats.byId || {})) {
+  for (const msg of reconcileCrimeRow(row)) {
+    reconcileIssues.push(`${id}: ${msg}`)
+  }
+}
+if (reconcileIssues.length) {
+  console.warn('invariant errors after reconcile:')
+  for (const msg of reconcileIssues) console.warn('  ', msg)
+}
+
 function readMetric(row, key) {
   const v = row?.[key]
   if (v == null) return { value: 0, metric: null }
-  if (typeof v === 'object' && v.value != null) return { value: v.value, metric: v }
+  if (typeof v === 'object') {
+    if (v.unavailable || v.value == null) {
+      return {
+        value: 0,
+        metric: {
+          ...v,
+          value: null,
+          unavailable: true,
+        },
+      }
+    }
+    return { value: v.value, metric: v }
+  }
   return {
     value: Number(v) || 0,
     metric: {
@@ -73,7 +195,9 @@ const municipalities = base.map((b) => {
 
 const meta = {
   retrievedAt: stats.meta?.retrievedAt || stats.meta?.fetchedAt || stats.meta?.updatedAt || null,
-  notes: stats.meta?.notes || '',
+  notes:
+    (stats.meta?.notes || '') +
+    ' 犯罪指標は同一地点・同一年度の直接値を優先。異年度×上位地域の組み合わせは reconcile で落とす。',
   fields: stats.meta?.fields || {},
 }
 

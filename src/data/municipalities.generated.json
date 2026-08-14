@@ -1,7 +1,7 @@
 {
   "meta": {
     "retrievedAt": "2026-08-14T06:17:18.948Z",
-    "notes": "e-Statは固定コードのみ使用。overrides の locked 値は人手検証優先。retrievedAtは取得日であり各指標の対象時点ではない。",
+    "notes": "e-Statは固定コードのみ使用。overrides の locked 値は人手検証優先。retrievedAtは取得日であり各指標の対象時点ではない。 犯罪指標は同一地点・同一年度の直接値を優先。異年度×上位地域の組み合わせは reconcile で落とす。",
     "fields": {
       "population": "総人口",
       "agingRate": "65歳以上人口割合（高齢化率）",
@@ -2153,11 +2153,11 @@
       "welfareRatePercent": 1.48,
       "crimePer100People": 0.89,
       "population": 55860,
-      "theftPer100People": 2.02,
-      "heinousSharePercent": 0.71,
-      "violentSharePercent": 5.9,
-      "theftSharePercent": 75.36,
-      "moralsSharePercent": 1.34,
+      "theftPer100People": 0.7,
+      "heinousSharePercent": 0,
+      "violentSharePercent": 0,
+      "theftSharePercent": 78.44,
+      "moralsSharePercent": 0,
       "metrics": {
         "agingRate": {
           "value": 33.2,
@@ -2193,7 +2193,7 @@
           "value": 0.89,
           "unit": "件/100人・年",
           "valueType": "computed",
-          "source": "千葉県警2025年確定 501件 ÷ 2025-04-01人口56,224（人手検証・参考計算）",
+          "source": "千葉県警2025年確定 刑法犯501件 ÷ 2025-04-01人口56,224（人手検証・参考計算）",
           "referenceDate": "2025",
           "catName": "人口100人当たり刑法犯認知件数（参考計算）",
           "formula": "501 / 56224 × 100 ≈ 0.891",
@@ -2210,54 +2210,52 @@
           "locked": true
         },
         "theftPer100People": {
-          "value": 2.02,
+          "value": 0.7,
           "unit": "件/100人・年",
           "valueType": "computed",
-          "source": "crimePer100People × theftSharePercent（prefecture構成比）",
-          "referenceDate": "2023年度",
-          "retrievedAt": "2026-08-14T06:17:18.948Z",
-          "catName": "窃盗認知率（推計）",
-          "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
+          "source": "千葉県警2025年確定 東金市 窃盗393件 ÷ 2025-04-01人口56,224（人手検証・参考計算）",
+          "referenceDate": "2025",
+          "catName": "人口100人当たり窃盗犯認知件数（参考計算）",
+          "formula": "393 / 56224 × 100 ≈ 0.699",
+          "warning": "市区町村直接値。都道府県構成比の推計ではない",
+          "locked": true
         },
         "heinousSharePercent": {
-          "value": 0.71,
-          "unit": "%",
+          "unavailable": true,
           "valueType": "estimate",
-          "source": "e-Stat 0000010111 / K420101 ÷ K4201（prefecture）",
-          "referenceDate": "2023年度",
-          "retrievedAt": "2026-08-14T06:17:18.948Z",
-          "catName": "K420101_凶悪犯認知件数",
-          "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+          "source": "未収録",
+          "referenceDate": "2025",
+          "warning": "同一地点・同一年度の直接値未収録のため非表示（異年度・都道府県推計は適用しない）",
+          "locked": true,
+          "value": null
         },
         "violentSharePercent": {
-          "value": 5.9,
-          "unit": "%",
+          "unavailable": true,
           "valueType": "estimate",
-          "source": "e-Stat 0000010111 / K420102 ÷ K4201（prefecture）",
-          "referenceDate": "2023年度",
-          "retrievedAt": "2026-08-14T06:17:18.948Z",
-          "catName": "K420102_粗暴犯認知件数",
-          "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+          "source": "未収録",
+          "referenceDate": "2025",
+          "warning": "同一地点・同一年度の直接値未収録のため非表示（異年度・都道府県推計は適用しない）",
+          "locked": true,
+          "value": null
         },
         "theftSharePercent": {
-          "value": 75.36,
+          "value": 78.44,
           "unit": "%",
-          "valueType": "estimate",
-          "source": "e-Stat 0000010111 / K420103 ÷ K4201（prefecture）",
-          "referenceDate": "2023年度",
-          "retrievedAt": "2026-08-14T06:17:18.948Z",
-          "catName": "K420103_窃盗犯認知件数",
-          "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+          "valueType": "official",
+          "source": "千葉県警2025年確定 東金市 窃盗393件 ÷ 刑法犯501件（人手検証）",
+          "referenceDate": "2025",
+          "catName": "刑法犯に占める窃盗犯の構成比",
+          "formula": "393 / 501 × 100 ≈ 78.44%",
+          "locked": true
         },
         "moralsSharePercent": {
-          "value": 1.34,
-          "unit": "%",
+          "unavailable": true,
           "valueType": "estimate",
-          "source": "e-Stat 0000010111 / K420105 ÷ K4201（prefecture）",
-          "referenceDate": "2023年度",
-          "retrievedAt": "2026-08-14T06:17:18.948Z",
-          "catName": "K420105_風俗犯認知件数",
-          "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
+          "source": "未収録",
+          "referenceDate": "2025",
+          "warning": "同一地点・同一年度の直接値未収録のため非表示（異年度・都道府県推計は適用しない）",
+          "locked": true,
+          "value": null
         }
       }
     },
@@ -2805,11 +2803,10 @@
           "value": 0.3,
           "unit": "件/100人・年",
           "valueType": "computed",
-          "source": "crimePer100People × theftSharePercent（prefecture構成比）",
-          "referenceDate": "2023年度",
-          "retrievedAt": "2026-08-14T06:17:18.948Z",
-          "catName": "窃盗認知率（推計）",
-          "warning": "市区町村窃盗率の直接値がないため、市区町村の刑法犯率×都道府県の窃盗構成比で推計"
+          "source": "crimePer100People × theftSharePercent（同一年再計算）",
+          "referenceDate": "unknown (pending corrected e-Stat match)",
+          "catName": "窃盗認知率（計算）",
+          "warning": "市区町村の罪種別公開が無いため、都道府県の構成比を当該市区町村に適用"
         },
         "heinousSharePercent": {
           "value": 0.79,

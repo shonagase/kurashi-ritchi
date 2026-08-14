@@ -38,7 +38,13 @@ export type ZoneHit = {
   method: 'gsi-raster-sample'
   valueType: ValueType
   sampledAtZoom?: number
-  failReason?: 'tile_missing' | 'pixel_read' | 'network'
+  failReason?:
+    | 'fetch_error'
+    | 'tile_not_found'
+    | 'pixel_read'
+    | 'layer_not_published'
+    | 'outside_coverage'
+    | 'unsupported'
   /**
    * 区域を検出した最短の距離帯（m）。
    * 0 = 地点そのものが区域内
@@ -46,6 +52,9 @@ export type ZoneHit = {
    * null = 100m以内に未検出、または未判定
    */
   nearestZoneWithinM: number | null
+  /** 境界までの厳密距離は未計算（離散帯のみ） */
+  boundaryDistance: 'unknown' | number
+  methodConfidence: 'low' | 'medium' | 'high'
 }
 
 export type ZoneAssessment = {
@@ -193,20 +202,26 @@ function classifyFloodDepth(r: number, g: number, b: number): string {
 
 type SampleResult =
   | { ok: true; inZone: boolean; depthLabel?: string; url: string; z: number }
-  | { ok: false; url: string; failReason: ZoneHit['failReason']; zTried: number[] }
+  | { ok: false; url: string; failReason: NonNullable<ZoneHit['failReason']>; zTried: number[] }
 
 async function samplePoint(layer: LayerDef, lat: number, lon: number): Promise<SampleResult> {
   const tried: number[] = []
   let lastUrl = ''
-  let lastFail: ZoneHit['failReason'] = 'tile_missing'
+  let lastFail: NonNullable<ZoneHit['failReason']> = 'tile_not_found'
   for (const z of ZOOM_CANDIDATES) {
     tried.push(z)
     const { x, y, px, py } = latLonToTile(lat, lon, z)
     const url = layer.url.replace('{z}', String(z)).replace('{x}', String(x)).replace('{y}', String(y))
     lastUrl = url
-    const img = await loadImageCached(url)
+    let img: HTMLImageElement | null
+    try {
+      img = await loadImageCached(url)
+    } catch {
+      lastFail = 'fetch_error'
+      continue
+    }
     if (!img) {
-      lastFail = 'tile_missing'
+      lastFail = 'tile_not_found'
       continue
     }
     const pix = samplePixel(img, px, py)
@@ -251,47 +266,70 @@ export function formatZoneProximity(hit: ZoneHit): string {
   return `地点は区域外推定／${PROXIMITY_BANDS_M[PROXIMITY_BANDS_M.length - 1]}m以内には区域を検出せず`
 }
 
+function unknownDetail(failReason: NonNullable<ZoneHit['failReason']>, zTried: number[]): string {
+  const z = zTried.join('→')
+  switch (failReason) {
+    case 'fetch_error':
+      return `未判定（FETCH_ERROR: 通信失敗, z=${z}）`
+    case 'tile_not_found':
+      return `未判定（TILE_NOT_FOUND: タイル欠損。未配信・カバレッジ外・URL問題の可能性, z=${z}）`
+    case 'pixel_read':
+      return `未判定（PIXEL_READ: 画素読み取り失敗, z=${z}）`
+    case 'layer_not_published':
+      return `未判定（LAYER_NOT_PUBLISHED: 当該レイヤー非公開の可能性, z=${z}）`
+    case 'outside_coverage':
+      return `未判定（OUTSIDE_COVERAGE: 配信範囲外の可能性, z=${z}）`
+    case 'unsupported':
+      return `未判定（UNSUPPORTED: 判定非対応, z=${z}）`
+  }
+}
+
+function hitBase(
+  layer: LayerDef,
+  partial: Partial<ZoneHit> &
+    Pick<ZoneHit, 'inZone' | 'status' | 'detail' | 'sourceUrl' | 'nearestZoneWithinM'>,
+): ZoneHit {
+  return {
+    id: layer.id,
+    label: layer.label,
+    method: 'gsi-raster-sample',
+    valueType: 'computed',
+    legendUrl: 'legendUrl' in layer ? layer.legendUrl : undefined,
+    boundaryDistance: 'unknown',
+    methodConfidence: 'medium',
+    ...partial,
+  }
+}
+
 async function sampleLayer(layer: LayerDef, lat: number, lon: number): Promise<ZoneHit> {
   const center = await samplePoint(layer, lat, lon)
   if (!center.ok) {
-    const z = center.zTried.join('→')
-    const detail =
-      center.failReason === 'pixel_read'
-        ? `未判定（画素読み取り失敗, z=${z}）`
-        : `未判定（タイル欠損/未配信, z=${z}）`
-    return {
-      id: layer.id,
-      label: layer.label,
+    return hitBase(layer, {
       inZone: null,
       status: 'unknown',
-      detail,
+      detail: unknownDetail(center.failReason, center.zTried),
       sourceUrl: center.url,
-      legendUrl: 'legendUrl' in layer ? layer.legendUrl : undefined,
-      method: 'gsi-raster-sample',
-      valueType: 'computed',
       failReason: center.failReason,
       sampledAtZoom: center.zTried[center.zTried.length - 1],
       nearestZoneWithinM: null,
-    }
+      methodConfidence: 'low',
+    })
   }
 
   if (center.inZone) {
     let detail = '地点は区域内推定（距離 0m）'
     if (center.depthLabel) detail = `地点は区域内推定（距離 0m／${center.depthLabel}）`
     if (center.z !== ZOOM_CANDIDATES[0]) detail += `（z=${center.z}へフォールバック）`
-    return {
-      id: layer.id,
-      label: layer.label,
+    return hitBase(layer, {
       inZone: true,
       status: 'in_zone',
       detail,
       sourceUrl: center.url,
-      legendUrl: 'legendUrl' in layer ? layer.legendUrl : undefined,
-      method: 'gsi-raster-sample',
-      valueType: 'computed',
       sampledAtZoom: center.z,
       nearestZoneWithinM: 0,
-    }
+      boundaryDistance: 0,
+      methodConfidence: center.z === ZOOM_CANDIDATES[0] ? 'medium' : 'low',
+    })
   }
 
   // 地点外 → 距離帯を外側へ探索
@@ -302,38 +340,32 @@ async function sampleLayer(layer: LayerDef, lat: number, lon: number): Promise<Z
     if (hit && hit.ok) {
       let detail = `地点は区域外推定／区域まで約${radiusM}m以内`
       if (center.z !== ZOOM_CANDIDATES[0]) detail += `（地点z=${center.z}）`
-      return {
-        id: layer.id,
-        label: layer.label,
+      return hitBase(layer, {
         inZone: false,
         status: 'nearby',
         detail,
         sourceUrl: center.url,
-        legendUrl: 'legendUrl' in layer ? layer.legendUrl : undefined,
-        method: 'gsi-raster-sample',
-        valueType: 'computed',
         sampledAtZoom: center.z,
         nearestZoneWithinM: radiusM,
-      }
+        boundaryDistance: 'unknown',
+        methodConfidence: 'medium',
+      })
     }
   }
 
   const maxM = PROXIMITY_BANDS_M[PROXIMITY_BANDS_M.length - 1]
   let detail = `地点は区域外推定／${maxM}m以内には区域を検出せず`
-  if (center.z !== ZOOM_CANDIDATES[0]) detail += `（z=${center.z}へフォールバック）`
-  return {
-    id: layer.id,
-    label: layer.label,
+  if (center.z !== ZOOM_CANDIDATES[0]) detail += `（z=${center.z}へフォールバック・境界精度注意）`
+  return hitBase(layer, {
     inZone: false,
     status: 'likely_outside',
     detail,
     sourceUrl: center.url,
-    legendUrl: 'legendUrl' in layer ? layer.legendUrl : undefined,
-    method: 'gsi-raster-sample',
-    valueType: 'computed',
     sampledAtZoom: center.z,
     nearestZoneWithinM: null,
-  }
+    boundaryDistance: 'unknown',
+    methodConfidence: center.z === ZOOM_CANDIDATES[0] ? 'medium' : 'low',
+  })
 }
 
 export function summarizeHazardStatus(hits: ZoneHit[]): {

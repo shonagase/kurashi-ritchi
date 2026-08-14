@@ -67,7 +67,8 @@ function shareCount(total: number, sharePercent: number): number {
 }
 
 function hasMetric(m: MunicipalityProfile, key: keyof NonNullable<MunicipalityProfile['metrics']>): boolean {
-  return m.metrics?.[key] != null && Number.isFinite(m.metrics[key]?.value)
+  const meta = m.metrics?.[key]
+  return meta != null && !meta.unavailable && meta.value != null && Number.isFinite(meta.value)
 }
 
 function fmtRate(v: number, has: boolean): string {

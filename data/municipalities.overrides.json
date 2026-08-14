@@ -34,11 +34,56 @@
       "value": 0.89,
       "unit": "件/100人・年",
       "valueType": "computed",
-      "source": "千葉県警2025年確定 501件 ÷ 2025-04-01人口56,224（人手検証・参考計算）",
+      "source": "千葉県警2025年確定 刑法犯501件 ÷ 2025-04-01人口56,224（人手検証・参考計算）",
       "referenceDate": "2025",
       "catName": "人口100人当たり刑法犯認知件数（参考計算）",
       "formula": "501 / 56224 × 100 ≈ 0.891",
       "warning": "警察が公表する『犯罪率』そのものではない",
+      "locked": true
+    },
+    "theftSharePercent": {
+      "value": 78.44,
+      "unit": "%",
+      "valueType": "official",
+      "source": "千葉県警2025年確定 東金市 窃盗393件 ÷ 刑法犯501件（人手検証）",
+      "referenceDate": "2025",
+      "catName": "刑法犯に占める窃盗犯の構成比",
+      "formula": "393 / 501 × 100 ≈ 78.44%",
+      "locked": true
+    },
+    "theftPer100People": {
+      "value": 0.7,
+      "unit": "件/100人・年",
+      "valueType": "computed",
+      "source": "千葉県警2025年確定 東金市 窃盗393件 ÷ 2025-04-01人口56,224（人手検証・参考計算）",
+      "referenceDate": "2025",
+      "catName": "人口100人当たり窃盗犯認知件数（参考計算）",
+      "formula": "393 / 56224 × 100 ≈ 0.699",
+      "warning": "市区町村直接値。都道府県構成比の推計ではない",
+      "locked": true
+    },
+    "heinousSharePercent": {
+      "unavailable": true,
+      "valueType": "estimate",
+      "source": "未収録",
+      "referenceDate": "2025",
+      "warning": "同一地点・同一年度の直接値未収録のため非表示（異年度・都道府県推計は適用しない）",
+      "locked": true
+    },
+    "violentSharePercent": {
+      "unavailable": true,
+      "valueType": "estimate",
+      "source": "未収録",
+      "referenceDate": "2025",
+      "warning": "同一地点・同一年度の直接値未収録のため非表示（異年度・都道府県推計は適用しない）",
+      "locked": true
+    },
+    "moralsSharePercent": {
+      "unavailable": true,
+      "valueType": "estimate",
+      "source": "未収録",
+      "referenceDate": "2025",
+      "warning": "同一地点・同一年度の直接値未収録のため非表示（異年度・都道府県推計は適用しない）",
       "locked": true
     },
     "population": {

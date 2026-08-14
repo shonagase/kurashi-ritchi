@@ -2,7 +2,7 @@ import generated from './municipalities.generated.json'
 import type { ValueType } from '../lib/formulas'
 
 export type MetricMeta = {
-  value: number
+  value: number | null
   unit?: string
   valueType?: ValueType | string
   source?: string
@@ -11,6 +11,8 @@ export type MetricMeta = {
   catName?: string
   formula?: string
   warning?: string
+  unavailable?: boolean
+  locked?: boolean
 }
 
 export type MunicipalityProfile = {
@@ -95,6 +97,14 @@ export const DATA_SOURCES = {
   hazardTiles: {
     label: 'ハザードマップポータル 配信タイル（オープンデータ）',
     url: 'https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html',
+  },
+  districtPlanHiyoshidai: {
+    label: '東金市 日吉台地区地区計画',
+    url: 'https://www.city.togane.chiba.jp/0000001432.html',
+  },
+  ksjFlood: {
+    label: '国土数値情報 洪水浸水想定区域（A31・GeoJSON）',
+    url: 'https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A31a-2025.html',
   },
 } as const
 

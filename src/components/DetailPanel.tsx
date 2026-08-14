@@ -9,6 +9,7 @@ import { getFloodHistoryLink } from '../data/floodHistory'
 import { FORMULAS, VALUE_TYPE_LABEL, type ValueType } from '../lib/formulas'
 import { officialHazardMapUrl } from '../lib/geo'
 import { hazardStatusLabel, nearestHazardDistanceM } from '../lib/hazardZones'
+import { legalStatusLabel } from '../lib/legalGate'
 import { REPAIR_SCENARIOS, hazardLabel, lossImpactPercent, totalRepairRange } from '../lib/risk'
 import type { Candidate } from '../types'
 
@@ -29,6 +30,20 @@ function MetricLine({
   display: string
   meta?: MetricMeta | null
 }) {
+  if (meta?.unavailable || meta?.value == null) {
+    return (
+      <li className="metric-line">
+        <div className="metric-main">
+          <TypeBadge type="estimate" />
+          <strong>{label}</strong>: —
+        </div>
+        <div className="muted small metric-meta">
+          未収録（unavailable）
+          {meta?.warning ? ` / ${meta.warning}` : ''}
+        </div>
+      </li>
+    )
+  }
   const type = (meta?.valueType as ValueType) || 'estimate'
   return (
     <li className="metric-line">
@@ -73,6 +88,83 @@ export function DetailPanel({ candidate }: Props) {
       <p className="muted small">
         座標: {candidate.lat.toFixed(5)}, {candidate.lon.toFixed(5)}（この点を起点に距離計算）
       </p>
+      <div className={`location-gate ${candidate.geocode.pointEvaluationOk ? 'ok' : 'warn'}`}>
+        <div>
+          <strong>地点精度</strong>: {candidate.geocode.labelJa}
+          <span className="muted small">
+            {' '}
+            ／ confidence: {candidate.geocode.locationConfidence}
+          </span>
+        </div>
+        {candidate.geocode.gateMessage && (
+          <p className="gate-message">{candidate.geocode.gateMessage}</p>
+        )}
+      </div>
+      {candidate.invariantIssues.some((i) => i.severity === 'error') && (
+        <div className="invariant-banner error">
+          <strong>データ整合性エラー</strong>
+          <ul>
+            {candidate.invariantIssues
+              .filter((i) => i.severity === 'error')
+              .map((i) => (
+                <li key={i.code}>{i.message}</li>
+              ))}
+          </ul>
+        </div>
+      )}
+      {candidate.invariantIssues.some((i) => i.severity === 'warning') && (
+        <div className="invariant-banner warn">
+          <strong>データ整合性の注意</strong>
+          <ul>
+            {candidate.invariantIssues
+              .filter((i) => i.severity === 'warning')
+              .map((i) => (
+                <li key={i.code}>{i.message}</li>
+              ))}
+          </ul>
+        </div>
+      )}
+
+      <div
+        className={`legal-gate ${
+          candidate.legal.status === 'attention'
+            ? 'warn'
+            : candidate.legal.status === 'needs_verify'
+              ? 'mid'
+              : 'ok'
+        }`}
+      >
+        <p className="eyebrow">Due Diligence ゲート（法務・都市計画）</p>
+        <strong>{candidate.legal.summary}</strong>
+        {candidate.legal.districtPlan && (
+          <p className="muted small">
+            出典:{' '}
+            <a href={candidate.legal.districtPlan.sourceUrl} target="_blank" rel="noreferrer">
+              {candidate.legal.districtPlan.sourceLabel}
+            </a>
+            （告示 {candidate.legal.districtPlan.referenceDate}／面積約
+            {candidate.legal.districtPlan.areaHa}ha／照合
+            {candidate.legal.matchMethod === 'address' ? '住所' : '概形PiP'}）
+          </p>
+        )}
+        <ul className="plain-list legal-checklist">
+          {candidate.legal.items.map((item) => (
+            <li key={item.id} className="metric-line">
+              <div className="metric-main">
+                <TypeBadge type={item.valueType} />
+                <span className={`legal-status status-${item.status}`}>
+                  {legalStatusLabel(item.status)}
+                </span>
+                <strong>{item.label}</strong>
+              </div>
+              <div className="muted small">{item.detail}</div>
+            </li>
+          ))}
+        </ul>
+        <p className="note">
+          中古戸建ては洪水リスクより、再建築・接道・地区計画適合の方が損失が大きいことがあります。ここは断定ではなく確認リストです。
+        </p>
+      </div>
 
       <div className="stat-row">
         <div>
@@ -126,16 +218,51 @@ export function DetailPanel({ candidate }: Props) {
               <TypeBadge type={z.valueType} />
               <strong>{z.label}</strong>: {z.detail}
             </div>
-            {z.nearestZoneWithinM != null && (
+            {(z.nearestZoneWithinM != null || z.methodConfidence) && (
               <div className="muted small">
-                距離帯: {z.nearestZoneWithinM === 0 ? '0m（地点上）' : `約${z.nearestZoneWithinM}m以内`}
+                {z.nearestZoneWithinM != null
+                  ? `距離帯: ${z.nearestZoneWithinM === 0 ? '0m（地点上）' : `約${z.nearestZoneWithinM}m以内`} ／ `
+                  : ''}
+                boundary_distance: {z.boundaryDistance === 'unknown' ? 'unknown' : `${z.boundaryDistance}m`}
+                ／ method_confidence: {z.methodConfidence}
               </div>
+            )}
+            {z.failReason && (
+              <div className="muted small">未判定コード: {z.failReason}</div>
             )}
             {z.sampledAtZoom != null && (
               <div className="muted small">使用ズーム: z={z.sampledAtZoom}</div>
             )}
           </li>
         ))}
+      </ul>
+      <h4 className="subhead">ベクターPiP（第二手法）</h4>
+      <p className="muted small">{candidate.vectorHazards.note}</p>
+      <ul className="plain-list">
+        <li className="metric-line">
+          <div className="metric-main">
+            <TypeBadge type="computed" />
+            <strong>洪水（ベクター）</strong>:{' '}
+            {candidate.vectorHazards.flood?.detail ?? '未ロード（ラスタ判定を使用）'}
+          </div>
+          {candidate.vectorHazards.flood && (
+            <div className="muted small">
+              method: vector-pip ／ confidence: {candidate.vectorHazards.flood.methodConfidence}
+            </div>
+          )}
+        </li>
+        <li className="metric-line">
+          <div className="metric-main">
+            <TypeBadge type="computed" />
+            <strong>土砂（ベクター）</strong>:{' '}
+            {candidate.vectorHazards.sediment?.detail ?? '未ロード（ラスタ判定を使用）'}
+          </div>
+          {candidate.vectorHazards.sediment && (
+            <div className="muted small">
+              method: vector-pip ／ confidence: {candidate.vectorHazards.sediment.methodConfidence}
+            </div>
+          )}
+        </li>
       </ul>
       {candidate.elevationM != null && (
         <p className="muted small">
@@ -221,21 +348,22 @@ export function DetailPanel({ candidate }: Props) {
       </p>
 
       <h3>
-        <TypeBadge type="computed" /> 通勤・移動（直線30分換算圏）
+        <TypeBadge type="computed" /> 通勤・移動（直線距離・参考）
       </h3>
       {candidate.transitFetchFailed ? (
         <p className="error">交通データの取得に失敗しました。時間をおいて候補を入れ直してください。</p>
       ) : (
         <>
-          <h4 className="subhead">駅・電停（{candidate.stations.length}件）</h4>
+          <h4 className="subhead">最寄り駅（上位3件）</h4>
           {candidate.stations.length ? (
             <ul className="plain-list transit-list">
-              {candidate.stations.map((s) => (
+              {candidate.stations.slice(0, 3).map((s) => (
                 <li key={`st-${s.name}-${s.meters}`}>
                   {s.name}
                   <div className="muted small">
-                    直線距離 約{(s.meters / 1000).toFixed(2)}km ／ 直線換算 約{s.walkMin}分
+                    直線距離 約{(s.meters / 1000).toFixed(2)}km ／ 参考換算 約{s.walkMin}分
                   </div>
+                  <div className="muted small">実歩行時間：未取得（ルート探索なし）</div>
                 </li>
               ))}
             </ul>
@@ -243,24 +371,30 @@ export function DetailPanel({ candidate }: Props) {
             <p className="muted">直線30分換算圏内に駅が見つかりませんでした。</p>
           )}
 
-          <h4 className="subhead">バス停（{candidate.buses.length}件）</h4>
+          <h4 className="subhead">最寄りバス停（上位3件・本数未取得）</h4>
           {candidate.buses.length ? (
             <ul className="plain-list transit-list">
-              {candidate.buses.map((s) => (
+              {candidate.buses.slice(0, 3).map((s) => (
                 <li key={`bus-${s.name}-${s.meters}`}>
                   {s.name}
                   <div className="muted small">
-                    直線距離 約{(s.meters / 1000).toFixed(2)}km ／ 直線換算 約{s.walkMin}分
+                    直線距離 約{(s.meters / 1000).toFixed(2)}km ／ 参考換算 約{s.walkMin}分
                   </div>
+                  <div className="muted small">運行本数・始発終バス：未取得</div>
                 </li>
               ))}
             </ul>
           ) : (
             <p className="muted">直線30分換算圏内にバス停が見つかりませんでした。</p>
           )}
+          {candidate.buses.length > 3 && (
+            <p className="muted small">ほか {candidate.buses.length - 3} 停留所（一覧は省略）</p>
+          )}
         </>
       )}
-      <p className="note">※{FORMULAS.straightWalkMin.formula}。実歩行ルートではありません。</p>
+      <p className="note">
+        ※{FORMULAS.straightWalkMin.formula}。徒歩分は実歩行ルートではありません。バス停の価値は距離より運行頻度の方が重要ですが、現状未取得です。
+      </p>
       <p className="source-line">
         地点データ出典:{' '}
         <a href={DATA_SOURCES.osm.url} target="_blank" rel="noreferrer">
@@ -271,6 +405,9 @@ export function DetailPanel({ candidate }: Props) {
       <h3>地域性（{m.pref} {m.name}）</h3>
       <p className="muted small">
         取得バッチ: {statsMeta.retrievedAt || '不明'}（これは取得日であり、各指標の対象時点ではありません）
+      </p>
+      <p className="muted small">
+        以下は市区町村全体の統計です。町丁目・半径500mの人口構成は未接続（市全体≠物件周辺）。
       </p>
       <p>
         <TypeBadge type="judgment" /> 産業メモ: {m.industryType} — {m.industryNote}
@@ -296,7 +433,7 @@ export function DetailPanel({ candidate }: Props) {
         <MetricLine
           label="窃盗認知"
           display={
-            m.metrics?.theftPer100People
+            m.metrics?.theftPer100People && m.metrics.theftPer100People.value != null
               ? `年${m.theftPer100People.toFixed(2)}件/100人`
               : '—'
           }
@@ -304,22 +441,38 @@ export function DetailPanel({ candidate }: Props) {
         />
         <MetricLine
           label="凶悪犯の割合"
-          display={m.metrics?.heinousSharePercent ? `${m.heinousSharePercent.toFixed(2)}%` : '—'}
+          display={
+            m.metrics?.heinousSharePercent?.value != null
+              ? `${m.heinousSharePercent.toFixed(2)}%`
+              : '—'
+          }
           meta={m.metrics?.heinousSharePercent}
         />
         <MetricLine
           label="粗暴犯の割合"
-          display={m.metrics?.violentSharePercent ? `${m.violentSharePercent.toFixed(2)}%` : '—'}
+          display={
+            m.metrics?.violentSharePercent?.value != null
+              ? `${m.violentSharePercent.toFixed(2)}%`
+              : '—'
+          }
           meta={m.metrics?.violentSharePercent}
         />
         <MetricLine
           label="窃盗犯の割合"
-          display={m.metrics?.theftSharePercent ? `${m.theftSharePercent.toFixed(2)}%` : '—'}
+          display={
+            m.metrics?.theftSharePercent?.value != null
+              ? `${m.theftSharePercent.toFixed(2)}%`
+              : '—'
+          }
           meta={m.metrics?.theftSharePercent}
         />
         <MetricLine
           label="風俗犯の割合"
-          display={m.metrics?.moralsSharePercent ? `${m.moralsSharePercent.toFixed(2)}%` : '—'}
+          display={
+            m.metrics?.moralsSharePercent?.value != null
+              ? `${m.moralsSharePercent.toFixed(2)}%`
+              : '—'
+          }
           meta={m.metrics?.moralsSharePercent}
         />
       </ul>

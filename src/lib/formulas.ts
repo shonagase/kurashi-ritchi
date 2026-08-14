@@ -18,8 +18,14 @@ export const FORMULAS = {
   officialZone: {
     label: '公式ハザード区域の機械判定',
     valueType: 'computed' as ValueType,
-    formula: '地点＋半径10/20/30/50/100mの円周ラスタサンプリング',
-    note: '公的データに基づく計算値。「約Xm以内」は距離帯。未判定を区域外に丸めない。区域外推定≠安全。',
+    formula: '地点＋半径10/20/30/50/100mの円周ラスタサンプリング（主）／登録GeoJSONのPoint-in-Polygon（副）',
+    note: '公的データに基づく計算値。「約Xm以内」は距離帯。ベクター未ロード時はラスタのみ。区域外推定≠安全。',
+  },
+  legalGate: {
+    label: '法務・地区計画ゲート',
+    valueType: 'official' as ValueType,
+    formula: '住所照合＋概形PiP（収録地区計画）／再建築・接道等は未評価チェックリスト',
+    note: '断定ではなく確認リスト。適合判定は市・専門家の確認が必要。',
   },
   damageTier: {
     label: '独自修理費シナリオ（損害ティア）',
