@@ -1,4 +1,4 @@
-import { hazardStatusLabel } from '../lib/hazardZones'
+import { hazardStatusLabel, nearestHazardDistanceM } from '../lib/hazardZones'
 import { hazardLabel, lossImpactPercent, totalRepairRange } from '../lib/risk'
 import type { Candidate, SortKey } from '../types'
 
@@ -110,24 +110,20 @@ export function ComparisonTable({
                 <td>
                   {c.zones.status === 'in_zone' ? (
                     <>
-                      <span className="badge badge-high">区域該当あり</span>
+                      <span className="badge badge-high">地点が区域内</span>
+                      <div className="muted small">距離 0m</div>
+                    </>
+                  ) : c.zones.status === 'nearby_zone' ? (
+                    <>
+                      <span className="badge badge-mid">近傍に区域</span>
                       <div className="muted small">
-                        {[
-                          c.zones.flood.inZone ? '洪水' : null,
-                          c.zones.sedimentSteep.inZone ||
-                          c.zones.sedimentDebris.inZone ||
-                          c.zones.sedimentSlide.inZone
-                            ? '土砂'
-                            : null,
-                        ]
-                          .filter(Boolean)
-                          .join('・')}
+                        約{nearestHazardDistanceM(c.zones)}m以内
                       </div>
                     </>
                   ) : c.zones.status === 'all_outside' ? (
                     <>
-                      <span className="badge badge-mid">区域外推定</span>
-                      <div className="muted small">全層判定済み（≠安全）</div>
+                      <span className="badge badge-low">近傍にもなし</span>
+                      <div className="muted small">100m以内未検出（≠安全）</div>
                     </>
                   ) : c.zones.status === 'partially_evaluated' ? (
                     <>

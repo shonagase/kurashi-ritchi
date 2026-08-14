@@ -8,7 +8,7 @@ import {
 import { getFloodHistoryLink } from '../data/floodHistory'
 import { FORMULAS, VALUE_TYPE_LABEL, type ValueType } from '../lib/formulas'
 import { officialHazardMapUrl } from '../lib/geo'
-import { hazardStatusLabel } from '../lib/hazardZones'
+import { hazardStatusLabel, nearestHazardDistanceM } from '../lib/hazardZones'
 import { REPAIR_SCENARIOS, hazardLabel, lossImpactPercent, totalRepairRange } from '../lib/risk'
 import type { Candidate } from '../types'
 
@@ -88,6 +88,9 @@ export function DetailPanel({ candidate }: Props) {
           <strong>{hazardStatusLabel(candidate.zones.status)}</strong>
           <div className="muted small">
             判定済み {candidate.zones.evaluatedCount}/4 ／ 未判定 {candidate.zones.unknownCount}
+            {nearestHazardDistanceM(candidate.zones) != null
+              ? ` ／ 最寄り区域 約${nearestHazardDistanceM(candidate.zones)}m以内`
+              : ''}
           </div>
           <div className="muted small">{FORMULAS.officialZone.note}</div>
         </div>
@@ -106,9 +109,10 @@ export function DetailPanel({ candidate }: Props) {
         <TypeBadge type="computed" /> 発生側：公式ハザードの機械判定
       </h3>
       <p className="muted small">
-        判定方式: 公式ハザードマップのラスタタイル地点サンプリング（基準z=
-        {candidate.zones.sampledAtZoom}、欠損時は下位ズームへフォールバック）。
-        区域外推定は安全宣言ではありません。警戒区域外でも災害が起きうる場合があります。
+        判定方式: 地点＋半径
+        {candidate.zones.proximityBandsM?.join('/')}
+        mの円周サンプリング（基準z={candidate.zones.sampledAtZoom}、欠損時は下位ズームへフォールバック）。
+        「約Xm以内」は離散点探索の距離帯です（最短距離の厳密値ではない）。区域外推定は安全宣言ではありません。
       </p>
       <ul className="plain-list">
         {[
@@ -122,6 +126,11 @@ export function DetailPanel({ candidate }: Props) {
               <TypeBadge type={z.valueType} />
               <strong>{z.label}</strong>: {z.detail}
             </div>
+            {z.nearestZoneWithinM != null && (
+              <div className="muted small">
+                距離帯: {z.nearestZoneWithinM === 0 ? '0m（地点上）' : `約${z.nearestZoneWithinM}m以内`}
+              </div>
+            )}
             {z.sampledAtZoom != null && (
               <div className="muted small">使用ズーム: z={z.sampledAtZoom}</div>
             )}

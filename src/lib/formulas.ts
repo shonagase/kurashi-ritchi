@@ -18,8 +18,8 @@ export const FORMULAS = {
   officialZone: {
     label: '公式ハザード区域の機械判定',
     valueType: 'computed' as ValueType,
-    formula: 'ハザードマップポータルのラスタタイルを地点サンプリング（z=15）',
-    note: '公的データに基づく計算値。未判定を区域外に丸めない。区域外推定≠安全。最終確認は公式地図で。',
+    formula: '地点＋半径10/20/30/50/100mの円周ラスタサンプリング',
+    note: '公的データに基づく計算値。「約Xm以内」は距離帯。未判定を区域外に丸めない。区域外推定≠安全。',
   },
   damageTier: {
     label: '独自修理費シナリオ（損害ティア）',

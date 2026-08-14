@@ -1,41 +1,51 @@
 /**
- * ハザードマップポータル（国土地理院）の公式ラスタタイルを地点サンプリングし、
- * 洪水・土砂区域への該当を機械判定する。
+ * ハザードマップポータル（国土地理院）の公式ラスタタイルを地点・近傍サンプリングし、
+ * 洪水・土砂区域への該当と「区域までの距離帯」を機械判定する。
  *
  * 注意:
- * - 行政による「区域外証明」ではない。公式データのラスタ1点からの推定。
+ * - 行政による「区域外証明」ではない。公式データのラスタからの推定。
  * - 属性付きポリゴンの厳密な空間結合ではない。
  * - 未判定（タイル取得失敗等）を「区域外」に丸めないこと。
+ * - 距離は円周上の離散サンプリングによる「○m以内」帯であり、最短距離の厳密値ではない。
  * - 最終確認は公式「重ねるハザードマップ」で行うこと。
  */
 
 import type { ValueType } from './formulas'
 
-export type ZoneHitStatus = 'in_zone' | 'likely_outside' | 'unknown'
+export type ZoneHitStatus = 'in_zone' | 'nearby' | 'likely_outside' | 'unknown'
 
 /** 4層を踏まえた総合ステータス。unknown を安全側に丸めない */
 export type HazardEvalStatus =
   | 'in_zone'
+  | 'nearby_zone'
   | 'all_outside'
   | 'partially_evaluated'
   | 'unevaluated'
 
+/** 近傍探索の距離帯（m）。表示もこの単位で出す */
+export const PROXIMITY_BANDS_M = [10, 20, 30, 50, 100] as const
+const BEARING_COUNT = 8
+
 export type ZoneHit = {
   id: string
   label: string
-  /** true=区域内推定, false=区域外推定, null=未判定 */
+  /** true=地点が区域内推定, false=地点は区域外推定, null=未判定 */
   inZone: boolean | null
   status: ZoneHitStatus
   detail: string
   sourceUrl: string
   legendUrl?: string
   method: 'gsi-raster-sample'
-  /** 公的ラスタに基づく機械判定 → 計算値 */
   valueType: ValueType
-  /** 実際にサンプリングしたズーム（フォールバック時は Z より小さい） */
   sampledAtZoom?: number
-  /** 未判定時の理由コード */
   failReason?: 'tile_missing' | 'pixel_read' | 'network'
+  /**
+   * 区域を検出した最短の距離帯（m）。
+   * 0 = 地点そのものが区域内
+   * 10/20/30/50/100 = その半径以内に区域あり
+   * null = 100m以内に未検出、または未判定
+   */
+  nearestZoneWithinM: number | null
 }
 
 export type ZoneAssessment = {
@@ -43,16 +53,13 @@ export type ZoneAssessment = {
   sedimentSteep: ZoneHit
   sedimentDebris: ZoneHit
   sedimentSlide: ZoneHit
-  /** @deprecated status を優先。後方互換のため残す */
   anyOfficialZone: boolean
-  /** 全層が未判定 */
   fetchFailed: boolean
-  /** Unknown を区域外に丸めない総合結果 */
   status: HazardEvalStatus
   evaluatedCount: number
   unknownCount: number
-  /** 要求ズーム（フォールバック前） */
   sampledAtZoom: number
+  proximityBandsM: readonly number[]
 }
 
 const ZOOM_CANDIDATES = [15, 14, 13] as const
@@ -85,6 +92,11 @@ const LAYERS = {
   },
 }
 
+type LayerDef = (typeof LAYERS)[keyof typeof LAYERS]
+
+const tileCache = new Map<string, HTMLImageElement | 'missing' | 'pending'>()
+const tileWaiters = new Map<string, Array<(img: HTMLImageElement | null) => void>>()
+
 function latLonToTile(lat: number, lon: number, z: number) {
   const n = 2 ** z
   const x = Math.floor(((lon + 180) / 360) * n)
@@ -98,16 +110,47 @@ function latLonToTile(lat: number, lon: number, z: number) {
   return { x, y, px: Math.min(255, Math.floor(xF * 256)), py: Math.min(255, Math.floor(yF * 256)) }
 }
 
-function loadImage(url: string): Promise<{ img: HTMLImageElement | null; failReason: 'tile_missing' | 'network' | null }> {
+/** メートルオフセット（east/north）から緯度経度へ */
+export function offsetLatLon(lat: number, lon: number, eastM: number, northM: number) {
+  const dLat = northM / 111_320
+  const cos = Math.cos((lat * Math.PI) / 180)
+  const dLon = eastM / (111_320 * Math.max(0.2, cos))
+  return { lat: lat + dLat, lon: lon + dLon }
+}
+
+function loadImageCached(url: string): Promise<HTMLImageElement | null> {
+  const cached = tileCache.get(url)
+  if (cached instanceof HTMLImageElement) return Promise.resolve(cached)
+  if (cached === 'missing') return Promise.resolve(null)
+
   return new Promise((resolve) => {
+    const waiters = tileWaiters.get(url) ?? []
+    waiters.push(resolve)
+    tileWaiters.set(url, waiters)
+    if (cached === 'pending') return
+
+    tileCache.set(url, 'pending')
     const img = new Image()
     img.crossOrigin = 'anonymous'
-    img.onload = () => resolve({ img, failReason: null })
-    img.onerror = () => resolve({ img: null, failReason: 'tile_missing' })
+    img.onload = () => {
+      tileCache.set(url, img)
+      const list = tileWaiters.get(url) ?? []
+      tileWaiters.delete(url)
+      list.forEach((w) => w(img))
+    }
+    img.onerror = () => {
+      tileCache.set(url, 'missing')
+      const list = tileWaiters.get(url) ?? []
+      tileWaiters.delete(url)
+      list.forEach((w) => w(null))
+    }
     try {
       img.src = url
     } catch {
-      resolve({ img: null, failReason: 'network' })
+      tileCache.set(url, 'missing')
+      const list = tileWaiters.get(url) ?? []
+      tileWaiters.delete(url)
+      list.forEach((w) => w(null))
     }
   })
 }
@@ -127,7 +170,6 @@ function samplePixel(
   return { r, g, b, a }
 }
 
-/** 洪水タイル凡例の近似（RGB距離）から浸水深区分を推定 */
 function classifyFloodDepth(r: number, g: number, b: number): string {
   const palette: Array<{ label: string; rgb: [number, number, number] }> = [
     { label: '浸水深 0.5m未満', rgb: [247, 245, 169] },
@@ -149,93 +191,149 @@ function classifyFloodDepth(r: number, g: number, b: number): string {
   return best.label
 }
 
-function failDetail(reason: 'tile_missing' | 'pixel_read' | 'network', zoomsTried: number[]): string {
-  const z = zoomsTried.join('→')
-  if (reason === 'tile_missing') return `未判定（タイル欠損/未配信, z=${z}）`
-  if (reason === 'pixel_read') return `未判定（画素読み取り失敗, z=${z}）`
-  return `未判定（通信エラー, z=${z}）`
-}
+type SampleResult =
+  | { ok: true; inZone: boolean; depthLabel?: string; url: string; z: number }
+  | { ok: false; url: string; failReason: ZoneHit['failReason']; zTried: number[] }
 
-function unknownHit(
-  layer: (typeof LAYERS)[keyof typeof LAYERS],
-  detail: string,
-  url: string,
-  failReason: ZoneHit['failReason'],
-  sampledAtZoom?: number,
-): ZoneHit {
-  return {
-    id: layer.id,
-    label: layer.label,
-    inZone: null,
-    status: 'unknown',
-    detail,
-    sourceUrl: url,
-    legendUrl: 'legendUrl' in layer ? layer.legendUrl : undefined,
-    method: 'gsi-raster-sample',
-    valueType: 'computed',
-    failReason,
-    sampledAtZoom,
-  }
-}
-
-async function sampleLayerAtZoom(
-  layer: (typeof LAYERS)[keyof typeof LAYERS],
-  lat: number,
-  lon: number,
-  z: number,
-): Promise<{ hit: ZoneHit | null; lastUrl: string; failReason: ZoneHit['failReason'] }> {
-  const { x, y, px, py } = latLonToTile(lat, lon, z)
-  const url = layer.url.replace('{z}', String(z)).replace('{x}', String(x)).replace('{y}', String(y))
-  const { img, failReason } = await loadImage(url)
-  if (!img) {
-    return { hit: null, lastUrl: url, failReason: failReason ?? 'tile_missing' }
-  }
-  const pix = samplePixel(img, px, py)
-  if (!pix) {
-    return { hit: null, lastUrl: url, failReason: 'pixel_read' }
-  }
-  const inZone = pix.a > 30
-  let detail = inZone ? '機械判定：区域内推定' : '機械判定：区域外推定'
-  if (inZone && layer.kind === 'flood') {
-    detail = `機械判定：区域内推定（${classifyFloodDepth(pix.r, pix.g, pix.b)}）`
-  }
-  if (z !== ZOOM_CANDIDATES[0]) {
-    detail += `（z=${z}へフォールバック）`
-  }
-  return {
-    hit: {
-      id: layer.id,
-      label: layer.label,
-      inZone,
-      status: inZone ? 'in_zone' : 'likely_outside',
-      detail,
-      sourceUrl: url,
-      legendUrl: 'legendUrl' in layer ? layer.legendUrl : undefined,
-      method: 'gsi-raster-sample',
-      valueType: 'computed',
-      sampledAtZoom: z,
-    },
-    lastUrl: url,
-    failReason: undefined,
-  }
-}
-
-async function sampleLayer(
-  layer: (typeof LAYERS)[keyof typeof LAYERS],
-  lat: number,
-  lon: number,
-): Promise<ZoneHit> {
+async function samplePoint(layer: LayerDef, lat: number, lon: number): Promise<SampleResult> {
   const tried: number[] = []
   let lastUrl = ''
   let lastFail: ZoneHit['failReason'] = 'tile_missing'
   for (const z of ZOOM_CANDIDATES) {
     tried.push(z)
-    const result = await sampleLayerAtZoom(layer, lat, lon, z)
-    lastUrl = result.lastUrl
-    if (result.hit) return result.hit
-    lastFail = result.failReason
+    const { x, y, px, py } = latLonToTile(lat, lon, z)
+    const url = layer.url.replace('{z}', String(z)).replace('{x}', String(x)).replace('{y}', String(y))
+    lastUrl = url
+    const img = await loadImageCached(url)
+    if (!img) {
+      lastFail = 'tile_missing'
+      continue
+    }
+    const pix = samplePixel(img, px, py)
+    if (!pix) {
+      lastFail = 'pixel_read'
+      continue
+    }
+    const inZone = pix.a > 30
+    return {
+      ok: true,
+      inZone,
+      depthLabel:
+        inZone && layer.kind === 'flood' ? classifyFloodDepth(pix.r, pix.g, pix.b) : undefined,
+      url,
+      z,
+    }
   }
-  return unknownHit(layer, failDetail(lastFail ?? 'tile_missing', tried), lastUrl, lastFail, tried[tried.length - 1])
+  return { ok: false, url: lastUrl, failReason: lastFail, zTried: tried }
+}
+
+function ringPoints(lat: number, lon: number, radiusM: number) {
+  const points: Array<{ lat: number; lon: number }> = []
+  for (let i = 0; i < BEARING_COUNT; i++) {
+    const rad = (i / BEARING_COUNT) * Math.PI * 2
+    const east = Math.sin(rad) * radiusM
+    const north = Math.cos(rad) * radiusM
+    points.push(offsetLatLon(lat, lon, east, north))
+  }
+  return points
+}
+
+export function formatZoneProximity(hit: ZoneHit): string {
+  if (hit.inZone === null) return hit.detail
+  if (hit.nearestZoneWithinM === 0) {
+    return hit.detail.includes('浸水深')
+      ? hit.detail
+      : '地点は区域内推定（距離 0m）'
+  }
+  if (hit.nearestZoneWithinM != null) {
+    return `地点は区域外推定／区域まで約${hit.nearestZoneWithinM}m以内`
+  }
+  return `地点は区域外推定／${PROXIMITY_BANDS_M[PROXIMITY_BANDS_M.length - 1]}m以内には区域を検出せず`
+}
+
+async function sampleLayer(layer: LayerDef, lat: number, lon: number): Promise<ZoneHit> {
+  const center = await samplePoint(layer, lat, lon)
+  if (!center.ok) {
+    const z = center.zTried.join('→')
+    const detail =
+      center.failReason === 'pixel_read'
+        ? `未判定（画素読み取り失敗, z=${z}）`
+        : `未判定（タイル欠損/未配信, z=${z}）`
+    return {
+      id: layer.id,
+      label: layer.label,
+      inZone: null,
+      status: 'unknown',
+      detail,
+      sourceUrl: center.url,
+      legendUrl: 'legendUrl' in layer ? layer.legendUrl : undefined,
+      method: 'gsi-raster-sample',
+      valueType: 'computed',
+      failReason: center.failReason,
+      sampledAtZoom: center.zTried[center.zTried.length - 1],
+      nearestZoneWithinM: null,
+    }
+  }
+
+  if (center.inZone) {
+    let detail = '地点は区域内推定（距離 0m）'
+    if (center.depthLabel) detail = `地点は区域内推定（距離 0m／${center.depthLabel}）`
+    if (center.z !== ZOOM_CANDIDATES[0]) detail += `（z=${center.z}へフォールバック）`
+    return {
+      id: layer.id,
+      label: layer.label,
+      inZone: true,
+      status: 'in_zone',
+      detail,
+      sourceUrl: center.url,
+      legendUrl: 'legendUrl' in layer ? layer.legendUrl : undefined,
+      method: 'gsi-raster-sample',
+      valueType: 'computed',
+      sampledAtZoom: center.z,
+      nearestZoneWithinM: 0,
+    }
+  }
+
+  // 地点外 → 距離帯を外側へ探索
+  for (const radiusM of PROXIMITY_BANDS_M) {
+    const pts = ringPoints(lat, lon, radiusM)
+    const results = await Promise.all(pts.map((p) => samplePoint(layer, p.lat, p.lon)))
+    const hit = results.find((r) => r.ok && r.inZone)
+    if (hit && hit.ok) {
+      let detail = `地点は区域外推定／区域まで約${radiusM}m以内`
+      if (center.z !== ZOOM_CANDIDATES[0]) detail += `（地点z=${center.z}）`
+      return {
+        id: layer.id,
+        label: layer.label,
+        inZone: false,
+        status: 'nearby',
+        detail,
+        sourceUrl: center.url,
+        legendUrl: 'legendUrl' in layer ? layer.legendUrl : undefined,
+        method: 'gsi-raster-sample',
+        valueType: 'computed',
+        sampledAtZoom: center.z,
+        nearestZoneWithinM: radiusM,
+      }
+    }
+  }
+
+  const maxM = PROXIMITY_BANDS_M[PROXIMITY_BANDS_M.length - 1]
+  let detail = `地点は区域外推定／${maxM}m以内には区域を検出せず`
+  if (center.z !== ZOOM_CANDIDATES[0]) detail += `（z=${center.z}へフォールバック）`
+  return {
+    id: layer.id,
+    label: layer.label,
+    inZone: false,
+    status: 'likely_outside',
+    detail,
+    sourceUrl: center.url,
+    legendUrl: 'legendUrl' in layer ? layer.legendUrl : undefined,
+    method: 'gsi-raster-sample',
+    valueType: 'computed',
+    sampledAtZoom: center.z,
+    nearestZoneWithinM: null,
+  }
 }
 
 export function summarizeHazardStatus(hits: ZoneHit[]): {
@@ -247,11 +345,12 @@ export function summarizeHazardStatus(hits: ZoneHit[]): {
 } {
   const evaluated = hits.filter((h) => h.inZone !== null)
   const unknown = hits.filter((h) => h.inZone === null)
-  const inZone = hits.some((h) => h.inZone === true)
+  const onPoint = hits.some((h) => h.inZone === true)
+  const nearby = hits.some((h) => h.nearestZoneWithinM != null && h.nearestZoneWithinM > 0)
   const evaluatedCount = evaluated.length
   const unknownCount = unknown.length
 
-  if (inZone) {
+  if (onPoint) {
     return {
       status: 'in_zone',
       anyOfficialZone: true,
@@ -265,6 +364,24 @@ export function summarizeHazardStatus(hits: ZoneHit[]): {
       status: 'unevaluated',
       anyOfficialZone: false,
       fetchFailed: true,
+      evaluatedCount,
+      unknownCount,
+    }
+  }
+  if (nearby && unknownCount === 0) {
+    return {
+      status: 'nearby_zone',
+      anyOfficialZone: false,
+      fetchFailed: false,
+      evaluatedCount,
+      unknownCount,
+    }
+  }
+  if (nearby && unknownCount > 0) {
+    return {
+      status: 'nearby_zone',
+      anyOfficialZone: false,
+      fetchFailed: false,
       evaluatedCount,
       unknownCount,
     }
@@ -290,9 +407,11 @@ export function summarizeHazardStatus(hits: ZoneHit[]): {
 export function hazardStatusLabel(status: HazardEvalStatus): string {
   switch (status) {
     case 'in_zone':
-      return '公式区域に該当（機械判定）'
+      return '地点が公式区域内（機械判定）'
+    case 'nearby_zone':
+      return '地点外だが近傍に区域あり'
     case 'all_outside':
-      return '判定済み層は区域外推定'
+      return '判定済み層は近傍にも区域なし'
     case 'partially_evaluated':
       return '一部判定済み（未判定あり）'
     case 'unevaluated':
@@ -300,7 +419,21 @@ export function hazardStatusLabel(status: HazardEvalStatus): string {
   }
 }
 
+/** 比較表用: 最も近い区域距離帯を返す（m）。無しは null */
+export function nearestHazardDistanceM(zones: ZoneAssessment): number | null {
+  const dists = [
+    zones.flood.nearestZoneWithinM,
+    zones.sedimentSteep.nearestZoneWithinM,
+    zones.sedimentDebris.nearestZoneWithinM,
+    zones.sedimentSlide.nearestZoneWithinM,
+  ].filter((d): d is number => d != null)
+  if (!dists.length) return null
+  return Math.min(...dists)
+}
+
 export async function assessOfficialHazardZones(lat: number, lon: number): Promise<ZoneAssessment> {
+  tileCache.clear()
+  tileWaiters.clear()
   const results = await Promise.all([
     sampleLayer(LAYERS.flood, lat, lon),
     sampleLayer(LAYERS.sedimentSteep, lat, lon),
@@ -321,14 +454,13 @@ export async function assessOfficialHazardZones(lat: number, lon: number): Promi
     evaluatedCount: summary.evaluatedCount,
     unknownCount: summary.unknownCount,
     sampledAtZoom: ZOOM_CANDIDATES[0],
+    proximityBandsM: PROXIMITY_BANDS_M,
   }
 }
 
 /**
- * 発生側（区域該当）に応じた損害側テーブルキー。
- * 区域内該当があれば mid/high。
- * 未判定を「安全＝low」と断定しないが、シナリオ選定の既定は低ティアを使う
- *（表示上は発生側ステータスを別表示すること）。
+ * 発生側に応じた損害側テーブルキー。
+ * 地点が区域内なら mid/high。近傍のみの場合は mid（境界近接の注意）。
  */
 export function damageTierFromZones(
   zones: ZoneAssessment,
@@ -353,7 +485,9 @@ export function damageTierFromZones(
   }
   if (sediment) return 'mid'
 
-  // 区域該当が確認できない場合のシナリオ既定（≠安全宣言）
+  const near = nearestHazardDistanceM(zones)
+  if (near != null && near > 0 && near <= 30) return 'mid'
+
   if (elevationM != null && elevationM < 5) return 'mid'
   return 'low'
 }
