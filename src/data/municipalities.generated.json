@@ -1,12 +1,67 @@
 {
   "meta": {
-    "retrievedAt": "2026-08-14T05:19:57.380Z",
-    "notes": "各指標は field ごとに referenceDate / source を持つ。retrievedAt は取得日時であり、統計の対象時点ではない。",
+    "retrievedAt": "2026-08-14T05:27:48.693Z",
+    "notes": "e-Statは固定コードのみ使用。overrides の locked 値は人手検証優先。retrievedAtは取得日であり各指標の対象時点ではない。",
+    "coding": {
+      "agingRate": {
+        "field": "agingRate",
+        "statsDataId": "0000020301",
+        "cdCat01": "#A03503",
+        "fallbackCat01": [
+          "#A03506",
+          "#A4101"
+        ],
+        "unit": "%",
+        "label": "65歳以上人口割合（高齢化率）",
+        "convert": "percent"
+      },
+      "singleHouseholdRate": {
+        "field": "singleHouseholdRate",
+        "statsDataId": "0000020301",
+        "cdCat01": "#A06205",
+        "fallbackCat01": [
+          "#A06301"
+        ],
+        "unit": "%",
+        "label": "単独世帯割合",
+        "convert": "percent",
+        "forbiddenNameSubstrings": [
+          "65歳以上世帯員"
+        ]
+      },
+      "welfareRatePercent": {
+        "field": "welfareRatePercent",
+        "statsDataId": "0000020310",
+        "cdCat01": "#J01107",
+        "fallbackCat01": [
+          "#J2301",
+          "#J01101"
+        ],
+        "fallbackStatsDataIds": [
+          "0000020210",
+          "0000020301"
+        ],
+        "unit": "%",
+        "label": "生活保護被保護実人員（人口千人当たり）→%",
+        "convert": "perThousandToPercent"
+      },
+      "crimePer100People": {
+        "field": "crimePer100People",
+        "statsDataId": "0000020311",
+        "cdCat01": "#K06101",
+        "fallbackCat01": [
+          "#K4101"
+        ],
+        "unit": "件/100人・年",
+        "label": "刑法犯認知件数（人口千人当たり）→100人あたり",
+        "convert": "perThousandToPer100"
+      }
+    },
     "fields": {
-      "agingRate": "高齢化率（65歳以上人口割合）",
-      "singleHouseholdRate": "一般世帯に占める単独世帯割合（高齢単独世帯は除外）",
-      "welfareRatePercent": "生活保護（人口千対を%換算）",
-      "crimePer100People": "刑法犯認知（人口千対を100人あたり換算）"
+      "agingRate": "65歳以上人口割合（高齢化率）",
+      "singleHouseholdRate": "単独世帯割合",
+      "welfareRatePercent": "生活保護被保護実人員（人口千人当たり）→%",
+      "crimePer100People": "刑法犯認知件数（人口千人当たり）→100人あたり"
     }
   },
   "municipalities": [
@@ -27,9 +82,9 @@
           "value": 16.3,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.313Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -56,9 +111,9 @@
           "value": 13.03,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -80,9 +135,9 @@
           "value": 16.3,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.313Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -109,9 +164,9 @@
           "value": 4.81,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -133,9 +188,9 @@
           "value": 18.1,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -162,9 +217,9 @@
           "value": 3.72,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -186,9 +241,9 @@
           "value": 20.1,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -215,9 +270,9 @@
           "value": 1.75,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -239,9 +294,9 @@
           "value": 16.9,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -268,9 +323,9 @@
           "value": 4.99,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -292,9 +347,9 @@
           "value": 21.2,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -321,9 +376,9 @@
           "value": 1.63,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -345,9 +400,9 @@
           "value": 24.5,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -374,9 +429,9 @@
           "value": 2.19,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -398,9 +453,9 @@
           "value": 24.7,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -427,9 +482,9 @@
           "value": 1.78,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -451,9 +506,9 @@
           "value": 20.9,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -480,9 +535,9 @@
           "value": 2.07,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -504,9 +559,9 @@
           "value": 24.4,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -533,9 +588,9 @@
           "value": 1.53,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -557,9 +612,9 @@
           "value": 19.6,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -586,9 +641,9 @@
           "value": 1.67,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -610,9 +665,9 @@
           "value": 25.5,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -639,9 +694,9 @@
           "value": 1.87,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -663,9 +718,9 @@
           "value": 23,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -692,9 +747,9 @@
           "value": 2.51,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -716,9 +771,9 @@
           "value": 23.2,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -745,9 +800,9 @@
           "value": 2.68,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -769,9 +824,9 @@
           "value": 25.6,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -798,9 +853,9 @@
           "value": 2.59,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -822,9 +877,9 @@
           "value": 23.8,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -851,9 +906,9 @@
           "value": 2.21,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -875,9 +930,9 @@
           "value": 25.6,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -904,9 +959,9 @@
           "value": 2.26,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -928,9 +983,9 @@
           "value": 25.8,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -957,9 +1012,9 @@
           "value": 2.22,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -984,7 +1039,8 @@
           "source": "東金市 住民基本台帳（人手検証）",
           "referenceDate": "2026-04-01",
           "catName": "高齢化率 = 65歳以上 / 総人口",
-          "locked": true
+          "locked": true,
+          "retrievedAt": "2026-08-14T05:27:48.693Z"
         },
         "singleHouseholdRate": {
           "value": 36.1,
@@ -993,7 +1049,8 @@
           "source": "国勢調査2020 / 東金市資料（人手検証）",
           "referenceDate": "2020-10-01",
           "catName": "単独世帯 / 一般世帯",
-          "locked": true
+          "locked": true,
+          "retrievedAt": "2026-08-14T05:27:48.693Z"
         },
         "welfareRatePercent": {
           "value": 1.48,
@@ -1002,7 +1059,8 @@
           "source": "東金市公表 生活保護率 14.80‰（人手検証）",
           "referenceDate": "2020",
           "catName": "生活保護率",
-          "locked": true
+          "locked": true,
+          "retrievedAt": "2026-08-14T05:27:48.693Z"
         },
         "crimePer100People": {
           "value": 0.89,
@@ -1012,7 +1070,8 @@
           "referenceDate": "2025",
           "catName": "刑法犯認知件数 / 人口",
           "formula": "501 / 56000 * 100 ≈ 0.89",
-          "locked": true
+          "locked": true,
+          "retrievedAt": "2026-08-14T05:27:48.693Z"
         }
       }
     },
@@ -1033,9 +1092,9 @@
           "value": 21.3,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -1062,9 +1121,9 @@
           "value": 3.2,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -1086,9 +1145,9 @@
           "value": 30.2,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -1115,9 +1174,9 @@
           "value": 1.59,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -1139,9 +1198,9 @@
           "value": 27.9,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -1168,9 +1227,9 @@
           "value": 1.47,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -1192,9 +1251,9 @@
           "value": 24.3,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -1221,9 +1280,9 @@
           "value": 3.6,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -1300,9 +1359,9 @@
           "value": 24.6,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -1329,9 +1388,9 @@
           "value": 4.06,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -1353,9 +1412,9 @@
           "value": 28.2,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -1382,9 +1441,9 @@
           "value": 2.73,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -1406,9 +1465,9 @@
           "value": 27.5,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -1435,9 +1494,9 @@
           "value": 2.35,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -1459,9 +1518,9 @@
           "value": 26.9,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -1488,9 +1547,9 @@
           "value": 2.57,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -1512,9 +1571,9 @@
           "value": 25.1,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -1541,9 +1600,9 @@
           "value": 1.57,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -1565,9 +1624,9 @@
           "value": 30.5,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -1594,9 +1653,9 @@
           "value": 2.21,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -1618,9 +1677,9 @@
           "value": 21,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -1647,9 +1706,9 @@
           "value": 2.66,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -1671,9 +1730,9 @@
           "value": 27.4,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -1700,9 +1759,9 @@
           "value": 1.7,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -1724,9 +1783,9 @@
           "value": 23.5,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -1753,9 +1812,9 @@
           "value": 1.72,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -1777,9 +1836,9 @@
           "value": 25.9,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -1806,9 +1865,9 @@
           "value": 1.65,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -1830,9 +1889,9 @@
           "value": 22.8,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -1859,9 +1918,9 @@
           "value": 1.83,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -1883,9 +1942,9 @@
           "value": 29.3,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -1912,9 +1971,9 @@
           "value": 1.54,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
@@ -1936,9 +1995,9 @@
           "value": 29,
           "unit": "%",
           "valueType": "official",
-          "source": "e-Stat 0000020301 / Ａ　人口・世帯",
+          "source": "e-Stat 0000020301 / #A03506",
           "referenceDate": "2020年度",
-          "retrievedAt": "2026-08-14T05:19:54.643Z",
+          "retrievedAt": "2026-08-14T05:27:45.314Z",
           "catName": "#A03506_65歳以上人口割合"
         },
         "singleHouseholdRate": {
@@ -1965,9 +2024,9 @@
           "value": 1.28,
           "unit": "件/100人・年",
           "valueType": "official",
-          "source": "e-Stat 0000020311 / Ｋ　安全",
+          "source": "e-Stat 0000020311 / #K06101",
           "referenceDate": "2005年度",
-          "retrievedAt": "2026-08-14T05:19:57.380Z",
+          "retrievedAt": "2026-08-14T05:27:48.693Z",
           "catName": "#K06101_刑法犯認知件数（人口千人当たり）"
         }
       }
