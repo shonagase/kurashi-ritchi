@@ -1,6 +1,7 @@
 import type { MunicipalityProfile } from './data/municipalities'
 import type { TransitStop } from './lib/geo'
 import type { ZoneAssessment } from './lib/hazardZones'
+import type { RainContext } from './lib/rainContext'
 import type { HazardLevel } from './lib/risk'
 
 export type Candidate = {
@@ -17,6 +18,8 @@ export type Candidate = {
   hazardLevel: HazardLevel
   /** 発生側: 公式ハザード区域の機械判定 */
   zones: ZoneAssessment
+  /** 近傍の直近雨量（参考。浸水証明ではない） */
+  rain: RainContext
   municipality: MunicipalityProfile
   stations: TransitStop[]
   buses: TransitStop[]

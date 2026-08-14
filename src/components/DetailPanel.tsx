@@ -5,6 +5,7 @@ import {
   statsMeta,
   type MetricMeta,
 } from '../data/municipalities'
+import { getFloodHistoryLink } from '../data/floodHistory'
 import { FORMULAS, VALUE_TYPE_LABEL, type ValueType } from '../lib/formulas'
 import { officialHazardMapUrl } from '../lib/geo'
 import { hazardStatusLabel } from '../lib/hazardZones'
@@ -61,6 +62,8 @@ export function DetailPanel({ candidate }: Props) {
   const impact = lossImpactPercent(candidate.purchaseManYen, range.max)
   const scenarios = REPAIR_SCENARIOS[level] ?? REPAIR_SCENARIOS.mid
   const m = candidate.municipality
+  const floodHistory = getFloodHistoryLink(m.id)
+  const rain = candidate.rain
 
   return (
     <aside className="detail-panel">
@@ -103,7 +106,8 @@ export function DetailPanel({ candidate }: Props) {
         <TypeBadge type="computed" /> 発生側：公式ハザードの機械判定
       </h3>
       <p className="muted small">
-        判定方式: 公式ハザードマップのラスタタイル地点サンプリング（z={candidate.zones.sampledAtZoom}）。
+        判定方式: 公式ハザードマップのラスタタイル地点サンプリング（基準z=
+        {candidate.zones.sampledAtZoom}、欠損時は下位ズームへフォールバック）。
         区域外推定は安全宣言ではありません。警戒区域外でも災害が起きうる場合があります。
       </p>
       <ul className="plain-list">
@@ -118,6 +122,9 @@ export function DetailPanel({ candidate }: Props) {
               <TypeBadge type={z.valueType} />
               <strong>{z.label}</strong>: {z.detail}
             </div>
+            {z.sampledAtZoom != null && (
+              <div className="muted small">使用ズーム: z={z.sampledAtZoom}</div>
+            )}
           </li>
         ))}
       </ul>
@@ -126,6 +133,59 @@ export function DetailPanel({ candidate }: Props) {
           <TypeBadge type="computed" /> 標高補助: {candidate.elevationM.toFixed(1)}m
           {candidate.elevationHsrc ? `（hsrc: ${candidate.elevationHsrc}）` : ''}
           ／ {FORMULAS.hazardFromElevation.note}
+        </p>
+      )}
+
+      <h3>
+        <TypeBadge type="estimate" /> 直近の雨量コンテキスト（参考）
+      </h3>
+      {rain.failed || rain.precipMm72h == null ? (
+        <p className="muted">雨量コンテキストを取得できませんでした。</p>
+      ) : (
+        <ul className="plain-list">
+          <li className="metric-line">
+            <div className="metric-main">
+              <TypeBadge type="estimate" />
+              <strong>直近約72時間の累積雨量</strong>: {rain.precipMm72h}mm
+            </div>
+          </li>
+          <li className="metric-line">
+            <div className="metric-main">
+              <TypeBadge type="estimate" />
+              <strong>期間内の最大時間雨量</strong>: {rain.maxHourlyMm ?? '—'}mm
+            </div>
+          </li>
+        </ul>
+      )}
+      <p className="note">
+        ※{rain.note} 出典: {rain.source}
+      </p>
+
+      <h3>
+        <TypeBadge type="official" /> 過去浸水（公的資料）
+      </h3>
+      <p className="muted small">
+        浸水実績の公開形態は自治体・河川ごとに異なり、全国一律の地点自動照合は未対応です。
+        ここは公的案内へのリンク／要約であり、「この座標が浸水した／していない」の判定ではありません。
+      </p>
+      {floodHistory ? (
+        <div className="flood-history-card">
+          <p>
+            <strong>{floodHistory.title}</strong>
+          </p>
+          <p className="muted small">{floodHistory.summary}</p>
+          <p className="muted small">
+            対象: {floodHistory.asOf} ／ {floodHistory.note}
+          </p>
+          <p className="source-line">
+            <a href={floodHistory.url} target="_blank" rel="noreferrer">
+              公的資料を開く
+            </a>
+          </p>
+        </div>
+      ) : (
+        <p className="muted">
+          この市区町村の浸水実績リンクは未整備です。下記の公式地図で確認してください。
         </p>
       )}
 

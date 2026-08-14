@@ -6,6 +6,7 @@ import { RegionStatsTab } from './components/RegionStatsTab'
 import { DATA_SOURCES, findNearestMunicipality, statsMeta } from './data/municipalities'
 import { fetchElevation, fetchNearbyTransit, searchAddress } from './lib/geo'
 import { assessOfficialHazardZones, damageTierFromZones } from './lib/hazardZones'
+import { fetchRainContext } from './lib/rainContext'
 import type { Candidate, SortKey } from './types'
 import './App.css'
 
@@ -56,10 +57,11 @@ export default function App() {
     lat: number
     lon: number
   }): Promise<Candidate> {
-    const [elevation, transit, zones] = await Promise.all([
+    const [elevation, transit, zones, rain] = await Promise.all([
       fetchElevation(input.lat, input.lon),
       fetchNearbyTransit(input.lat, input.lon),
       assessOfficialHazardZones(input.lat, input.lon),
+      fetchRainContext(input.lat, input.lon),
     ])
     const elevationM = elevation?.elevationM ?? null
     const hazardLevel = damageTierFromZones(zones, elevationM)
@@ -76,6 +78,7 @@ export default function App() {
       elevationHsrc: elevation?.hsrc ?? null,
       hazardLevel,
       zones,
+      rain,
       municipality,
       stations: transit.stations,
       buses: transit.buses,
@@ -243,7 +246,11 @@ export default function App() {
                 デモ3件を読み込む
               </button>
             </div>
-            {loading && <p className="status">分析中…（標高・公式ハザード区域・周辺交通を取得）</p>}
+            {loading && (
+              <p className="status">
+                分析中…（標高・公式ハザード区域・周辺交通・直近雨量コンテキストを取得）
+              </p>
+            )}
             {error && <p className="error">{error}</p>}
           </section>
 

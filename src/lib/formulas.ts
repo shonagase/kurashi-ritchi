@@ -45,4 +45,10 @@ export const FORMULAS = {
     formula: '損害ティアに応じた固定ヒューリスティック',
     note: '発生確率を掛けた期待損失ではない。物理最大損害でもない。',
   },
+  rainContext: {
+    label: '直近雨量コンテキスト',
+    valueType: 'estimate' as ValueType,
+    formula: 'Open-Meteo 地点グリッドの直近約72時間降水',
+    note: '浸水証明ではない。過去浸水実績の代替にもならない。',
+  },
 } as const

@@ -32,6 +32,10 @@ export type ZoneHit = {
   method: 'gsi-raster-sample'
   /** 公的ラスタに基づく機械判定 → 計算値 */
   valueType: ValueType
+  /** 実際にサンプリングしたズーム（フォールバック時は Z より小さい） */
+  sampledAtZoom?: number
+  /** 未判定時の理由コード */
+  failReason?: 'tile_missing' | 'pixel_read' | 'network'
 }
 
 export type ZoneAssessment = {
@@ -47,10 +51,11 @@ export type ZoneAssessment = {
   status: HazardEvalStatus
   evaluatedCount: number
   unknownCount: number
+  /** 要求ズーム（フォールバック前） */
   sampledAtZoom: number
 }
 
-const Z = 15 // 地点判定用。細かすぎるとタイル欠損、粗すぎると誤判定
+const ZOOM_CANDIDATES = [15, 14, 13] as const
 
 const LAYERS = {
   flood: {
@@ -93,13 +98,17 @@ function latLonToTile(lat: number, lon: number, z: number) {
   return { x, y, px: Math.min(255, Math.floor(xF * 256)), py: Math.min(255, Math.floor(yF * 256)) }
 }
 
-function loadImage(url: string): Promise<HTMLImageElement | null> {
+function loadImage(url: string): Promise<{ img: HTMLImageElement | null; failReason: 'tile_missing' | 'network' | null }> {
   return new Promise((resolve) => {
     const img = new Image()
     img.crossOrigin = 'anonymous'
-    img.onload = () => resolve(img)
-    img.onerror = () => resolve(null)
-    img.src = url
+    img.onload = () => resolve({ img, failReason: null })
+    img.onerror = () => resolve({ img: null, failReason: 'tile_missing' })
+    try {
+      img.src = url
+    } catch {
+      resolve({ img: null, failReason: 'network' })
+    }
   })
 }
 
@@ -140,10 +149,19 @@ function classifyFloodDepth(r: number, g: number, b: number): string {
   return best.label
 }
 
+function failDetail(reason: 'tile_missing' | 'pixel_read' | 'network', zoomsTried: number[]): string {
+  const z = zoomsTried.join('→')
+  if (reason === 'tile_missing') return `未判定（タイル欠損/未配信, z=${z}）`
+  if (reason === 'pixel_read') return `未判定（画素読み取り失敗, z=${z}）`
+  return `未判定（通信エラー, z=${z}）`
+}
+
 function unknownHit(
   layer: (typeof LAYERS)[keyof typeof LAYERS],
   detail: string,
   url: string,
+  failReason: ZoneHit['failReason'],
+  sampledAtZoom?: number,
 ): ZoneHit {
   return {
     id: layer.id,
@@ -155,6 +173,50 @@ function unknownHit(
     legendUrl: 'legendUrl' in layer ? layer.legendUrl : undefined,
     method: 'gsi-raster-sample',
     valueType: 'computed',
+    failReason,
+    sampledAtZoom,
+  }
+}
+
+async function sampleLayerAtZoom(
+  layer: (typeof LAYERS)[keyof typeof LAYERS],
+  lat: number,
+  lon: number,
+  z: number,
+): Promise<{ hit: ZoneHit | null; lastUrl: string; failReason: ZoneHit['failReason'] }> {
+  const { x, y, px, py } = latLonToTile(lat, lon, z)
+  const url = layer.url.replace('{z}', String(z)).replace('{x}', String(x)).replace('{y}', String(y))
+  const { img, failReason } = await loadImage(url)
+  if (!img) {
+    return { hit: null, lastUrl: url, failReason: failReason ?? 'tile_missing' }
+  }
+  const pix = samplePixel(img, px, py)
+  if (!pix) {
+    return { hit: null, lastUrl: url, failReason: 'pixel_read' }
+  }
+  const inZone = pix.a > 30
+  let detail = inZone ? '機械判定：区域内推定' : '機械判定：区域外推定'
+  if (inZone && layer.kind === 'flood') {
+    detail = `機械判定：区域内推定（${classifyFloodDepth(pix.r, pix.g, pix.b)}）`
+  }
+  if (z !== ZOOM_CANDIDATES[0]) {
+    detail += `（z=${z}へフォールバック）`
+  }
+  return {
+    hit: {
+      id: layer.id,
+      label: layer.label,
+      inZone,
+      status: inZone ? 'in_zone' : 'likely_outside',
+      detail,
+      sourceUrl: url,
+      legendUrl: 'legendUrl' in layer ? layer.legendUrl : undefined,
+      method: 'gsi-raster-sample',
+      valueType: 'computed',
+      sampledAtZoom: z,
+    },
+    lastUrl: url,
+    failReason: undefined,
   }
 }
 
@@ -162,36 +224,18 @@ async function sampleLayer(
   layer: (typeof LAYERS)[keyof typeof LAYERS],
   lat: number,
   lon: number,
-  z: number,
 ): Promise<ZoneHit> {
-  const { x, y, px, py } = latLonToTile(lat, lon, z)
-  const url = layer.url.replace('{z}', String(z)).replace('{x}', String(x)).replace('{y}', String(y))
-  const img = await loadImage(url)
-  if (!img) {
-    return unknownHit(layer, '未判定（タイル取得失敗）', url)
+  const tried: number[] = []
+  let lastUrl = ''
+  let lastFail: ZoneHit['failReason'] = 'tile_missing'
+  for (const z of ZOOM_CANDIDATES) {
+    tried.push(z)
+    const result = await sampleLayerAtZoom(layer, lat, lon, z)
+    lastUrl = result.lastUrl
+    if (result.hit) return result.hit
+    lastFail = result.failReason
   }
-  const pix = samplePixel(img, px, py)
-  if (!pix) {
-    return unknownHit(layer, '未判定（画素読み取り失敗）', url)
-  }
-  const inZone = pix.a > 30
-  let detail = inZone
-    ? '機械判定：区域内推定'
-    : '機械判定：区域外推定'
-  if (inZone && layer.kind === 'flood') {
-    detail = `機械判定：区域内推定（${classifyFloodDepth(pix.r, pix.g, pix.b)}）`
-  }
-  return {
-    id: layer.id,
-    label: layer.label,
-    inZone,
-    status: inZone ? 'in_zone' : 'likely_outside',
-    detail,
-    sourceUrl: url,
-    legendUrl: 'legendUrl' in layer ? layer.legendUrl : undefined,
-    method: 'gsi-raster-sample',
-    valueType: 'computed',
-  }
+  return unknownHit(layer, failDetail(lastFail ?? 'tile_missing', tried), lastUrl, lastFail, tried[tried.length - 1])
 }
 
 export function summarizeHazardStatus(hits: ZoneHit[]): {
@@ -258,10 +302,10 @@ export function hazardStatusLabel(status: HazardEvalStatus): string {
 
 export async function assessOfficialHazardZones(lat: number, lon: number): Promise<ZoneAssessment> {
   const results = await Promise.all([
-    sampleLayer(LAYERS.flood, lat, lon, Z),
-    sampleLayer(LAYERS.sedimentSteep, lat, lon, Z),
-    sampleLayer(LAYERS.sedimentDebris, lat, lon, Z),
-    sampleLayer(LAYERS.sedimentSlide, lat, lon, Z),
+    sampleLayer(LAYERS.flood, lat, lon),
+    sampleLayer(LAYERS.sedimentSteep, lat, lon),
+    sampleLayer(LAYERS.sedimentDebris, lat, lon),
+    sampleLayer(LAYERS.sedimentSlide, lat, lon),
   ])
   const [flood, sedimentSteep, sedimentDebris, sedimentSlide] = results
   const summary = summarizeHazardStatus(results)
@@ -276,7 +320,7 @@ export async function assessOfficialHazardZones(lat: number, lon: number): Promi
     status: summary.status,
     evaluatedCount: summary.evaluatedCount,
     unknownCount: summary.unknownCount,
-    sampledAtZoom: Z,
+    sampledAtZoom: ZOOM_CANDIDATES[0],
   }
 }
 

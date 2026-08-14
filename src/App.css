@@ -146,6 +146,18 @@ a {
   grid-template-columns: 1fr;
 }
 
+.flood-history-card {
+  margin: 0.5rem 0 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--paper) 70%, white);
+}
+
+.flood-history-card p {
+  margin: 0.35rem 0;
+}
+
 .filter-check {
   display: inline-flex;
   align-items: center;
