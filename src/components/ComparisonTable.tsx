@@ -141,6 +141,11 @@ export function ComparisonTable({
                       <span className="badge badge-low">近傍にもなし</span>
                       <div className="muted small">100m以内未検出（≠安全）</div>
                     </>
+                  ) : c.zones.status === 'skipped_low_precision' ? (
+                    <>
+                      <span className="badge badge-mid">精度不足でスキップ</span>
+                      <div className="muted small">物件固有判定なし</div>
+                    </>
                   ) : c.zones.status === 'partially_evaluated' ? (
                     <>
                       <span className="badge badge-mid">一部判定済み</span>

@@ -1,33 +1,36 @@
 /**
  * ハザードマップポータル（国土地理院）の公式ラスタタイルを地点・近傍サンプリングし、
- * 洪水・土砂区域への該当と「区域までの距離帯」を機械判定する。
+ * 水害・土砂等への該当と「区域までの距離帯」を機械判定する。
  *
  * 注意:
  * - 行政による「区域外証明」ではない。公式データのラスタからの推定。
+ * - 河川洪水タイルは複数河川シナリオの統合配信であり、荒川／江戸川等の個別シナリオではない。
  * - 属性付きポリゴンの厳密な空間結合ではない。
- * - 未判定（タイル取得失敗等）を「区域外」に丸めないこと。
- * - 距離は円周上の離散サンプリングによる「○m以内」帯であり、最短距離の厳密値ではない。
+ * - 未判定を「区域外」に丸めないこと。
+ * - distance_to_hazard_area と distance_to_boundary を混同しないこと。
  * - 最終確認は公式「重ねるハザードマップ」で行うこと。
  */
 
+import { hazardProfileForMunicipality, type HazardAxisId, type HazardProfile } from '../data/hazardProfiles'
 import type { ValueType } from './formulas'
 
 export type ZoneHitStatus = 'in_zone' | 'nearby' | 'likely_outside' | 'unknown'
 
-/** 4層を踏まえた総合ステータス。unknown を安全側に丸めない */
+/** 総合ステータス。unknown を安全側に丸めない */
 export type HazardEvalStatus =
   | 'in_zone'
   | 'nearby_zone'
   | 'all_outside'
   | 'partially_evaluated'
   | 'unevaluated'
+  | 'skipped_low_precision'
 
 /** 近傍探索の距離帯（m）。表示もこの単位で出す */
 export const PROXIMITY_BANDS_M = [10, 20, 30, 50, 100] as const
 const BEARING_COUNT = 8
 
 export type ZoneHit = {
-  id: string
+  id: HazardAxisId | string
   label: string
   /** true=地点が区域内推定, false=地点は区域外推定, null=未判定 */
   inZone: boolean | null
@@ -35,7 +38,7 @@ export type ZoneHit = {
   detail: string
   sourceUrl: string
   legendUrl?: string
-  method: 'gsi-raster-sample'
+  method: 'gsi-raster-sample' | 'unsupported' | 'skipped'
   valueType: ValueType
   sampledAtZoom?: number
   failReason?:
@@ -46,22 +49,38 @@ export type ZoneHit = {
     | 'outside_coverage'
     | 'unsupported'
   /**
-   * 区域を検出した最短の距離帯（m）。
-   * 0 = 地点そのものが区域内
-   * 10/20/30/50/100 = その半径以内に区域あり
-   * null = 100m以内に未検出、または未判定
+   * 区域までの距離帯（m）。
+   * 0 = 地点が区域内（distance_to_hazard_area = 0）
+   * 10/20/… = その半径以内に区域あり
+   * null = 未検出または未判定
    */
+  distanceToHazardAreaM: number | null
+  /** @deprecated distanceToHazardAreaM を使う */
   nearestZoneWithinM: number | null
-  /** 境界までの厳密距離は未計算（離散帯のみ） */
-  boundaryDistance: 'unknown' | number
+  /**
+   * 区域境界線までの距離（m）。
+   * ラスタ地点判定では計算不可 → 常に null。
+   * 「区域内」でも境界まで0mとは限らない。
+   */
+  distanceToBoundaryM: null
+  /** シナリオID。河川別分割前は composite / null */
+  scenario: string | null
+  scenarioNote?: string
   methodConfidence: 'low' | 'medium' | 'high'
+  priority: 'priority' | 'secondary'
 }
 
 export type ZoneAssessment = {
   flood: ZoneHit
+  stormSurge: ZoneHit
+  inlandFlood: ZoneHit
+  liquefaction: ZoneHit
   sedimentSteep: ZoneHit
   sedimentDebris: ZoneHit
   sedimentSlide: ZoneHit
+  /** 表示順（プロファイル反映） */
+  displayOrder: ZoneHit[]
+  profile: HazardProfile
   anyOfficialZone: boolean
   fetchFailed: boolean
   status: HazardEvalStatus
@@ -75,29 +94,54 @@ const ZOOM_CANDIDATES = [15, 14, 13] as const
 
 const LAYERS = {
   flood: {
-    id: 'flood',
-    label: '洪水浸水想定区域（想定最大規模）',
+    id: 'flood' as const,
+    label: '河川洪水浸水想定（想定最大・統合タイル）',
     url: 'https://disaportaldata.gsi.go.jp/raster/01_flood_l2_shinsuishin_data/{z}/{x}/{y}.png',
     legendUrl: 'https://disaportal.gsi.go.jp/hazardmap/copyright/img/shinsui_legend2-1.png',
     kind: 'flood' as const,
+    scenario: 'river_flood_l2_max_composite',
+    scenarioNote:
+      '荒川・江戸川・利根川等の個別シナリオではなく、配信タイル上の重畳／統合結果。個別シナリオ分割は未実装。',
+  },
+  stormSurge: {
+    id: 'stormSurge' as const,
+    label: '高潮浸水想定区域',
+    url: 'https://disaportaldata.gsi.go.jp/raster/03_hightide_l2_shinsuishin_data/{z}/{x}/{y}.png',
+    kind: 'flood' as const,
+    scenario: 'storm_surge_l2',
+    scenarioNote: '高潮シナリオ（統合タイル）。',
+  },
+  inlandFlood: {
+    id: 'inlandFlood' as const,
+    label: '内水（雨水出水）浸水想定区域',
+    url: 'https://disaportaldata.gsi.go.jp/raster/02_naisui_data/{z}/{x}/{y}.png',
+    kind: 'flood' as const,
+    scenario: 'inland_flood',
+    scenarioNote: '内水シナリオ。河川氾濫・高潮は含まない（配信仕様）。',
   },
   sedimentSteep: {
-    id: 'sedimentSteep',
+    id: 'sedimentSteep' as const,
     label: '土砂災害警戒区域（急傾斜地の崩壊）',
     url: 'https://disaportaldata.gsi.go.jp/raster/05_kyukeishakeikaikuiki/{z}/{x}/{y}.png',
     kind: 'sediment' as const,
+    scenario: 'sediment_steep',
+    scenarioNote: undefined as string | undefined,
   },
   sedimentDebris: {
-    id: 'sedimentDebris',
+    id: 'sedimentDebris' as const,
     label: '土砂災害警戒区域（土石流）',
     url: 'https://disaportaldata.gsi.go.jp/raster/05_dosekiryukeikaikuiki/{z}/{x}/{y}.png',
     kind: 'sediment' as const,
+    scenario: 'sediment_debris',
+    scenarioNote: undefined as string | undefined,
   },
   sedimentSlide: {
-    id: 'sedimentSlide',
+    id: 'sedimentSlide' as const,
     label: '土砂災害警戒区域（地すべり）',
     url: 'https://disaportaldata.gsi.go.jp/raster/05_jisuberikeikaikuiki/{z}/{x}/{y}.png',
     kind: 'sediment' as const,
+    scenario: 'sediment_slide',
+    scenarioNote: undefined as string | undefined,
   },
 }
 
@@ -255,13 +299,13 @@ function ringPoints(lat: number, lon: number, radiusM: number) {
 
 export function formatZoneProximity(hit: ZoneHit): string {
   if (hit.inZone === null) return hit.detail
-  if (hit.nearestZoneWithinM === 0) {
+  if (hit.distanceToHazardAreaM === 0) {
     return hit.detail.includes('浸水深')
       ? hit.detail
-      : '地点は区域内推定（距離 0m）'
+      : '地点は区域内推定（distance_to_hazard_area=0m／境界距離は未計算）'
   }
-  if (hit.nearestZoneWithinM != null) {
-    return `地点は区域外推定／区域まで約${hit.nearestZoneWithinM}m以内`
+  if (hit.distanceToHazardAreaM != null) {
+    return `地点は区域外推定／区域まで約${hit.distanceToHazardAreaM}m以内`
   }
   return `地点は区域外推定／${PROXIMITY_BANDS_M[PROXIMITY_BANDS_M.length - 1]}m以内には区域を検出せず`
 }
@@ -280,24 +324,35 @@ function unknownDetail(failReason: NonNullable<ZoneHit['failReason']>, zTried: n
     case 'outside_coverage':
       return `未判定（OUTSIDE_COVERAGE: 配信範囲外の可能性, z=${z}）`
     case 'unsupported':
-      return `未判定（UNSUPPORTED: 判定非対応, z=${z}）`
+      return `未判定（UNSUPPORTED: 全国ラスタ未配信, z=${z}）`
   }
 }
 
 function hitBase(
   layer: LayerDef,
   partial: Partial<ZoneHit> &
-    Pick<ZoneHit, 'inZone' | 'status' | 'detail' | 'sourceUrl' | 'nearestZoneWithinM'>,
+    Pick<ZoneHit, 'inZone' | 'status' | 'detail' | 'sourceUrl' | 'distanceToHazardAreaM'>,
 ): ZoneHit {
+  const dist = partial.distanceToHazardAreaM ?? null
   return {
     id: layer.id,
     label: layer.label,
+    inZone: partial.inZone,
+    status: partial.status,
+    detail: partial.detail,
+    sourceUrl: partial.sourceUrl,
     method: 'gsi-raster-sample',
     valueType: 'computed',
     legendUrl: 'legendUrl' in layer ? layer.legendUrl : undefined,
-    boundaryDistance: 'unknown',
-    methodConfidence: 'medium',
-    ...partial,
+    failReason: partial.failReason,
+    sampledAtZoom: partial.sampledAtZoom,
+    scenario: layer.scenario,
+    scenarioNote: layer.scenarioNote,
+    methodConfidence: partial.methodConfidence ?? 'medium',
+    priority: partial.priority ?? 'priority',
+    distanceToHazardAreaM: dist,
+    nearestZoneWithinM: dist,
+    distanceToBoundaryM: null,
   }
 }
 
@@ -311,14 +366,18 @@ async function sampleLayer(layer: LayerDef, lat: number, lon: number): Promise<Z
       sourceUrl: center.url,
       failReason: center.failReason,
       sampledAtZoom: center.zTried[center.zTried.length - 1],
-      nearestZoneWithinM: null,
+      distanceToHazardAreaM: null,
       methodConfidence: 'low',
     })
   }
 
   if (center.inZone) {
-    let detail = '地点は区域内推定（距離 0m）'
-    if (center.depthLabel) detail = `地点は区域内推定（距離 0m／${center.depthLabel}）`
+    let detail =
+      '地点は区域内推定（distance_to_hazard_area=0m／distance_to_boundary=未計算）'
+    if (center.depthLabel) {
+      detail = `地点は区域内推定（distance_to_hazard_area=0m／${center.depthLabel}／境界距離未計算）`
+    }
+    if (layer.scenarioNote) detail += ` ※${layer.scenarioNote}`
     if (center.z !== ZOOM_CANDIDATES[0]) detail += `（z=${center.z}へフォールバック）`
     return hitBase(layer, {
       inZone: true,
@@ -326,19 +385,17 @@ async function sampleLayer(layer: LayerDef, lat: number, lon: number): Promise<Z
       detail,
       sourceUrl: center.url,
       sampledAtZoom: center.z,
-      nearestZoneWithinM: 0,
-      boundaryDistance: 0,
+      distanceToHazardAreaM: 0,
       methodConfidence: center.z === ZOOM_CANDIDATES[0] ? 'medium' : 'low',
     })
   }
 
-  // 地点外 → 距離帯を外側へ探索
   for (const radiusM of PROXIMITY_BANDS_M) {
     const pts = ringPoints(lat, lon, radiusM)
     const results = await Promise.all(pts.map((p) => samplePoint(layer, p.lat, p.lon)))
     const hit = results.find((r) => r.ok && r.inZone)
     if (hit && hit.ok) {
-      let detail = `地点は区域外推定／区域まで約${radiusM}m以内`
+      let detail = `地点は区域外推定／区域まで約${radiusM}m以内（境界距離未計算）`
       if (center.z !== ZOOM_CANDIDATES[0]) detail += `（地点z=${center.z}）`
       return hitBase(layer, {
         inZone: false,
@@ -346,15 +403,14 @@ async function sampleLayer(layer: LayerDef, lat: number, lon: number): Promise<Z
         detail,
         sourceUrl: center.url,
         sampledAtZoom: center.z,
-        nearestZoneWithinM: radiusM,
-        boundaryDistance: 'unknown',
+        distanceToHazardAreaM: radiusM,
         methodConfidence: 'medium',
       })
     }
   }
 
   const maxM = PROXIMITY_BANDS_M[PROXIMITY_BANDS_M.length - 1]
-  let detail = `地点は区域外推定／${maxM}m以内には区域を検出せず`
+  let detail = `地点は区域外推定／${maxM}m以内には区域を検出せず（境界距離未計算）`
   if (center.z !== ZOOM_CANDIDATES[0]) detail += `（z=${center.z}へフォールバック・境界精度注意）`
   return hitBase(layer, {
     inZone: false,
@@ -362,10 +418,53 @@ async function sampleLayer(layer: LayerDef, lat: number, lon: number): Promise<Z
     detail,
     sourceUrl: center.url,
     sampledAtZoom: center.z,
-    nearestZoneWithinM: null,
-    boundaryDistance: 'unknown',
+    distanceToHazardAreaM: null,
     methodConfidence: center.z === ZOOM_CANDIDATES[0] ? 'medium' : 'low',
   })
+}
+
+function liquefactionUnsupported(municipalityId: string): ZoneHit {
+  const tokyoNote =
+    municipalityId === '13123'
+      ? '江戸川区は東京都液状化予測図（2024改訂）を案内。全国統一ラスタは未配信のため未判定。'
+      : '全国統一の液状化ラスタタイルは未配信。都道府県図の照合が必要。'
+  return {
+    id: 'liquefaction',
+    label: '液状化予測',
+    inZone: null,
+    status: 'unknown',
+    detail: `未判定（UNSUPPORTED: ${tokyoNote}）`,
+    sourceUrl: 'https://www.mlit.go.jp/toshi/toshi_tobou_tk_000038.html',
+    method: 'unsupported',
+    valueType: 'estimate',
+    failReason: 'unsupported',
+    distanceToHazardAreaM: null,
+    nearestZoneWithinM: null,
+    distanceToBoundaryM: null,
+    scenario: null,
+    scenarioNote: 'シナリオ未接続',
+    methodConfidence: 'low',
+    priority: 'priority',
+  }
+}
+
+function skippedHit(id: HazardAxisId, label: string): ZoneHit {
+  return {
+    id,
+    label,
+    inZone: null,
+    status: 'unknown',
+    detail: '地点精度不足のため物件固有判定をスキップ',
+    sourceUrl: '',
+    method: 'skipped',
+    valueType: 'estimate',
+    distanceToHazardAreaM: null,
+    nearestZoneWithinM: null,
+    distanceToBoundaryM: null,
+    scenario: null,
+    methodConfidence: 'low',
+    priority: 'secondary',
+  }
 }
 
 export function summarizeHazardStatus(hits: ZoneHit[]): {
@@ -378,7 +477,7 @@ export function summarizeHazardStatus(hits: ZoneHit[]): {
   const evaluated = hits.filter((h) => h.inZone !== null)
   const unknown = hits.filter((h) => h.inZone === null)
   const onPoint = hits.some((h) => h.inZone === true)
-  const nearby = hits.some((h) => h.nearestZoneWithinM != null && h.nearestZoneWithinM > 0)
+  const nearby = hits.some((h) => h.distanceToHazardAreaM != null && h.distanceToHazardAreaM > 0)
   const evaluatedCount = evaluated.length
   const unknownCount = unknown.length
 
@@ -448,41 +547,50 @@ export function hazardStatusLabel(status: HazardEvalStatus): string {
       return '一部判定済み（未判定あり）'
     case 'unevaluated':
       return '未判定'
+    case 'skipped_low_precision':
+      return '地点精度不足のため物件固有判定スキップ'
   }
 }
 
 /** 比較表用: 最も近い区域距離帯を返す（m）。無しは null */
 export function nearestHazardDistanceM(zones: ZoneAssessment): number | null {
-  const dists = [
-    zones.flood.nearestZoneWithinM,
-    zones.sedimentSteep.nearestZoneWithinM,
-    zones.sedimentDebris.nearestZoneWithinM,
-    zones.sedimentSlide.nearestZoneWithinM,
-  ].filter((d): d is number => d != null)
+  const dists = zones.displayOrder
+    .map((h) => h.distanceToHazardAreaM)
+    .filter((d): d is number => d != null)
   if (!dists.length) return null
   return Math.min(...dists)
 }
 
-export async function assessOfficialHazardZones(lat: number, lon: number): Promise<ZoneAssessment> {
-  tileCache.clear()
-  tileWaiters.clear()
-  const results = await Promise.all([
-    sampleLayer(LAYERS.flood, lat, lon),
-    sampleLayer(LAYERS.sedimentSteep, lat, lon),
-    sampleLayer(LAYERS.sedimentDebris, lat, lon),
-    sampleLayer(LAYERS.sedimentSlide, lat, lon),
-  ])
-  const [flood, sedimentSteep, sedimentDebris, sedimentSlide] = results
-  const summary = summarizeHazardStatus(results)
-
+function assembleAssessment(
+  hitsById: Record<HazardAxisId, ZoneHit>,
+  profile: HazardProfile,
+  statusOverride?: HazardEvalStatus,
+): ZoneAssessment {
+  const orderedIds = [
+    ...profile.priority,
+    ...profile.secondary.filter((a) => !profile.priority.includes(a)),
+  ]
+  const displayOrder = orderedIds.map((id) => {
+    const hit = hitsById[id]
+    return {
+      ...hit,
+      priority: profile.priority.includes(id) ? ('priority' as const) : ('secondary' as const),
+    }
+  })
+  const summary = summarizeHazardStatus(displayOrder.filter((h) => h.method !== 'skipped'))
   return {
-    flood,
-    sedimentSteep,
-    sedimentDebris,
-    sedimentSlide,
+    flood: hitsById.flood,
+    stormSurge: hitsById.stormSurge,
+    inlandFlood: hitsById.inlandFlood,
+    liquefaction: hitsById.liquefaction,
+    sedimentSteep: hitsById.sedimentSteep,
+    sedimentDebris: hitsById.sedimentDebris,
+    sedimentSlide: hitsById.sedimentSlide,
+    displayOrder,
+    profile,
     anyOfficialZone: summary.anyOfficialZone,
     fetchFailed: summary.fetchFailed,
-    status: summary.status,
+    status: statusOverride ?? summary.status,
     evaluatedCount: summary.evaluatedCount,
     unknownCount: summary.unknownCount,
     sampledAtZoom: ZOOM_CANDIDATES[0],
@@ -490,29 +598,75 @@ export async function assessOfficialHazardZones(lat: number, lon: number): Promi
   }
 }
 
+export function skippedHazardAssessment(municipalityId: string): ZoneAssessment {
+  const profile = hazardProfileForMunicipality(municipalityId)
+  const hitsById = {
+    flood: skippedHit('flood', LAYERS.flood.label),
+    stormSurge: skippedHit('stormSurge', LAYERS.stormSurge.label),
+    inlandFlood: skippedHit('inlandFlood', LAYERS.inlandFlood.label),
+    liquefaction: skippedHit('liquefaction', '液状化予測'),
+    sedimentSteep: skippedHit('sedimentSteep', LAYERS.sedimentSteep.label),
+    sedimentDebris: skippedHit('sedimentDebris', LAYERS.sedimentDebris.label),
+    sedimentSlide: skippedHit('sedimentSlide', LAYERS.sedimentSlide.label),
+  }
+  return assembleAssessment(hitsById, profile, 'skipped_low_precision')
+}
+
+export async function assessOfficialHazardZones(
+  lat: number,
+  lon: number,
+  municipalityId = '',
+): Promise<ZoneAssessment> {
+  tileCache.clear()
+  tileWaiters.clear()
+  const profile = hazardProfileForMunicipality(municipalityId)
+  const [flood, stormSurge, inlandFlood, sedimentSteep, sedimentDebris, sedimentSlide] =
+    await Promise.all([
+      sampleLayer(LAYERS.flood, lat, lon),
+      sampleLayer(LAYERS.stormSurge, lat, lon),
+      sampleLayer(LAYERS.inlandFlood, lat, lon),
+      sampleLayer(LAYERS.sedimentSteep, lat, lon),
+      sampleLayer(LAYERS.sedimentDebris, lat, lon),
+      sampleLayer(LAYERS.sedimentSlide, lat, lon),
+    ])
+  const liquefaction = liquefactionUnsupported(municipalityId)
+  return assembleAssessment(
+    {
+      flood,
+      stormSurge,
+      inlandFlood,
+      liquefaction,
+      sedimentSteep,
+      sedimentDebris,
+      sedimentSlide,
+    },
+    profile,
+  )
+}
+
 /**
  * 発生側に応じた損害側テーブルキー。
- * 地点が区域内なら mid/high。近傍のみの場合は mid（境界近接の注意）。
+ * 地点が水害区域内なら mid/high。近傍のみの場合は mid。
  */
 export function damageTierFromZones(
   zones: ZoneAssessment,
   elevationM: number | null,
 ): 'low' | 'mid' | 'high' {
-  const flood = zones.flood.inZone === true
+  if (zones.status === 'skipped_low_precision') return 'low'
+
+  const water =
+    zones.flood.inZone === true ||
+    zones.stormSurge.inZone === true ||
+    zones.inlandFlood.inZone === true
   const sediment =
     zones.sedimentSteep.inZone === true ||
     zones.sedimentDebris.inZone === true ||
     zones.sedimentSlide.inZone === true
 
-  if (flood && sediment) return 'high'
-  if (flood) {
-    if (
-      zones.flood.detail.includes('10') ||
-      zones.flood.detail.includes('20') ||
-      zones.flood.detail.includes('5〜')
-    ) {
-      return 'high'
-    }
+  if (water && sediment) return 'high'
+  if (water) {
+    const detail = `${zones.flood.detail} ${zones.stormSurge.detail}`
+    if (detail.includes('10') || detail.includes('20') || detail.includes('5〜')) return 'high'
     return 'mid'
   }
   if (sediment) return 'mid'

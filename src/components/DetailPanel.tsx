@@ -79,6 +79,14 @@ export function DetailPanel({ candidate }: Props) {
   const m = candidate.municipality
   const floodHistory = getFloodHistoryLink(m.id)
   const rain = candidate.rain
+  const refTag =
+    candidate.locationEvalLevel === 'property'
+      ? null
+      : candidate.locationEvalLevel === 'reference'
+        ? '丁目代表点の参考値'
+        : candidate.locationEvalLevel === 'overview'
+          ? '町域代表点の概況（物件固有ではない）'
+          : '地点精度不足のため非表示'
 
   return (
     <aside className="detail-panel">
@@ -86,14 +94,25 @@ export function DetailPanel({ candidate }: Props) {
       <h2>{candidate.name}</h2>
       <p className="muted">{candidate.address}</p>
       <p className="muted small">
-        座標: {candidate.lat.toFixed(5)}, {candidate.lon.toFixed(5)}（この点を起点に距離計算）
+        座標: {candidate.lat.toFixed(5)}, {candidate.lon.toFixed(5)}
+        {candidate.geocode.allowPointHazard ? '（この点を起点に距離計算）' : '（物件固有計算はスキップ）'}
       </p>
-      <div className={`location-gate ${candidate.geocode.pointEvaluationOk ? 'ok' : 'warn'}`}>
+      <div
+        className={`location-gate ${
+          candidate.locationEvalLevel === 'property'
+            ? 'ok'
+            : candidate.locationEvalLevel === 'reference'
+              ? 'mid'
+              : 'warn'
+        }`}
+      >
         <div>
           <strong>地点精度</strong>: {candidate.geocode.labelJa}
           <span className="muted small">
             {' '}
             ／ confidence: {candidate.geocode.locationConfidence}
+            ／ eval: {candidate.locationEvalLevel}
+            ／ property_specific: {candidate.geocode.propertySpecific ? 'true' : 'false'}
           </span>
         </div>
         {candidate.geocode.gateMessage && (
@@ -179,10 +198,14 @@ export function DetailPanel({ candidate }: Props) {
           </span>
           <strong>{hazardStatusLabel(candidate.zones.status)}</strong>
           <div className="muted small">
-            判定済み {candidate.zones.evaluatedCount}/4 ／ 未判定 {candidate.zones.unknownCount}
+            判定済み {candidate.zones.evaluatedCount}/{candidate.zones.displayOrder.length} ／ 未判定{' '}
+            {candidate.zones.unknownCount}
             {nearestHazardDistanceM(candidate.zones) != null
               ? ` ／ 最寄り区域 約${nearestHazardDistanceM(candidate.zones)}m以内`
               : ''}
+          </div>
+          <div className="muted small">
+            プロファイル: {candidate.zones.profile.label} — {candidate.zones.profile.note}
           </div>
           <div className="muted small">{FORMULAS.officialZone.note}</div>
         </div>
@@ -200,102 +223,66 @@ export function DetailPanel({ candidate }: Props) {
       <h3>
         <TypeBadge type="computed" /> 発生側：公式ハザードの機械判定
       </h3>
-      <p className="muted small">
-        判定方式: 地点＋半径
-        {candidate.zones.proximityBandsM?.join('/')}
-        mの円周サンプリング（基準z={candidate.zones.sampledAtZoom}、欠損時は下位ズームへフォールバック）。
-        「約Xm以内」は離散点探索の距離帯です（最短距離の厳密値ではない）。区域外推定は安全宣言ではありません。
-      </p>
-      <ul className="plain-list">
-        {[
-          candidate.zones.flood,
-          candidate.zones.sedimentSteep,
-          candidate.zones.sedimentDebris,
-          candidate.zones.sedimentSlide,
-        ].map((z) => (
-          <li key={z.id} className="metric-line">
-            <div className="metric-main">
-              <TypeBadge type={z.valueType} />
-              <strong>{z.label}</strong>: {z.detail}
-            </div>
-            {(z.nearestZoneWithinM != null || z.methodConfidence) && (
-              <div className="muted small">
-                {z.nearestZoneWithinM != null
-                  ? `距離帯: ${z.nearestZoneWithinM === 0 ? '0m（地点上）' : `約${z.nearestZoneWithinM}m以内`} ／ `
-                  : ''}
-                boundary_distance: {z.boundaryDistance === 'unknown' ? 'unknown' : `${z.boundaryDistance}m`}
-                ／ method_confidence: {z.methodConfidence}
-              </div>
-            )}
-            {z.failReason && (
-              <div className="muted small">未判定コード: {z.failReason}</div>
-            )}
-            {z.sampledAtZoom != null && (
-              <div className="muted small">使用ズーム: z={z.sampledAtZoom}</div>
-            )}
-          </li>
-        ))}
-      </ul>
-      <h4 className="subhead">ベクターPiP（第二手法）</h4>
-      <p className="muted small">{candidate.vectorHazards.note}</p>
-      <ul className="plain-list">
-        <li className="metric-line">
-          <div className="metric-main">
-            <TypeBadge type="computed" />
-            <strong>洪水（ベクター）</strong>:{' '}
-            {candidate.vectorHazards.flood?.detail ?? '未ロード（ラスタ判定を使用）'}
-          </div>
-          {candidate.vectorHazards.flood && (
-            <div className="muted small">
-              method: vector-pip ／ confidence: {candidate.vectorHazards.flood.methodConfidence}
-            </div>
-          )}
-        </li>
-        <li className="metric-line">
-          <div className="metric-main">
-            <TypeBadge type="computed" />
-            <strong>土砂（ベクター）</strong>:{' '}
-            {candidate.vectorHazards.sediment?.detail ?? '未ロード（ラスタ判定を使用）'}
-          </div>
-          {candidate.vectorHazards.sediment && (
-            <div className="muted small">
-              method: vector-pip ／ confidence: {candidate.vectorHazards.sediment.methodConfidence}
-            </div>
-          )}
-        </li>
-      </ul>
-      {candidate.elevationM != null && (
+      {!candidate.geocode.allowPointHazard ? (
+        <p className="error">
+          地点精度が不足しているため物件固有ハザード判定は実行していません（{refTag}）。
+        </p>
+      ) : (
+        <>
+          <p className="muted small">
+            優先軸: {candidate.zones.profile.priority.join(' / ')}。
+            河川洪水タイルは統合配信のため荒川・江戸川等の個別シナリオには分割していません。
+            {refTag ? ` ※${refTag}` : ''}
+          </p>
+          <ul className="plain-list">
+            {candidate.zones.displayOrder.map((z) => (
+              <li key={z.id} className="metric-line">
+                <div className="metric-main">
+                  <TypeBadge type={z.valueType} />
+                  <span className={`legal-status status-${z.priority}`}>{z.priority}</span>
+                  <strong>{z.label}</strong>: {z.detail}
+                </div>
+                {z.scenario && (
+                  <div className="muted small">
+                    scenario: {z.scenario}
+                    {z.scenarioNote ? ` — ${z.scenarioNote}` : ''}
+                  </div>
+                )}
+                <div className="muted small">
+                  distance_to_hazard_area:{' '}
+                  {z.distanceToHazardAreaM == null
+                    ? 'null'
+                    : z.distanceToHazardAreaM === 0
+                      ? '0m（区域内）'
+                      : `約${z.distanceToHazardAreaM}m以内`}
+                  {' ／ '}
+                  distance_to_boundary: null（ラスタでは未計算）
+                  {' ／ '}
+                  method_confidence: {z.methodConfidence}
+                </div>
+                {z.failReason && (
+                  <div className="muted small">未判定コード: {z.failReason}</div>
+                )}
+                {z.sampledAtZoom != null && (
+                  <div className="muted small">使用ズーム: z={z.sampledAtZoom}</div>
+                )}
+              </li>
+            ))}
+          </ul>
+          <h4 className="subhead">ベクターPiP（第二手法）</h4>
+          <p className="muted small">{candidate.vectorHazards.note}</p>
+        </>
+      )}
+      {candidate.elevationM != null ? (
         <p className="muted small">
           <TypeBadge type="computed" /> 標高補助: {candidate.elevationM.toFixed(1)}m
           {candidate.elevationHsrc ? `（hsrc: ${candidate.elevationHsrc}）` : ''}
           ／ {FORMULAS.hazardFromElevation.note}
+          {refTag ? ` ※${refTag}` : ''}
         </p>
-      )}
-
-      <h3>
-        <TypeBadge type="estimate" /> 直近の雨量コンテキスト（参考）
-      </h3>
-      {rain.failed || rain.precipMm72h == null ? (
-        <p className="muted">雨量コンテキストを取得できませんでした。</p>
-      ) : (
-        <ul className="plain-list">
-          <li className="metric-line">
-            <div className="metric-main">
-              <TypeBadge type="estimate" />
-              <strong>直近約72時間の累積雨量</strong>: {rain.precipMm72h}mm
-            </div>
-          </li>
-          <li className="metric-line">
-            <div className="metric-main">
-              <TypeBadge type="estimate" />
-              <strong>期間内の最大時間雨量</strong>: {rain.maxHourlyMm ?? '—'}mm
-            </div>
-          </li>
-        </ul>
-      )}
-      <p className="note">
-        ※{rain.note} 出典: {rain.source}
-      </p>
+      ) : !candidate.geocode.allowPointHazard ? (
+        <p className="muted small">標高: 地点精度不足のため未取得</p>
+      ) : null}
 
       <h3>
         <TypeBadge type="official" /> 過去浸水（公的資料）
@@ -350,10 +337,13 @@ export function DetailPanel({ candidate }: Props) {
       <h3>
         <TypeBadge type="computed" /> 通勤・移動（直線距離・参考）
       </h3>
-      {candidate.transitFetchFailed ? (
+      {!candidate.geocode.allowPointHazard ? (
+        <p className="error">地点精度不足のため駅・バス停距離は計算していません。</p>
+      ) : candidate.transitFetchFailed ? (
         <p className="error">交通データの取得に失敗しました。時間をおいて候補を入れ直してください。</p>
       ) : (
         <>
+          {refTag && <p className="muted small">※{refTag}</p>}
           <h4 className="subhead">最寄り駅（上位3件）</h4>
           {candidate.stations.length ? (
             <ul className="plain-list transit-list">
@@ -420,12 +410,14 @@ export function DetailPanel({ candidate }: Props) {
         />
         <MetricLine
           label="高齢化率"
-          display={`${m.agingRate}%`}
+          display={m.metrics?.agingRate?.value != null ? `${m.agingRate}%` : '—'}
           meta={m.metrics?.agingRate}
         />
         <MetricLine
           label="単身世帯比率"
-          display={`${m.singleHouseholdRate}%`}
+          display={
+            m.metrics?.singleHouseholdRate?.value != null ? `${m.singleHouseholdRate}%` : '—'
+          }
           meta={m.metrics?.singleHouseholdRate}
         />
         <MetricLine label="生活保護" display={formatWelfare(m)} meta={m.metrics?.welfareRatePercent} />
@@ -513,6 +505,38 @@ export function DetailPanel({ candidate }: Props) {
           標高データの出典を開く
         </a>
       </div>
+
+      <h3>
+        <TypeBadge type="estimate" /> Current Conditions（保有リスク評価外）
+      </h3>
+      <p className="muted small">
+        直近雨量は「今の浸水状況」向けの参考です。30年保有の物件リスク本体からは分離しています。
+      </p>
+      {!rain ? (
+        <p className="muted">雨量コンテキストなし（地点精度不足または未取得）。</p>
+      ) : rain.failed || rain.precipMm72h == null ? (
+        <p className="muted">雨量コンテキストを取得できませんでした。</p>
+      ) : (
+        <ul className="plain-list">
+          <li className="metric-line">
+            <div className="metric-main">
+              <TypeBadge type="estimate" />
+              <strong>直近約72時間の累積雨量</strong>: {rain.precipMm72h}mm
+            </div>
+          </li>
+          <li className="metric-line">
+            <div className="metric-main">
+              <TypeBadge type="estimate" />
+              <strong>期間内の最大時間雨量</strong>: {rain.maxHourlyMm ?? '—'}mm
+            </div>
+          </li>
+        </ul>
+      )}
+      {rain && (
+        <p className="note">
+          ※{rain.note} 出典: {rain.source}
+        </p>
+      )}
     </aside>
   )
 }

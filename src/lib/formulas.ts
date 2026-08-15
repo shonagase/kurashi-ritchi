@@ -18,8 +18,8 @@ export const FORMULAS = {
   officialZone: {
     label: '公式ハザード区域の機械判定',
     valueType: 'computed' as ValueType,
-    formula: '地点＋半径10/20/30/50/100mの円周ラスタサンプリング（主）／登録GeoJSONのPoint-in-Polygon（副）',
-    note: '公的データに基づく計算値。「約Xm以内」は距離帯。ベクター未ロード時はラスタのみ。区域外推定≠安全。',
+    formula: '地点＋半径10/20/30/50/100mの円周ラスタサンプリング（主）／登録GeoJSONのPoint-in-Polygon（副）。河川洪水は統合タイル（個別シナリオ未分割）。高潮・内水を別軸で評価。',
+    note: '公的データに基づく計算値。distance_to_hazard_area≠境界距離。区域内でも distance_to_boundary は未計算。区域外推定≠安全。',
   },
   legalGate: {
     label: '法務・地区計画ゲート',

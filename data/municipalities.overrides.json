@@ -95,5 +95,91 @@
       "catName": "総人口",
       "locked": true
     }
+  },
+  "13123": {
+    "population": {
+      "value": 701753,
+      "unit": "人",
+      "valueType": "official",
+      "source": "江戸川区 住民基本台帳（人手検証）",
+      "referenceDate": "2026-08-01",
+      "catName": "総人口",
+      "formula": "701,753人（2026-08-01）",
+      "locked": true
+    },
+    "agingRate": {
+      "value": 21.0,
+      "unit": "%",
+      "valueType": "official",
+      "source": "江戸川区 住民基本台帳（人手検証）",
+      "referenceDate": "2026-08-01",
+      "catName": "高齢化率 = 65歳以上 / 総人口",
+      "formula": "147379 / 701753 ≈ 21.00%",
+      "locked": true
+    },
+    "singleHouseholdRate": {
+      "unavailable": true,
+      "valueType": "estimate",
+      "source": "quality-gate",
+      "referenceDate": "blocked",
+      "warning": "DATA_MAPPING_ERROR: 旧マッチ11%は公式（単独世帯約4割）と矛盾のため非表示",
+      "locked": true
+    },
+    "crimePer100People": {
+      "unavailable": true,
+      "valueType": "estimate",
+      "source": "quality-gate",
+      "referenceDate": "blocked",
+      "warning": "STALE_SOURCE: 2005年e-Statは不使用。警視庁の区・町丁別直接値へ置換予定",
+      "locked": true
+    },
+    "theftPer100People": {
+      "unavailable": true,
+      "valueType": "estimate",
+      "source": "quality-gate",
+      "referenceDate": "blocked",
+      "warning": "STALE_SOURCE: 都道府県構成比推計は不使用。町丁別直接値へ置換予定",
+      "locked": true
+    },
+    "heinousSharePercent": {
+      "unavailable": true,
+      "valueType": "estimate",
+      "source": "quality-gate",
+      "referenceDate": "blocked",
+      "warning": "都道府県推計のため非表示",
+      "locked": true
+    },
+    "violentSharePercent": {
+      "unavailable": true,
+      "valueType": "estimate",
+      "source": "quality-gate",
+      "referenceDate": "blocked",
+      "warning": "都道府県推計のため非表示",
+      "locked": true
+    },
+    "theftSharePercent": {
+      "unavailable": true,
+      "valueType": "estimate",
+      "source": "quality-gate",
+      "referenceDate": "blocked",
+      "warning": "都道府県推計のため非表示",
+      "locked": true
+    },
+    "moralsSharePercent": {
+      "unavailable": true,
+      "valueType": "estimate",
+      "source": "quality-gate",
+      "referenceDate": "blocked",
+      "warning": "都道府県推計のため非表示",
+      "locked": true
+    },
+    "welfareRatePercent": {
+      "unavailable": true,
+      "valueType": "estimate",
+      "source": "quality-gate",
+      "referenceDate": "blocked",
+      "warning": "DATA_MAPPING_ERROR: 旧マッチング疑いのため非表示",
+      "locked": true
+    }
   }
 }

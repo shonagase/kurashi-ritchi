@@ -123,42 +123,58 @@ export function RegionStatsTab({ highlightIds }: Props) {
   const [view, setView] = useState<RegionView>('pop')
   const [demoSort, setDemoSort] = useState<DemoSortKey>('population')
   const [crimeSort, setCrimeSort] = useState<CrimeSortKey>('crimeRate')
-  const [onlyCandidates, setOnlyCandidates] = useState(false)
+  const [onlyCandidates, setOnlyCandidates] = useState(true)
+  const [query, setQuery] = useState('')
   const highlightSet = useMemo(() => new Set(highlightIds), [highlightIds])
+  const nationwide = municipalities.length > 100
+
+  const matchQuery = (name: string, pref: string) => {
+    const q = query.trim()
+    if (!q) return true
+    return `${pref}${name}`.includes(q)
+  }
 
   const demoRows = useMemo(() => {
-    const list: DemoRow[] = municipalities.map((m) => ({
-      m,
-      welfareCount: derivedWelfare(m),
-      crimeCount: derivedCrime(m),
-      highlighted: highlightSet.has(m.id),
-    }))
+    const list: DemoRow[] = municipalities
+      .filter((m) => matchQuery(m.name, m.pref))
+      .map((m) => ({
+        m,
+        welfareCount: derivedWelfare(m),
+        crimeCount: derivedCrime(m),
+        highlighted: highlightSet.has(m.id),
+      }))
     const filtered =
       onlyCandidates && highlightIds.length ? list.filter((r) => r.highlighted) : list
-    return filtered.sort((a, b) => compareDemo(a, b, demoSort))
-  }, [demoSort, highlightIds, highlightSet, onlyCandidates])
+    return filtered.sort((a, b) => compareDemo(a, b, demoSort)).slice(0, 300)
+  }, [demoSort, highlightIds, highlightSet, onlyCandidates, query])
 
   const crimeRows = useMemo(() => {
-    const list: CrimeRow[] = municipalities.map((m) => {
-      const crimeCount = derivedCrime(m)
-      return {
-        m,
-        crimeCount,
-        heinousCount: shareCount(crimeCount, m.heinousSharePercent),
-        violentCount: shareCount(crimeCount, m.violentSharePercent),
-        theftCount: shareCount(crimeCount, m.theftSharePercent),
-        moralsCount: shareCount(crimeCount, m.moralsSharePercent),
-        highlighted: highlightSet.has(m.id),
-      }
-    })
+    const list: CrimeRow[] = municipalities
+      .filter((m) => matchQuery(m.name, m.pref))
+      .map((m) => {
+        const crimeCount = derivedCrime(m)
+        return {
+          m,
+          crimeCount,
+          heinousCount: shareCount(crimeCount, m.heinousSharePercent),
+          violentCount: shareCount(crimeCount, m.violentSharePercent),
+          theftCount: shareCount(crimeCount, m.theftSharePercent),
+          moralsCount: shareCount(crimeCount, m.moralsSharePercent),
+          highlighted: highlightSet.has(m.id),
+        }
+      })
     const filtered =
       onlyCandidates && highlightIds.length ? list.filter((r) => r.highlighted) : list
-    return filtered.sort((a, b) => compareCrime(a, b, crimeSort))
-  }, [crimeSort, highlightIds, highlightSet, onlyCandidates])
+    return filtered.sort((a, b) => compareCrime(a, b, crimeSort)).slice(0, 300)
+  }, [crimeSort, highlightIds, highlightSet, onlyCandidates, query])
 
   return (
     <section className="panel table-panel region-stats-panel">
       <h2>地域統計比較</h2>
+      <p className="muted small">
+        収録市区町村: {municipalities.length.toLocaleString('ja-JP')}
+        {nationwide ? '（全国マスタ。表示は最大300件）' : ''}
+      </p>
 
       <div className="app-tabs region-subtabs" aria-label="地域統計の表示">
         <button
@@ -235,6 +251,16 @@ export function RegionStatsTab({ highlightIds }: Props) {
       </div>
 
       <div className="sort-bar">
+        <label className="filter-check">
+          検索{' '}
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="例: 江戸川 / 東金"
+            style={{ minWidth: '10rem' }}
+          />
+        </label>
         <label className="filter-check">
           <input
             type="checkbox"

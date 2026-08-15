@@ -10,7 +10,7 @@ import type { ValueType } from './formulas'
 export type LegalCheckStatus =
   | 'matched'
   | 'likely_matched'
-  | 'not_in_catalog'
+  | 'not_checked'
   | 'unevaluated'
   | 'needs_verify'
 
@@ -93,8 +93,8 @@ export function assessLegalGate(input: {
     items.push({
       id: 'district_plan',
       label: '地区計画',
-      status: 'not_in_catalog',
-      detail: `${input.municipalityName}について、当アプリ収録の地区計画カタログに該当なし（≠地区計画なし）。公式都市計画図で要確認。`,
+      status: 'not_checked',
+      detail: `${input.municipalityName}の公式都市計画レイヤ未照合（アプリカタログ外＝地区計画なし、ではない）。最終は自治体の都市計画情報で確認。`,
       valueType: 'estimate',
     })
   }
@@ -157,8 +157,8 @@ export function legalStatusLabel(status: LegalCheckStatus): string {
       return '該当の可能性'
     case 'likely_matched':
       return '概形上の該当候補'
-    case 'not_in_catalog':
-      return 'カタログ外'
+    case 'not_checked':
+      return '未照合'
     case 'unevaluated':
       return '未評価'
     case 'needs_verify':

@@ -16,8 +16,13 @@ export type LocationConfidence = 'high' | 'medium' | 'low'
 export type GeocodeQuality = {
   precision: GeocodePrecision
   locationConfidence: LocationConfidence
-  /** 物件地点評価として使ってよいか（town 以下は参考扱い） */
+  /** 丁目以上なら参考計算可 */
   pointEvaluationOk: boolean
+  /** 番地・街区のみ true（物件固有として扱ってよい） */
+  propertySpecific: boolean
+  /** ハザード／交通の地点サンプリングを実行してよいか（town未満は不可） */
+  allowPointHazard: boolean
+  allowPropertyHazard: boolean
   labelJa: string
   gateMessage: string | null
 }
@@ -41,6 +46,9 @@ export function inferGeocodePrecision(input: {
       precision: 'exact_address',
       locationConfidence: 'high',
       pointEvaluationOk: true,
+      propertySpecific: true,
+      allowPointHazard: true,
+      allowPropertyHazard: true,
       labelJa: PRECISION_LABEL.exact_address,
       gateMessage: null,
     }
@@ -73,14 +81,27 @@ export function inferGeocodePrecision(input: {
   const pointEvaluationOk =
     precision === 'exact_address' || precision === 'block' || precision === 'chome'
 
-  const gateMessage = pointEvaluationOk
-    ? null
-    : `地点精度は「${PRECISION_LABEL[precision]}」です。町域・市区町村の代表点による参考評価であり、物件地点そのものの評価ではありません。ハザード・駅距離・標高は目安として扱ってください。`
+  /** town=概況のみ / municipality=物件固有禁止 */
+  const propertySpecific = precision === 'exact_address' || precision === 'block'
+  const allowPointHazard = pointEvaluationOk // chomeまでは参考として計算可
+  const allowPropertyHazard = propertySpecific
+
+  let gateMessage: string | null = null
+  if (precision === 'municipality' || precision === 'unknown') {
+    gateMessage = `地点精度は「${PRECISION_LABEL[precision]}」です。物件固有のハザード・駅距離・標高の計算を禁止します（市区町村概況のみ）。`
+  } else if (precision === 'town') {
+    gateMessage = `地点精度は「${PRECISION_LABEL[precision]}」です。町域代表点のため物件固有判定は禁止し、概況のみ表示します。`
+  } else if (precision === 'chome') {
+    gateMessage = `地点精度は「${PRECISION_LABEL[precision]}」です。丁目代表点の参考評価であり、物件地点そのものの判定ではありません。`
+  }
 
   return {
     precision,
     locationConfidence,
     pointEvaluationOk,
+    propertySpecific,
+    allowPointHazard,
+    allowPropertyHazard,
     labelJa: PRECISION_LABEL[precision],
     gateMessage,
   }

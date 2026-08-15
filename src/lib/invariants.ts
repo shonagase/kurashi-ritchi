@@ -99,7 +99,9 @@ export function checkMunicipalityInvariants(m: MunicipalityProfile): InvariantIs
 
 export function checkZoneInvariants(zones: ZoneAssessment): InvariantIssue[] {
   const issues: InvariantIssue[] = []
-  const hits = [zones.flood, zones.sedimentSteep, zones.sedimentDebris, zones.sedimentSlide]
+  const hits = zones.displayOrder?.length
+    ? zones.displayOrder
+    : [zones.flood, zones.sedimentSteep, zones.sedimentDebris, zones.sedimentSlide]
   const evaluated = hits.filter((h) => h.inZone !== null).length
   const unknown = hits.filter((h) => h.inZone === null).length
   if (evaluated + unknown !== hits.length) {

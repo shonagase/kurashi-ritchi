@@ -32,6 +32,9 @@ jobs:
             exit 1
           fi
 
+      - name: Refresh nationwide municipality base
+        run: node scripts/build-nationwide-base.mjs
+
       - name: Fetch latest stats from e-Stat
         env:
           ESTAT_APP_ID: ${{ secrets.ESTAT_APP_ID }}
@@ -39,13 +42,13 @@ jobs:
 
       - name: Commit if changed
         run: |
-          if git diff --quiet -- data/municipalities.stats.json src/data/municipalities.generated.json; then
+          if git diff --quiet -- data/municipalities.base.json data/municipalities.stats.json src/data/municipalities.generated.json; then
             echo "No stats changes"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/municipalities.stats.json src/data/municipalities.generated.json
+          git add data/municipalities.base.json data/municipalities.stats.json src/data/municipalities.generated.json
           git commit -m "chore: update municipal stats from e-Stat"
           # main が先に進んでいても取り込んでから push する
           for i in 1 2 3; do

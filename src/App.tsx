@@ -6,9 +6,10 @@ import { RegionStatsTab } from './components/RegionStatsTab'
 import { DATA_SOURCES, findNearestMunicipality, statsMeta } from './data/municipalities'
 import { fetchElevation, fetchNearbyTransit, searchAddress } from './lib/geo'
 import { inferGeocodePrecision, type GeocodeQuality } from './lib/geocodePrecision'
-import { assessOfficialHazardZones, damageTierFromZones } from './lib/hazardZones'
+import { assessOfficialHazardZones, damageTierFromZones, skippedHazardAssessment } from './lib/hazardZones'
 import { checkMunicipalityInvariants, checkZoneInvariants } from './lib/invariants'
 import { assessLegalGate } from './lib/legalGate'
+import { applyMunicipalityPublishGates, locationEvalLevel } from './lib/dataQualityGate'
 import { fetchRainContext } from './lib/rainContext'
 import { assessVectorHazards } from './lib/vectorHazard'
 import type { Candidate, SortKey } from './types'
@@ -65,15 +66,24 @@ export default function App() {
     const geocode =
       input.geocode ??
       inferGeocodePrecision({ query: input.address, resultLabel: input.address, source: 'demo' })
+    const evalLevel = locationEvalLevel(geocode.precision)
+    const municipalityRaw = findNearestMunicipality(input.lat, input.lon)
+    const municipality = applyMunicipalityPublishGates(municipalityRaw)
+
+    const runPoint = geocode.allowPointHazard
     const [elevation, transit, zones, rain] = await Promise.all([
-      fetchElevation(input.lat, input.lon),
-      fetchNearbyTransit(input.lat, input.lon),
-      assessOfficialHazardZones(input.lat, input.lon),
-      fetchRainContext(input.lat, input.lon),
+      runPoint ? fetchElevation(input.lat, input.lon) : Promise.resolve(null),
+      runPoint
+        ? fetchNearbyTransit(input.lat, input.lon)
+        : Promise.resolve({ stations: [], buses: [], fetchFailed: false }),
+      runPoint
+        ? assessOfficialHazardZones(input.lat, input.lon, municipality.id)
+        : Promise.resolve(skippedHazardAssessment(municipality.id)),
+      // Current Conditions: 保有リスクからは分離。参考として町域以上でも取得可
+      evalLevel === 'blocked' ? Promise.resolve(null) : fetchRainContext(input.lat, input.lon),
     ])
     const elevationM = elevation?.elevationM ?? null
     const hazardLevel = damageTierFromZones(zones, elevationM)
-    const municipality = findNearestMunicipality(input.lat, input.lon)
     const legal = assessLegalGate({
       address: input.address,
       municipalityId: municipality.id,
@@ -81,7 +91,14 @@ export default function App() {
       lat: input.lat,
       lon: input.lon,
     })
-    const vectorHazards = assessVectorHazards(input.lat, input.lon)
+    const vectorHazards = runPoint
+      ? assessVectorHazards(input.lat, input.lon)
+      : {
+          status: 'no_layers' as const,
+          flood: null,
+          sediment: null,
+          note: '地点精度不足のためベクター判定もスキップ',
+        }
     const invariantIssues = [
       ...checkMunicipalityInvariants(municipality),
       ...checkZoneInvariants(zones),
@@ -95,6 +112,7 @@ export default function App() {
       lat: input.lat,
       lon: input.lon,
       geocode,
+      locationEvalLevel: evalLevel,
       legal,
       elevationM,
       elevationHsrc: elevation?.hsrc ?? null,

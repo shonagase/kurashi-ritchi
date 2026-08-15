@@ -492,8 +492,14 @@ input:focus {
   color: var(--warn);
 }
 
-.legal-status.status-unevaluated,
-.legal-status.status-not_in_catalog {
+.location-gate.mid {
+  border-left-color: #8a6d3b;
+  background: color-mix(in srgb, #8a6d3b 8%, transparent);
+}
+
+.legal-status.status-not_checked,
+.legal-status.status-priority,
+.legal-status.status-secondary {
   color: var(--ink-soft);
 }
 

@@ -8,6 +8,7 @@
     "build": "npm run merge:stats && tsc -b && vite build",
     "merge:stats": "node scripts/merge-municipalities.mjs",
     "update:stats": "node scripts/update-municipal-stats.mjs",
+    "build:base": "node scripts/build-nationwide-base.mjs",
     "lint": "oxlint",
     "preview": "vite preview"
   },

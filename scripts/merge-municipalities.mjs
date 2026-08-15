@@ -141,6 +141,42 @@ function readMetric(row, key) {
         },
       }
     }
+    // Data Quality Gate（表示前に落とす）
+    const blob = `${v.source ?? ''} ${v.referenceDate ?? ''} ${v.warning ?? ''} ${v.catName ?? ''}`
+    if (/pending corrected|旧マッチ|legacy-flat/i.test(blob)) {
+      return {
+        value: 0,
+        metric: {
+          ...v,
+          value: null,
+          unavailable: true,
+          warning: `DATA_MAPPING_ERROR: ${v.warning || '誤マッチ疑いのため非表示'}`,
+        },
+      }
+    }
+    if (/^seed$/i.test(String(v.referenceDate)) || /人口シード/i.test(blob)) {
+      return {
+        value: 0,
+        metric: {
+          ...v,
+          value: null,
+          unavailable: true,
+          warning: 'SEED_VALUE: seed概算は非表示',
+        },
+      }
+    }
+    const year = String(v.referenceDate || '').match(/20\d{2}/)?.[0]
+    if (year && Number(year) <= 2010 && /犯罪|刑法|K06101|crime/i.test(blob)) {
+      return {
+        value: 0,
+        metric: {
+          ...v,
+          value: null,
+          unavailable: true,
+          warning: `STALE_SOURCE: ${year}年データは非表示`,
+        },
+      }
+    }
     return { value: v.value, metric: v }
   }
   return {

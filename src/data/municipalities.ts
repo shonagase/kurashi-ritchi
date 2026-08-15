@@ -33,6 +33,11 @@ export type MunicipalityProfile = {
   moralsSharePercent: number
   industryType: string
   industryNote: string
+  source?: {
+    dataset?: string
+    url?: string
+    lgcode?: string | null
+  }
   metrics?: {
     population?: MetricMeta | null
     agingRate?: MetricMeta | null
