@@ -41,22 +41,41 @@ jobs:
         run: node scripts/update-municipal-stats.mjs
 
       - name: Commit if changed
+        env:
+          ESTAT_APP_ID: ${{ secrets.ESTAT_APP_ID }}
         run: |
-          if git diff --quiet -- data/municipalities.base.json data/municipalities.stats.json src/data/municipalities.generated.json; then
-            echo "No stats changes"
-            exit 0
-          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/municipalities.base.json data/municipalities.stats.json src/data/municipalities.generated.json
-          git commit -m "chore: update municipal stats from e-Stat"
-          # main が先に進んでいても取り込んでから push する
+
+          commit_stats() {
+            if git diff --quiet -- data/municipalities.base.json data/municipalities.stats.json src/data/municipalities.generated.json; then
+              echo "No stats changes"
+              return 1
+            fi
+            git add data/municipalities.base.json data/municipalities.stats.json src/data/municipalities.generated.json
+            # 既に同内容のコミットがある場合は作り直さない
+            if git diff --cached --quiet; then
+              return 1
+            fi
+            git commit -m "chore: update municipal stats from e-Stat"
+            return 0
+          }
+
+          # 生成JSONは rebase すると必ず衝突するので、失敗時は最新 main で再生成する
           for i in 1 2 3; do
+            if ! commit_stats; then
+              echo "Nothing to push"
+              exit 0
+            fi
             if git push origin HEAD:main; then
               exit 0
             fi
-            echo "push rejected; rebase onto origin/main (try $i)"
-            git pull --rebase origin main
+            echo "push rejected; regenerate on origin/main (try $i)"
+            git rebase --abort 2>/dev/null || true
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/build-nationwide-base.mjs
+            node scripts/update-municipal-stats.mjs
           done
-          echo "::error::push failed after rebase retries"
+          echo "::error::push failed after regenerate retries"
           exit 1
