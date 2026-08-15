@@ -296,7 +296,7 @@ function writeMerged(base, stats) {
   )
 }
 
-async function resolveCat(statsDataId, preferred, fallbacks = [], forbidden = []) {
+async function resolveCat(statsDataId, preferred, fallbacks = [], forbidden = [], nameIncludes = [], nameExcludes = []) {
   const cats = await getMetaCat01(statsDataId)
   const byCode = new Map(cats.map((c) => [c.code, c]))
   const candidates = [preferred, ...fallbacks]
@@ -309,6 +309,20 @@ async function resolveCat(statsDataId, preferred, fallbacks = [], forbidden = []
     }
     return hit
   }
+
+  // コードが変わっても名称で拾う（総人口など）
+  if (nameIncludes.length) {
+    const byName = cats.find((c) => {
+      if (forbidden.some((f) => c.name.includes(f))) return false
+      if (nameExcludes.some((f) => c.name.includes(f))) return false
+      return nameIncludes.some((f) => c.name.includes(f))
+    })
+    if (byName) {
+      console.log(`resolveCat by name in ${statsDataId}: ${byName.code} ${byName.name}`)
+      return byName
+    }
+  }
+
   console.warn(
     `cat not found in ${statsDataId}. wanted=${candidates.join(',')} sample=`,
     cats.slice(0, 8).map((c) => `${c.code}:${c.name}`).join(' | '),
@@ -324,18 +338,26 @@ async function updateFixedMetric(def, base, byId) {
       def.cdCat01,
       def.fallbackCat01 || [],
       def.forbiddenNameSubstrings || [],
+      def.nameIncludes || [],
+      def.nameExcludes || [],
     )
     if (!cat) continue
 
     console.log(`fetch ${def.field}: [${statsDataId}] ${cat.code} ${cat.name}`)
     const map = await fetchLatestByArea(statsDataId, cat.code)
     let hits = 0
+    let miss = 0
     for (const m of base) {
+      // locked overrides は後段で勝つ。seed は上書きしてよい
+      if (byId[m.id]?.[def.field]?.locked) continue
       const row =
         map.get(m.id) ||
         map.get(normalizeAreaCode(m.id)) ||
         map.get(m.id.replace(/^0/, ''))
-      if (!row) continue
+      if (!row) {
+        miss++
+        continue
+      }
       const next = convertValue(row.value, def.convert, cat.unit, cat.name)
       if (next == null || !Number.isFinite(next)) continue
       byId[m.id] = byId[m.id] || {}
@@ -348,7 +370,7 @@ async function updateFixedMetric(def, base, byId) {
       })
       hits++
     }
-    console.log(`  updated: ${hits}`)
+    console.log(`  updated: ${hits} (miss area: ${miss}, map size: ${map.size})`)
     if (hits > 0) return true
   }
   return false
